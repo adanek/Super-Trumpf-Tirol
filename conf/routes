@@ -4,7 +4,10 @@
 
 # Home page
 GET        /                    controllers.Application.index()
+GET        /manual              controllers.Application.manual()
 GET        /langs               controllers.Application.langs()
+
+GET        /Game/new            controllers.GameController.New()
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file        controllers.Assets.at(path="/public", file)

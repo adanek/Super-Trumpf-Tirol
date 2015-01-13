@@ -1,22 +1,25 @@
 package controllers;
 
-import play.i18n.Messages;
+
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Results;
+
 import views.html.index;
+import views.html.manual;
 
 public class Application extends Controller {
 
     public static Result index() {
         
-        String msg = Messages.get("files.test");
-        return ok(index.render(msg));
+        return ok(index.render());
     }
 
+    public static Result manual() {
+        
+        return ok(manual.render());
+    }
+    
     public static Result langs() {
         return ok(request().acceptLanguages().toString());
-        
     }
-
 }

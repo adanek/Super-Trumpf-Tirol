@@ -1,10 +1,11 @@
-@(title: String, scripts: Html= new Html(""))(content: Html)
+@(scripts: Html= new Html(""))(content: Html)
+
 
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>@title</title>
+        <title>@play.i18n.Messages.get("app.name")</title>
         
         <meta charset="utf-8"  />
         <meta name="viewport" content="width=device-width, initial-scale=1..0, user-scalable=no"/>
@@ -14,28 +15,28 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     </head>
     <body>
-        <div id="header">
-            <header></header>
-        </div>
         
         <div id="nav">
             <nav class="navbar navbar-inverse navbar-fixed-top">
                 <div  class="container-fluid">
                     <div class="navbar-header">
-                        <span class="navbar-brand">Super Trumpf Tyrol</span>
+                        <span class="navbar-brand">@play.i18n.Messages.get("app.name")</span>
                     </div>
                 </div>
             </nav>
         </div>
-
-        @content
-                
+        
+        <div class="container body-content center-block" >
+            @content
+        </div>
+        
         <div id="footer">
             <footer></footer>
         </div>
         
         <!-- Scripts -->
-        <script type="text/javascript" src="@routes.Assets.at("js/jquery-1.11.2.min.js")" ></script>
+        <script type="text/javascript" src="@routes.Assets.at("js/jquery-1.11.2.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("js/custom/main.js")"></script>
         @scripts
     </body>
 </html>
