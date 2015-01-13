@@ -1,4 +1,4 @@
-@(title: String, scripts: Html="")(content: Html)
+@(title: String, scripts: Html= new Html(""))(content: Html)
 
 <!DOCTYPE html>
 
@@ -7,13 +7,26 @@
         <title>@title</title>
         
         <meta charset="utf-8"  />
-        <meta name="viewport" content="width=device-width, initial-scale=1..0, uuser-scalable=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1..0, user-scalable=no"/>
         
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.css")" />
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     </head>
     <body>
+        <div id="header">
+            <header></header>
+        </div>
+        
+        <div id="nav">
+            <nav></nav>
+        </div>
+        
         @content
+                
+        <div id="footer">
+            <footer></footer>
+        </div>
         
         <!-- Scripts -->
         <script type="text/javascript" src="@routes.Assets.at("js/jquery-1.11.2.min.js")" ></script>
