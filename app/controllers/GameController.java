@@ -9,13 +9,14 @@ import play.mvc.Security;
 public class GameController extends Controller{
 
     // GET /game/
+    @Security.Authenticated(MyAuthenticator.class)
     public static Result index() {
 
         return ok(game.render());
     }
     
     // POST /game/create
-    @Security.Authenticated(MyAuthenticator.class)
+    //@Security.Authenticated(MyAuthenticator.class)
     public static Result createGame(){
     
         return play.mvc.Results.TODO;

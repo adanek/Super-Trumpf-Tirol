@@ -13,12 +13,12 @@ import java.util.UUID;
 public class LoginController extends Controller{
 
     //Login
-    public static Result login() {
+    public static Result showLoginForm() {
         return ok(login.render(Form.form(Credentials.class)) );
     }
-    
-    //authenticate
-    //POST   /login
+
+
+    //POST  /showLoginForm
     public static Result authenticate() {
         Form<Credentials> loginForm = Form.form(Credentials.class).bindFromRequest();
         Credentials c = loginForm.get();

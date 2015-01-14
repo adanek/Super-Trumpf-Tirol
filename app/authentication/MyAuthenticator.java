@@ -21,6 +21,6 @@ public class MyAuthenticator extends Security.Authenticator {
 
     @Override
     public Result onUnauthorized(Context ctx) {
-        return redirect("/login");
+        return redirect("/showLoginForm");
     }
 }

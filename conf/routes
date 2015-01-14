@@ -14,8 +14,7 @@ POST        /game/play              controllers.GameController.playCard()
 POST        /game/commit            controllers.GameController.commitRound()
 POST        /game/abort             controllers.GameController.abortGame()
 
-GET         /login                  controllers.LoginController.login()
-POST        /authenticate           controllers.LoginController.authenticate()
+GET         /login                  controllers.LoginController.showLoginForm()
 POST        /login                  controllers.LoginController.authenticate()
 
 # Map static resources from the /public folder to the /assets URL path
