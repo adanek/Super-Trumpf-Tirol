@@ -1,6 +1,7 @@
 package controllers;
 
 import authentication.MyLoginHandler;
+import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Controller;
 import play.mvc.Results;
@@ -12,13 +13,15 @@ import java.util.UUID;
 
 public class LoginController extends Controller{
 
-    //Login
+    //GET /login
     public static Result showLoginForm() {
+
+        Http.Request r = request();
         return ok(login.render(Form.form(Credentials.class)) );
     }
 
 
-    //POST  /showLoginForm
+    //POST  /login
     public static Result authenticate() {
         Form<Credentials> loginForm = Form.form(Credentials.class).bindFromRequest();
         Credentials c = loginForm.get();
@@ -31,6 +34,6 @@ public class LoginController extends Controller{
         session().clear();
         session("uid", id.toString());
         
-        return redirect("/game/new");
+        return redirect(request().uri());
     }
 }
