@@ -2,29 +2,47 @@ package controllers;
 
 import authentication.MyAuthenticator;
 import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.game;
 import play.mvc.Security;
 
-import javax.servlet.annotation.ServletSecurity;
-
 public class GameController extends Controller{
+
+    // GET /game/
+    public static Result index() {
+
+        return ok(game.render());
+    }
     
+    // POST /game/create
+    public static Result createGame(){
+        return play.mvc.Results.TODO;
     @Security.Authenticated(MyAuthenticator.class)
     public static play.mvc.Result NewGame(){
         return ok("New Game started");
     }
     
-    public static play.mvc.Result MakeMove(){
+    // POST /game/play
+    public static Result playCard(){
+        
         return TODO;
     }
     
-    //GET /game/status
-    public static play.mvc.Result GetStatus(){
+    // GET /game/status
+    public static Result getStatus(){
         
-        return  notFound();        
+        return  TODO;
     }
     
-    public static play.mvc.Result CommitRound(){
+    //POST /game/commit
+    public static Result commitRound(){
         
-        return notFound();
+        return TODO;
+    }
+    
+    //POST /game/abord
+    public static Result abortGame(){
+        
+        return TODO;
     }
 }

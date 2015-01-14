@@ -1,6 +1,5 @@
 @(scripts: Html= new Html(""))(content: Html)
 
-
 <!DOCTYPE html>
 
 <html>
@@ -8,7 +7,7 @@
         <title>@play.i18n.Messages.get("app.name")</title>
         
         <meta charset="utf-8"  />
-        <meta name="viewport" content="width=device-width, initial-scale=1..0, user-scalable=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
         
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.css")" />
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/main.css")">
@@ -29,11 +28,13 @@
         <div class="container body-content center-block" >
             @content
         </div>
-        
-        <div id="footer">
-            <footer></footer>
+
+        <div id="footer" class="navbar-fixed-bottom">
+            <div class="container center-block">
+                <hr />
+                <p class="text-center">&copy; 2015 - Team A Software Development</p>
+            </div>
         </div>
-        
         <!-- Scripts -->
         <script type="text/javascript" src="@routes.Assets.at("js/jquery-1.11.2.min.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("js/custom/main.js")"></script>
