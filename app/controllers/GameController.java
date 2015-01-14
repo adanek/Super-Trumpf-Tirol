@@ -15,11 +15,10 @@ public class GameController extends Controller{
     }
     
     // POST /game/create
-    public static Result createGame(){
-        return play.mvc.Results.TODO;
     @Security.Authenticated(MyAuthenticator.class)
-    public static play.mvc.Result NewGame(){
-        return ok("New Game started");
+    public static Result createGame(){
+    
+        return play.mvc.Results.TODO;
     }
     
     // POST /game/play
