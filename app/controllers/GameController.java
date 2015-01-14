@@ -1,25 +1,43 @@
 package controllers;
 
 import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.game;
 
 public class GameController extends Controller{
-    
-    public static play.mvc.Result NewGame(){
-        return ok("New Game started");
+
+    // GET /game/
+    public static Result index() {
+
+        return ok(game.render());
     }
     
-    public static play.mvc.Result MakeMove(){
-        
-        return notFound();
+    // POST /game/create
+    public static Result createGame(){
+        return play.mvc.Results.TODO;
     }
     
-    public static play.mvc.Result GetStatus(){
+    // POST /game/play
+    public static Result playCard(){
         
-        return  notFound();        
+        return TODO;
     }
     
-    public static play.mvc.Result CommitRound(){
+    // GET /game/status
+    public static Result getStatus(){
         
-        return notFound();
+        return  TODO;
+    }
+    
+    //POST /game/commit
+    public static Result commitRound(){
+        
+        return TODO;
+    }
+    
+    //POST /game/abord
+    public static Result abortGame(){
+        
+        return TODO;
     }
 }
