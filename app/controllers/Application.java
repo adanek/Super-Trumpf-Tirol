@@ -22,4 +22,5 @@ public class Application extends Controller {
     public static Result langs() {
         return ok(request().acceptLanguages().toString());
     }
+    
 }
