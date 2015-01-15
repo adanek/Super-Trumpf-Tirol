@@ -1,10 +1,8 @@
 package controllers;
 
 import authentication.MyLoginHandler;
-import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Controller;
-import play.mvc.Results;
 import views.html.*;
 import contracts.login.*;
 import play.data.*;
@@ -16,7 +14,6 @@ public class LoginController extends Controller{
     //GET /login
     public static Result showLoginForm() {
 
-        Http.Request r = request();
         return ok(login.render(Form.form(Credentials.class)) );
     }
 
@@ -34,6 +31,6 @@ public class LoginController extends Controller{
         session().clear();
         session("uid", id.toString());
         
-        return redirect(request().uri());
+        return redirect("/");
     }
 }

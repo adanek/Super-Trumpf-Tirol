@@ -11,3 +11,5 @@ manual.backbutton=Zurück
 game-index-header=Gegen wen möchtest du spielen?
 game-index-singleplayer=Computer
 game-index-multiplayer=anderen Spieler
+
+login-button=login

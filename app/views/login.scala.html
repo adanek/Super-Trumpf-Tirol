@@ -1,12 +1,22 @@
 @(form: Form[contracts.login.Credentials]) 
-	
+@import play.i18n.Messages;
+
 @main() {
 	
-	<h2>Login:</h2>
-	
 	<form action="@routes.LoginController.authenticate()" method="post">
-		<input type="email" name="email"/>
-		<input type="password" name="password"/>
-		<button type="submit">showLoginForm</button>
+	
+		<div class="form-group">
+			<label for="email">Email address</label>
+			<input type="email" class="form-control" id="email" placeholder="Enter email">
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" class="form-control" id="password" placeholder="Password">
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-default">@Messages.get("login-button")</button>
+		</div>
 	</form>
+	
+	
 }
