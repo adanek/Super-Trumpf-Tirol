@@ -26,7 +26,7 @@ public class LoginController extends Controller{
         LoginHandler lh = new MyLoginHandler();
         UUID id = lh.authenticate(c.email, c.password);
         
-        //if(id == null) return unauthorized();
+        if(id == null) return unauthorized();
 
         session().clear();
         session("uid", id.toString());
