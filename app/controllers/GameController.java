@@ -3,7 +3,6 @@ package controllers;
 import authentication.MyAuthenticator;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.game;
 import play.mvc.Security;
 
 public class GameController extends Controller{
@@ -12,14 +11,15 @@ public class GameController extends Controller{
     @Security.Authenticated(MyAuthenticator.class)
     public static Result index() {
 
-        return ok(game.render());
+        return ok(views.html.game.selectModus.render());
     }
     
     // POST /game/create
     //@Security.Authenticated(MyAuthenticator.class)
     public static Result createGame(){
     
-        return play.mvc.Results.TODO;
+        String mode = request().body().asFormUrlEncoded().get("mode")[0];
+        return ok(mode);
     }
     
     // POST /game/play

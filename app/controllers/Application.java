@@ -6,7 +6,6 @@ import play.mvc.Result;
 
 import views.html.index;
 import views.html.manual;
-import com.avaje.ebean.Ebean;
 
 public class Application extends Controller {
 
