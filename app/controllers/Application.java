@@ -12,7 +12,6 @@ public class Application extends Controller {
 
     public static Result index() {
         
-        Ebean.save(new data.Commune());
         return ok(index.render());
     }
 

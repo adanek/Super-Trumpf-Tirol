@@ -14,6 +14,11 @@ import play.db.ebean.Model;
  */
 @Entity
 public class Commune extends Model {
+
+    @Id
+    public Long id;
+    /** name of commune */
+    @Id
     private String name;
     /** population of last census */
     private int population;
@@ -27,6 +32,26 @@ public class Commune extends Model {
     private int nights;
     /** places where everybody can do sport activities like soccer, swimming,.. */
     private int sportFields;
+
+    public static Finder<Long, Commune> find = new Finder<Long, Commune>(Long.class, Commune.class);
+
+    protected Commune(String name, int population, float area, float indebtedness, int nights, int sportFields) {
+	super();
+	this.name = name;
+	this.population = population;
+	this.area = area;
+	this.indebtedness = indebtedness;
+	this.nights = nights;
+	this.sportFields = sportFields;
+    }
+
+    public final Long getId() {
+	return id;
+    }
+
+    public final void setId(Long id) {
+	this.id = id;
+    }
 
     public Commune() {
 
@@ -78,6 +103,20 @@ public class Commune extends Model {
 
     public final void setSportFields(int sportFields) {
 	this.sportFields = sportFields;
+    }
+
+    public static final Finder<Long, Commune> getFind() {
+	return find;
+    }
+
+    public static final void setFind(Finder<Long, Commune> find) {
+	Commune.find = find;
+    }
+
+    @Override
+    public String toString() {
+	return "Commune [name=" + name + ", population=" + population + ", area=" + area + ", indebtedness="
+		+ indebtedness + ", nights=" + nights + ", sportFields=" + sportFields + "]";
     }
 
 }
