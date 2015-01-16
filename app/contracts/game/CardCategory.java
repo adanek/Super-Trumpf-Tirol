@@ -5,6 +5,7 @@ package contracts.game;
  * e.g. population *
  */
 public interface CardCategory {
+    int getId();
     String getName();
     String getValue();
 }

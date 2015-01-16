@@ -1,7 +1,6 @@
-@(form: Form[contracts.login.Credentials]) 
 @import play.i18n.Messages;
 
-@main() {
+@shared.main() {
 	
 	<form action="@routes.LoginController.authenticate()" method="post">
 	

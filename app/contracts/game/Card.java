@@ -6,7 +6,7 @@ import java.util.List;
 public interface Card {
     
     public String getName();
-    public URL getImageUrl();
+    public String getImageUrl();
     public List<CardCategory> getCategories();
 
 }

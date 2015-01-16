@@ -1,17 +1,15 @@
-@main(){
+@shared.main() {
 
     <h2 class="text-center">@play.i18n.Messages.get("game-index-header")</h2>
 
     <div class="row row-first">
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 btn-group-vertical">
             <a class='btn btn-default btn-lg btn-block' href='javascript:startGame("S")'>@play.i18n.Messages.get("game-index-singleplayer")</a>
-            <a class="btn btn-default btn-lg btn-block " href='javascript:startGame("M")'>@play.i18n.Messages.get("game-index-multiplayer")</a>
+            <a class="btn btn-default btn-lg btn-block disabled" href='javascript:startGame("M")'>@play.i18n.Messages.get("game-index-multiplayer")</a>
         </div>
     </div>
 
     <form id="form-start" method="post" action="@routes.GameController.createGame()">
         <input type="hidden" id="form-start-mode" name="mode" />
     </form>
-
-    <div id="response"></div>
 }

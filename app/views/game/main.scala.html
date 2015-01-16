@@ -1,0 +1,29 @@
+@(card: contracts.game.Card)
+@import contracts.game.CardCategory
+
+@shared.main() {
+
+  <div id="card" class="center-block">
+    <div class="card-title">Innsbruck</div>
+    <div class="panel panel-default card-img">
+      <img src="@routes.Assets.at("images/tirol.jpg")" alt="@play.i18n.Messages.get("card-image-alternativ")"/>
+    </div>
+    <div id="card-categories" class="list-group">
+      
+      @for(cat <- card.getCategories()) {
+        <a href="@routes.GameController.playCard()/@cat.getId()" class="card-category list-group-item">
+          <table>
+            <tbody>
+              <tr>
+                <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName()):</td>
+                <td class="card-content-value"><span class="text-right"><strong id="card-category-population"></strong>@cat.getValue()</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </a>
+      }
+    
+    </div>
+  </div>
+  
+}

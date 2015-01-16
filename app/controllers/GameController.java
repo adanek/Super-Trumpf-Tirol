@@ -17,9 +17,8 @@ public class GameController extends Controller{
     // POST /game/create
     //@Security.Authenticated(MyAuthenticator.class)
     public static Result createGame(){
-    
-        String mode = request().body().asFormUrlEncoded().get("mode")[0];
-        return ok(mode);
+
+        return ok(views.html.game.main.render());
     }
     
     // POST /game/play

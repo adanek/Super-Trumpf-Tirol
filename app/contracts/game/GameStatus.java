@@ -1,5 +1,7 @@
 package contracts.game;
 
+import java.util.UUID;
+
 public interface GameStatus {
     
     // unique id of the game

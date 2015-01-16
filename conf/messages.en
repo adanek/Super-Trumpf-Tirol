@@ -13,3 +13,10 @@ manual.text=Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam no
 manual.backbutton=Back
 
 login-button=login
+
+card-category-population=Population
+card-category-area=Area
+card-category-sportfacilities=Sport facilities
+card-category-indebtedness=Indebtedness
+card-category-overnightstays=Overnight stays
+card-image-alternativ=Position on map
