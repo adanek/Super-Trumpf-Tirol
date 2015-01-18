@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Card implements contracts.game.Card{
     
-    List<CardCategory> categories;
+    List<contracts.game.CardCategory> categories;
     
     public Card() {
         this.categories = new LinkedList<>();
@@ -28,7 +28,7 @@ public class Card implements contracts.game.Card{
     }
 
     @Override
-    public List<CardCategory> getCategories() {
+    public List<contracts.game.CardCategory> getCategories() {
         return this.categories;
     }
 }
