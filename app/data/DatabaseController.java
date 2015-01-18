@@ -2,33 +2,39 @@ package data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 import play.Play;
+import contracts.data.DataProvider;
+import contracts.game.CardI;
+import contracts.model.UserI;
 
-public class DatabaseController {
+public class DatabaseController implements DataProvider {
 
-    public static boolean flagLoaded = false;
-    public static int g = 0;
+    private boolean flagLoaded = false;
 
-    public static void load() {
+    private static class DatabaseControllerHolder {
+	private final static DatabaseController INSTANCE = new DatabaseController();
+    }
 
+    public static DatabaseController getInstance() {
+	return DatabaseControllerHolder.INSTANCE;
+    }
+
+    public void load() throws FileNotFoundException {
 	if (flagLoaded)
 	    return;
 	File myfile = Play.application().getFile("/app/data/Daten.csv");
-	if (!myfile.exists())
-	    throw new IllegalArgumentException("wrong path");
 
 	try (Scanner s = new Scanner(myfile);) {
 	    long i = 0;
 	    while (s.hasNextLine()) {
 		Scanner line = new Scanner(s.nextLine());
 		line.useDelimiter(";");
-		
-		Commune c = new Commune();
-		c.setId(i);
+
+		Card c = new Card();
 		c.setName(line.next());
 		c.setPopulation(line.nextInt());
 		c.setArea(line.nextFloat());
@@ -36,9 +42,8 @@ public class DatabaseController {
 		c.setNights(line.nextInt());
 		c.setSportFields(line.nextInt());
 		c.save();
-		
+
 		Ranking rank = new Ranking();
-		rank.setId(i);
 		rank.setName(c.getName());
 		rank.setRankPopulation(line.nextInt());
 		rank.setRankArea(line.nextInt());
@@ -49,12 +54,62 @@ public class DatabaseController {
 		line.close();
 	    }
 	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
+	    throw new FileNotFoundException("file can't be found");
 	}
 
+	/**
+	 * temporary users
+	 */
+	this.createUser("admin", "admin@gmx.at", "123456");
+	this.createUser("admin", "sdfad", "admin");
+	this.createUser("test", "test@gmx.at", "654321");
     }
 
-    public static List<Commune> getData() {
-	return Commune.find.all();
+    @Override
+    public UserI createUser(String name, String email, String password) {
+	User newUser = null;
+	List<User> userList = User.find.where().eq("name", name).eq("email", email).findList();
+	if (userList.size() == 0) {
+	    newUser = new User(name, email, password);
+	    newUser.save();
+	}
+	return newUser;
+    }
+
+    public List<Card> getAllCards() {
+	return Card.find.all();
+    }
+
+    @Override
+    public CardI getCardByID(UUID id) {
+	return Card.find.byId(id);
+    }
+
+    public List<Ranking> getAllRankings() {
+	return Ranking.find.all();
+    }
+
+    @Override
+    public Ranking getRankingsByID(UUID id) {
+	return Ranking.find.byId(id);
+    }
+
+    public List<User> getAllUsers() {
+	return User.find.all();
+    }
+
+    @Override
+    public UserI getUserByID(UUID id) {
+	return User.find.byId(id);
+    }
+
+    @Override
+    public UserI checkUser(String name, String password) {
+	User toCheck = null;
+	List<User> users = User.find.where().eq("name", name).findList();
+	for (User u : users)
+	    if (u.getPassword().equals(password))
+		toCheck = u;
+	return toCheck;
     }
 }
