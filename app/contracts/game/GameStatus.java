@@ -3,15 +3,20 @@ package contracts.game;
 import java.util.UUID;
 
 public interface GameStatus {
-    
-    // unique id of the game
-    UUID getGameID();
-    
-    // unique id of the player
-    UUID getPlayer();
-    
-    // current state of the game
-    GameState getCurrentState();
+
+    /**
+     * The current state of the game
+     * *
+     * @return a string representring the current state of the game
+     */
+    String getMessage();
+
+    /**
+     * The current round of the game
+     *
+     * @return the current round of the game
+     */
+    int getRound();
     
     // number of cards in your stack
     int getCardCount();
