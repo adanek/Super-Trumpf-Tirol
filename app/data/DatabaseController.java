@@ -104,9 +104,9 @@ public class DatabaseController implements DataProvider {
     }
 
     @Override
-    public UserI checkUser(String name, String password) {
+    public UserI checkUser(String email, String password) {
 	User toCheck = null;
-	List<User> users = User.find.where().eq("name", name).findList();
+	List<User> users = User.find.where().eq("email", email).findList();
 	for (User u : users)
 	    if (u.getPassword().equals(password))
 		toCheck = u;

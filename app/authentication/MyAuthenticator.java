@@ -13,6 +13,7 @@ public class MyAuthenticator extends Security.Authenticator {
     @Override
     public Result onUnauthorized(Context ctx) {
         
+    	//user is not authorized -> redirect to login form
         return redirect(controllers.routes.LoginController.showLoginForm());
     }
 }

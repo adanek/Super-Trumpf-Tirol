@@ -1,5 +1,10 @@
 package controllers;
 
+import java.util.UUID;
+
+import contracts.data.DataProvider;
+import contracts.model.UserI;
+import data.DatabaseController;
 import authentication.MyAuthenticator;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -11,8 +16,15 @@ public class GameController extends Controller{
     // GET /game/
     @Security.Authenticated(MyAuthenticator.class)
     public static Result index() {
-
-        return ok(game.render());
+    	
+    	//get uid from request
+    	UUID uid = UUID.fromString(request().username());
+    	
+    	//get database connection
+    	DataProvider dp = DatabaseController.getInstance();
+    	
+    	//call game view with username
+        return ok(game.render(dp.getUserByID(uid).getName()));
     }
     
     // POST /game/create

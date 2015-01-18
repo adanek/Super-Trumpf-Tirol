@@ -5,8 +5,10 @@ import play.mvc.Result;
 import play.mvc.Controller;
 import views.html.*;
 import contracts.login.*;
+import contracts.model.UserI;
 import play.data.*;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class LoginController extends Controller{
@@ -18,19 +20,33 @@ public class LoginController extends Controller{
     }
 
 
-    //POST  /login
-    public static Result authenticate() {
-        Form<Credentials> loginForm = Form.form(Credentials.class).bindFromRequest();
-        Credentials c = loginForm.get();
+	// POST /login
+	public static Result authenticate() {
+		Form<Credentials> loginForm = Form.form(Credentials.class)
+				.bindFromRequest();
+		
+		Map<String,String> data = loginForm.data();
+		
+		Credentials c = new Credentials();
+		
+		//get form fields
+		c.email = data.get("email");
+		c.password = data.get("password");
+		
+		//check if user exists
+		LoginHandler lh = new MyLoginHandler();
+		UserI user = lh.authenticate(c.email, c.password);
 
-        LoginHandler lh = new MyLoginHandler();
-        UUID id = lh.authenticate(c.email, c.password);
-        
-        if(id == null) return unauthorized();
+		//user does not exist or is unauthorized
+		if (user == null) {
+			return unauthorized();
+		}
+		
+		//store session data
+		session().clear();
+		session("uid", user.getID().toString());
 
-        session().clear();
-        session("uid", id.toString());
-        
-        return redirect("/");
-    }
+		//redirect to game
+		return redirect("/game/");
+	}
 }
