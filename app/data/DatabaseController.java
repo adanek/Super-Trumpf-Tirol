@@ -55,6 +55,6 @@ public class DatabaseController {
     }
 
     public static List<Commune> getData() {
-	return Commune.find.all().get(g++).toString();
+	return Commune.find.all();
     }
 }
