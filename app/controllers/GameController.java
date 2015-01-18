@@ -1,7 +1,10 @@
 package controllers;
 
 import authentication.MyAuthenticator;
+import contracts.game.GameState;
+import contracts.game.GameStatus;
 import mock.GameHandler;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -56,8 +59,21 @@ public class GameController extends Controller{
     
     // GET /game/status
     public static Result getStatus(){
+
+        GameStatus state;
         
-        return  TODO;
+        try {
+            UUID gid = UUID.fromString(session().get("gid"));
+            UUID pid = UUID.fromString(session().get("uid"));
+            contracts.game.GameHandler gh = new GameHandler();            
+   
+            state = gh.getGameStatus(gid, pid);
+        }
+        catch (Exception ex){
+            return badRequest();
+        }
+        
+        return  ok(Json.toJson(state));
     }
     
     //POST /game/commit
