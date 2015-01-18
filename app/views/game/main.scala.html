@@ -1,5 +1,4 @@
 @(card: contracts.game.Card)
-@import contracts.game.CardCategory
 
 @shared.main() {
 
@@ -11,7 +10,7 @@
     <div id="card-categories" class="list-group">
       
       @for(cat <- card.getCategories()) {
-        <a href="@routes.GameController.playCard()/@cat.getId()" class="card-category list-group-item">
+        <a href='@routes.GameController.playCard()' class="card-category list-group-item" data-id="@cat.getId()">
           <table>
             <tbody>
               <tr>

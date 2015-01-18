@@ -5,13 +5,14 @@ function startGame(mode) {
 
 }
 
-function chooseCategory (category) {
+function chooseCategory (category, url) {
     
-    alert(category);
-    
+    $.post(url, {cid:category});
 }
 
-$('.card-category').click(function () {
-    var cat = $(this).find('.card-content-label').text();
-    chooseCategory(cat);
+$('.card-category').click(function (event) {
+    event.preventDefault();
+    var cat = $(this).attr('data-id');
+    var url = $(this).attr('href');
+    chooseCategory(cat, url);
 });

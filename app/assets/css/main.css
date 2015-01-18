@@ -55,8 +55,7 @@ input[type="checkbox"].input-validation-error {
     border-radius: 10px;
     border: 1px solid #AAAAAA;
     padding-top: 10px;
-    box-shadow: 3px 3px 3px 0px #ccc;
-    
+    box-shadow: 3px 3px 3px 0px #ccc;    
 }
 .card-img {
     width: 100%;
@@ -66,6 +65,11 @@ input[type="checkbox"].input-validation-error {
 .card-img img {
     width: 100%;
     height: auto;
+}
+
+#card table {
+    width: 100%;
+    
 }
 
 .card-content-label {

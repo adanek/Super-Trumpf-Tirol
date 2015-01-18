@@ -8,8 +8,10 @@ public interface GameHandler {
     /**
      * Creates a new single player game
      * @param playerId the ID of the player
+     *                 
+     * @return the id of the new game
      */
-    public void createNewGame(UUID playerId);
+    public UUID createNewGame(UUID playerId);
 
     /**
      * Returns the current state of the game 
@@ -48,7 +50,7 @@ public interface GameHandler {
      * @param playerId The ID of the passive player
      * @param categoryID The Id of the choosen category
      */
-    public void makeMove(UUID gameId, UUID playerId, CardCategory categoryID);
+    public void makeMove(UUID gameId, UUID playerId, int categoryID);
 
     /**
      * Finishes a round.

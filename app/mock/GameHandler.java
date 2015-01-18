@@ -4,34 +4,41 @@ import contracts.game.*;
 import contracts.game.Card;
 import contracts.game.CardCategory;
 
-public class GameHandler implements contracts.game.GameHandler{
-    @Override
-    public void createNewGame() {
+import java.util.UUID;
 
+public class GameHandler implements contracts.game.GameHandler {
+    @Override
+    public UUID createNewGame(UUID playerId) {
+        return UUID.randomUUID();
     }
 
     @Override
-    public GameStatus getGameStatus() {
+    public GameStatus getGameStatus(UUID gameId, UUID playerId) {
         return null;
     }
 
     @Override
-    public Card getCard() {
+    public Card getCard(UUID gameId, UUID playerId) {
         return new mock.Card();
     }
 
     @Override
-    public Card getCardFromCompetitor() {
+    public Card getCardFromCompetitor(UUID gameId, UUID playerId) {
         return null;
     }
 
     @Override
-    public void makeMove(CardCategory category) {
+    public void makeMove(UUID gameId, UUID playerId, int categoryId) {
 
     }
 
     @Override
-    public void commitRound() {
+    public void commitRound(UUID gameId, UUID playerId) {
+
+    }
+
+    @Override
+    public void commitCard(UUID gameId, UUID playerId) {
 
     }
 }
