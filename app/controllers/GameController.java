@@ -19,7 +19,7 @@ public class GameController extends Controller{
         
         return ok(views.html.game.selectModus.render());
     }
-    
+    // Demo Comment
     // POST /game/create
     //@Security.Authenticated(MyAuthenticator.class)
     public static Result createGame(){
