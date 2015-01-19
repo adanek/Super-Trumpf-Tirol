@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import play.db.ebean.Model;
-import contracts.model.UserI;
+import contracts.model.IUser;
 
 /**
  * This class contains the information about a village and the position of the
@@ -17,7 +17,7 @@ import contracts.model.UserI;
  *
  */
 @Entity
-public class User extends Model implements UserI {
+public class User extends Model implements IUser {
 
     @Id
     private UUID ID = UUID.randomUUID();

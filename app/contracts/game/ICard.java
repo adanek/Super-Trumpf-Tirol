@@ -2,7 +2,12 @@ package contracts.game;
 
 import java.util.UUID;
 
-public interface CardI {
+/**
+ * 
+ * @author Witsch Daniel
+ *
+ */
+public interface ICard {
 
     UUID getID();
 
