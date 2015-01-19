@@ -11,7 +11,7 @@ public interface GameHandler {
      *                 
      * @return the id of the new game
      */
-    public UUID createNewGame(UUID playerId);
+    public String createNewGame(String playerId);
 
     /**
      * Returns the current state of the game 
@@ -21,7 +21,7 @@ public interface GameHandler {
      * 
      * @return the current game state
      */
-    public GameStatus getGameStatus(UUID gameId, UUID playerId);
+    public GameStatus getGameStatus(String gameId, String playerId);
 
     /**
      * Returns the current card of the player
@@ -30,7 +30,7 @@ public interface GameHandler {
      * @param playerId The ID of the passive player* 
      * @return the current card of the player
      */
-    public Card getCard(UUID gameId, UUID playerId);
+    public Card getCard(String gameId, String playerId);
 
     /**
      * Returns the current card of the competitor to compare it with your own after the choice is made
@@ -40,7 +40,7 @@ public interface GameHandler {
      * @param playerId The ID of the passive player
      * @return the current card of the competitor
      */
-    public Card getCardFromCompetitor(UUID gameId, UUID playerId);
+    public Card getCardFromCompetitor(String gameId, String playerId);
 
     /**
      * Submit the chosen category
@@ -50,7 +50,7 @@ public interface GameHandler {
      * @param playerId The ID of the passive player
      * @param categoryID The Id of the choosen category
      */
-    public void makeMove(UUID gameId, UUID playerId, int categoryID);
+    public void makeMove(String gameId, String playerId, int categoryID);
 
     /**
      * Finishes a round.
@@ -64,7 +64,7 @@ public interface GameHandler {
      * @param gameId The ID of the current game
      * @param playerId The ID of the passive player
      */
-    public void commitRound(UUID gameId, UUID playerId);
+    public void commitRound(String gameId, String playerId);
 
     /**
      * The passiv player has to commit his card before the evaluation of the round can be done
@@ -72,5 +72,5 @@ public interface GameHandler {
      * @param gameId The ID of the current game
      * @param playerId The ID of the passive player
      */
-    public void commitCard(UUID gameId, UUID playerId);
+    public void commitCard(String gameId, String playerId);
 }

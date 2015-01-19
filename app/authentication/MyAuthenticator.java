@@ -7,7 +7,7 @@ public class MyAuthenticator extends Security.Authenticator {
     
     @Override
     public String getUsername(Context ctx) {
-        return ctx.session().get("uid");
+        return ctx.session().get("pid");
     }
 
     @Override

@@ -54,7 +54,7 @@ public class LoginController extends Controller{
 		
 		//store session data
 		session().clear();
-		session("uid", user.getID().toString());
+		session("pid", user.getID().toString());
 
 		//redirect to game
 		return redirect("/game/");

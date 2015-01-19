@@ -8,37 +8,37 @@ import java.util.UUID;
 
 public class GameHandler implements contracts.game.GameHandler {
     @Override
-    public UUID createNewGame(UUID playerId) {
-        return UUID.randomUUID();
+    public String createNewGame(String playerId) {
+        return UUID.randomUUID().toString();
     }
 
     @Override
-    public GameStatus getGameStatus(UUID gameId, UUID playerId) {
+    public GameStatus getGameStatus(String gameId, String playerId) {
         return new GameStatus( GameState.WaitForYourChoice, 12, 40, 22);
     }
 
     @Override
-    public Card getCard(UUID gameId, UUID playerId) {
+    public Card getCard(String gameId, String playerId) {
         return new mock.Card();
     }
 
     @Override
-    public Card getCardFromCompetitor(UUID gameId, UUID playerId) {
+    public Card getCardFromCompetitor(String gameId, String playerId) {
         return null;
     }
 
     @Override
-    public void makeMove(UUID gameId, UUID playerId, int categoryId) {
+    public void makeMove(String gameId, String playerId, int categoryId) {
 
     }
 
     @Override
-    public void commitRound(UUID gameId, UUID playerId) {
+    public void commitRound(String gameId, String playerId) {
 
     }
 
     @Override
-    public void commitCard(UUID gameId, UUID playerId) {
+    public void commitCard(String gameId, String playerId) {
 
     }
 }
