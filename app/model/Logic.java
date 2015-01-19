@@ -20,39 +20,38 @@ public class Logic extends Model implements GameHandler {
     private Array<Card> cards;
 
 
-    //TODO
     @Override
-    public UUID createNewGame(UUID playerId) {
+    public String createNewGame(String playerId) {
         return null;
     }
 
     @Override
-    public GameStatus getGameStatus(UUID gameId, UUID playerId) {
+    public GameStatus getGameStatus(String gameId, String playerId) {
         return null;
     }
 
     @Override
-    public Card getCard(UUID gameId, UUID playerId) {
+    public Card getCard(String gameId, String playerId) {
         return null;
     }
 
     @Override
-    public Card getCardFromCompetitor(UUID gameId, UUID playerId) {
+    public Card getCardFromCompetitor(String gameId, String playerId) {
         return null;
     }
 
     @Override
-    public void makeMove(UUID gameId, UUID playerId, int categoryID) {
+    public void makeMove(String gameId, String playerId, int categoryID) {
 
     }
 
     @Override
-    public void commitRound(UUID gameId, UUID playerId) {
+    public void commitRound(String gameId, String playerId) {
 
     }
 
     @Override
-    public void commitCard(UUID gameId, UUID playerId) {
+    public void commitCard(String gameId, String playerId) {
 
     }
 }
