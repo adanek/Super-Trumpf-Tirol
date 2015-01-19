@@ -1,7 +1,7 @@
 package authentication;
 
 import contracts.login.LoginHandler;
-import contracts.model.UserI;
+import contracts.model.IUser;
 import contracts.data.DataProvider;
 
 import java.io.FileNotFoundException;
@@ -15,18 +15,10 @@ public class MyLoginHandler implements LoginHandler {
 
 	public MyLoginHandler() {
 		this.dp = DatabaseController.getInstance();
-
-		// load database
-		try {
-			dp.load();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
-	public UserI authenticate(String email, String password) {
+	public IUser authenticate(String email, String password) {
 
 		// return user if found
 		return this.dp.checkUser(email, password);

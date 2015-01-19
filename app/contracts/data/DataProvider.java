@@ -1,11 +1,14 @@
 package contracts.data;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.UUID;
 
 import contracts.game.ICard;
 import contracts.model.IUser;
+import data.Card;
 import data.Ranking;
+import data.User;
 
 /**
  * 
@@ -25,5 +28,11 @@ public interface DataProvider {
     IUser getUserByID(UUID id);
 
     IUser checkUser(String email, String password);
+
+    List<Card> getAllCards();
+
+    List<Ranking> getAllRankings();
+
+    List<User> getAllUsers();
 
 }

@@ -5,7 +5,7 @@ import play.mvc.Result;
 import play.mvc.Controller;
 import views.html.*;
 import contracts.login.*;
-import contracts.model.UserI;
+import contracts.model.IUser;
 import play.data.*;
 
 import java.util.Map;
@@ -35,7 +35,7 @@ public class LoginController extends Controller{
 		
 		//check if user exists
 		LoginHandler lh = new MyLoginHandler();
-		UserI user = lh.authenticate(c.email, c.password);
+		IUser user = lh.authenticate(c.email, c.password);
 
 		//user does not exist or is unauthorized
 		if (user == null) {
