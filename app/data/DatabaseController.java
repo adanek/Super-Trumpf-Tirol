@@ -8,8 +8,8 @@ import java.util.UUID;
 
 import play.Play;
 import contracts.data.DataProvider;
-import contracts.game.CardI;
-import contracts.model.UserI;
+import contracts.game.ICard;
+import contracts.model.IUser;
 
 public class DatabaseController implements DataProvider {
 
@@ -26,6 +26,7 @@ public class DatabaseController implements DataProvider {
     public void load() throws FileNotFoundException {
 	if (flagLoaded)
 	    return;
+
 	File myfile = Play.application().getFile("/app/data/Daten.csv");
 
 	try (Scanner s = new Scanner(myfile);) {
@@ -66,11 +67,15 @@ public class DatabaseController implements DataProvider {
     }
 
     @Override
-    public UserI createUser(String name, String email, String password) {
+    public IUser createUser(String name, String email, String password) {
 	User newUser = null;
 	List<User> userList = User.find.where().eq("name", name).eq("email", email).findList();
 	if (userList.size() == 0) {
-	    newUser = new User(name, email, password);
+	    try {
+		newUser = new User(name, email, PasswordHash.getSaltedHash(password));
+	    } catch (Exception e) {
+		System.out.println(e);
+	    }
 	    newUser.save();
 	}
 	return newUser;
@@ -81,7 +86,7 @@ public class DatabaseController implements DataProvider {
     }
 
     @Override
-    public CardI getCardByID(UUID id) {
+    public ICard getCardByID(UUID id) {
 	return Card.find.byId(id);
     }
 
@@ -99,17 +104,21 @@ public class DatabaseController implements DataProvider {
     }
 
     @Override
-    public UserI getUserByID(UUID id) {
+    public IUser getUserByID(UUID id) {
 	return User.find.byId(id);
     }
 
     @Override
-    public UserI checkUser(String email, String password) {
+    public IUser checkUser(String name, String password) {
 	User toCheck = null;
-	List<User> users = User.find.where().eq("email", email).findList();
+	List<User> users = User.find.where().eq("name", name).findList();
 	for (User u : users)
-	    if (u.getPassword().equals(password))
-		toCheck = u;
+	    try {
+		if (PasswordHash.check(password, u.getPassword()))
+		    toCheck = u;
+	    } catch (Exception e) {
+		System.out.println(e);
+	    }
 	return toCheck;
     }
 }
