@@ -56,7 +56,7 @@ public class GameController extends Controller{
 
             String pid = session().get("pid");
             String gid = session().get("gid");
-            int cid = Integer.getInteger(request().body().asFormUrlEncoded().get("cid")[0]);
+            int cid = Integer.parseInt(request().body().asFormUrlEncoded().get("cid")[0]);
 
             ServiceLocator.getGameHandler().makeMove(gid, pid, cid);
         }
