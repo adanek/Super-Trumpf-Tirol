@@ -24,7 +24,7 @@ public class GameController extends Controller{
     	//CHANGED CHANGED, Ändern bitte, da game.main.html eine Card will, ich jedoch keine geben kann
         //CHANGED Im der UI benötige keien Zugriff auf die Datensicht, geht nur über Logik
         //return ok(main.render(dp.getAllCards().get(0)));
-        return ok(views.html.game.selectModus.render());
+        return ok(views.html.game.mode.render());
     }
 
     // POST /game/create

@@ -22,7 +22,7 @@ public class Application extends Controller {
     /**
      * Returns if the user is signed in*
      *
-     * @return
+     * @return true if the user is signed in
      */
     private static Boolean isSignedIn() {
 

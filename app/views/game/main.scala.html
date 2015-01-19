@@ -8,8 +8,8 @@
     </div>
     <table class="table">
       <tr class="text-center">
-        <td>Sie <span class="info-cardCount label label-info" /></td>
-        <td>Gegner <span class="info-competitorCardCount label label-info" /></td>
+        <td>Sie <span class="info-cardCount label label-info" ></span></td>
+        <td>Gegner <span class="info-competitorCardCount label label-info" ></span></td>
       </tr>
     </table>
   </div>
@@ -20,14 +20,14 @@
       <img src="@routes.Assets.at("images/tirol.jpg")" alt="@play.i18n.Messages.get("card-image-alternative")"/>
     </div>
     <div id="card-categories" class="list-group">
-      
-      @for(cat <- card.getCategories()) {
-        <a href='@routes.GameController.playCard()' class="card-category list-group-item" data-id="@cat.getId()">
+
+    @for(cat <- card.getCategories) {
+      <a href='@routes.GameController.playCard()' class="card-category list-group-item" data-id="@cat.getId">
           <table>
             <tbody>
               <tr>
-                <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName()):</td>
-                <td class="card-content-value"><span class="text-right"><strong id="card-category-population"></strong>@cat.getValue()</span></td>
+                <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName):</td>
+                <td class="card-content-value"><span class="text-right"><strong id="card-category-population"></strong> @cat.getValue</span></td>
               </tr>
             </tbody>
           </table>
