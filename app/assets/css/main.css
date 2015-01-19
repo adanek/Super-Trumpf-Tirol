@@ -1,9 +1,90 @@
-body {
-    padding-top: 50px;
+.row-first {
+    margin-top: 50px;
     
 }
 
-.row-first {
-    margin-top: 50px;
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+#card {
+    margin-top: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 300px;
+    height: 450px;
+    border-radius: 10px;
+    border: 1px solid #AAAAAA;
+    padding-top: 10px;
+    box-shadow: 3px 3px 3px 0px #ccc;    
+}
+.card-img {
+    width: 100%;
+}
+
+.card-img img {
+    width: 100%;
+    height: auto;
+}
+
+#card table {
+    width: 100%;
+    
+}
+
+.card-content-label {
+    font-size: 0.8em;
+}
+
+.card-content-value {
+    text-align: right;
+}
+
+.game-info {
+    margin-top: 20px;
+}
+
+#info {
+    max-width: 600px;
+    
     
 }

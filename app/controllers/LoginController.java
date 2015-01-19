@@ -16,7 +16,7 @@ public class LoginController extends Controller{
     //GET /login
     public static Result showLoginForm() {
 
-        return ok(login.render(Form.form(Credentials.class)) );
+        return ok(views.html.login.render());
     }
 
 

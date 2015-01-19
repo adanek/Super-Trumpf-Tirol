@@ -1,0 +1,40 @@
+@(card: contracts.game.Card)
+
+@shared.main() {
+
+  <div id="info" class="panel panel-default center-block">
+    <div class="panel-heading">
+      <p class="text-center">Runde <span class="info-roundnr"></span>: <span class="info-message" ></span> </p>
+    </div>
+    <table class="table">
+      <tr class="text-center">
+        <td>Sie <span class="info-cardCount label label-info" /></td>
+        <td>Gegner <span class="info-competitorCardCount label label-info" /></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div id="card" class="center-block">
+    <div class="card-title">Innsbruck</div>
+    <div class="panel panel-default card-img">
+      <img src="@routes.Assets.at("images/tirol.jpg")" alt="@play.i18n.Messages.get("card-image-alternativ")"/>
+    </div>
+    <div id="card-categories" class="list-group">
+      
+      @for(cat <- card.getCategories()) {
+        <a href='@routes.GameController.playCard()' class="card-category list-group-item" data-id="@cat.getId()">
+          <table>
+            <tbody>
+              <tr>
+                <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName()):</td>
+                <td class="card-content-value"><span class="text-right"><strong id="card-category-population"></strong>@cat.getValue()</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </a>
+      }
+    
+    </div>
+  </div>
+  
+}
