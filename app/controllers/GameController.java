@@ -11,6 +11,7 @@ import play.mvc.Result;
 import views.html.game.*;
 import play.mvc.Security;
 import java.util.List;
+import mock.*;
 
 public class GameController extends Controller{
 
@@ -26,7 +27,7 @@ public class GameController extends Controller{
     	
     	//CHANGED CHANGED, Ändern bitte, da game.main.html eine Card will, ich jedoch keine geben kann
         //return ok(main.render(dp.getAllCards().get(0)));
-        return ok(main.render(dp.getAllCards().get(0)));
+        return ok(main.render(new GameHandler().getCard(UUID.randomUUID(),UUID.randomUUID())));
     }
     
     // POST /game/create

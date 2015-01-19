@@ -19,6 +19,16 @@ public class LoginController extends Controller{
         return ok(views.html.login.render());
     }
 
+    //GET /logout
+    public static Result logout(){
+    	
+    	//clear session data
+		session().clear();
+    	
+		//redirect to index page
+    	return redirect("/");
+    }
+    
 
 	// POST /login
 	public static Result authenticate() {
@@ -49,4 +59,5 @@ public class LoginController extends Controller{
 		//redirect to game
 		return redirect("/game/");
 	}
+	
 }
