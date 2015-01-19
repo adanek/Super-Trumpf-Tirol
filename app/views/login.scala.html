@@ -1,8 +1,8 @@
 @import play.i18n.Messages;
 
-@shared.main() {
-	
-	<form action="@routes.LoginController.authenticate()" method="post">
+@shared.main(false) {
+
+	<form class="login-form center-block" action="@routes.LoginController.authenticate()" method="post">
 	
 		<div class="form-group">
 			<label for="email">Email address</label>

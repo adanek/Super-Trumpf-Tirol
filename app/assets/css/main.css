@@ -1,17 +1,9 @@
 .row-first {
     margin-top: 50px;
-    
 }
 
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -48,6 +40,7 @@ input[type="checkbox"].input-validation-error {
 
 #card {
     margin-top: 25px;
+    margin-bottom: 10px;
     padding-left: 15px;
     padding-right: 15px;
     width: 300px;
@@ -86,5 +79,64 @@ input[type="checkbox"].input-validation-error {
 #info {
     max-width: 600px;
     
-    
+}
+
+.login-form {
+
+    margin-top: 80px;
+    max-width: 300px;
+}
+
+/* Sticky footer styles
+ -------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+
+#footer {
+    background-color: #f5f5f5;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+    padding-top: 60px;
+}
+
+.container .credit {
+    margin: 20px 0;
+}
+
+code {
+    font-size: 80%;
 }

@@ -9,8 +9,6 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 
-
-
 public class GameController extends Controller{
 
     // GET /game/
@@ -50,6 +48,7 @@ public class GameController extends Controller{
     }
     
     // POST /game/play
+    @Security.Authenticated(MyAuthenticator.class)
     public static Result playCard(){
 
         try {
@@ -68,6 +67,7 @@ public class GameController extends Controller{
     }
     
     // GET /game/status
+    @Security.Authenticated(MyAuthenticator.class)
     public static Result getStatus(){       
         
         GameStatus state = null;

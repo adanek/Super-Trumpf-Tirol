@@ -1,4 +1,6 @@
 app.name=Super Trumpf Tirol
+user-info-label=Angemeldet als
+
 
 index.header=Willkommen auf Super Trumpf Tirol
 index.link-newGame=Spielen

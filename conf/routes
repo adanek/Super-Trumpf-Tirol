@@ -5,7 +5,6 @@
 #Methods    URL                     Controller
 GET         /                    controllers.Application.index()
 GET         /manual              controllers.Application.manual()
-GET         /langs               controllers.Application.langs()
 
 GET         /login               controllers.LoginController.showLoginForm()
 POST        /login               controllers.LoginController.authenticate()
