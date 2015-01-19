@@ -24,7 +24,8 @@ public class GameController extends Controller{
     	//get database connection
     	DataProvider dp = DatabaseController.getInstance();
     	
-    	//CHANGED CHANGED, Ändern bitte, da game.main.html eine Card will, ich jedoch keine geben kann
+    	//CHANGED CHANGED, Ã„ndern bitte, da game.main.html eine Card will, ich jedoch keine geben kann
+        //return ok(main.render(dp.getAllCards().get(0)));
         return ok(main.render(dp.getAllCards().get(0)));
     }
     
