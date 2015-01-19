@@ -57,7 +57,7 @@ public class LoginController extends Controller{
 		session("pid", user.getID().toString());
 
 		//redirect to game
-		return redirect("/game/");
+		return redirect("/");
 	}
 	
 }

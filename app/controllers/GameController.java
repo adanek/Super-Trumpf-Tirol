@@ -1,17 +1,15 @@
 package controllers;
 
-import java.util.UUID;
-
-import contracts.data.DataProvider;
-import contracts.model.IUser;
-import data.DatabaseController;
 import authentication.MyAuthenticator;
+import config.ServiceLocator;
+import contracts.game.GameHandler;
+import contracts.game.GameStatus;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.game.*;
 import play.mvc.Security;
-import java.util.List;
-import mock.*;
+
+
 
 public class GameController extends Controller{
 
@@ -30,24 +28,61 @@ public class GameController extends Controller{
         //return ok(main.render(dp.getAllCards().get(0)));
         return ok(views.html.game.selectModus.render());
     }
-    // Demo Comment
+
     // POST /game/create
-    //@Security.Authenticated(MyAuthenticator.class)
+    @Security.Authenticated(MyAuthenticator.class)
     public static Result createGame(){
-    
-        return play.mvc.Results.TODO;
+
+        GameHandler gh = ServiceLocator.getGameHandler();
+        String pid = session().get("pid");
+        String gid;
+        
+        try {
+            gid = gh.createNewGame(pid);
+            session("gid", gid);
+        }
+        catch(Exception ex)
+        {
+            return badRequest();
+        }
+        
+        return ok(views.html.game.main.render(gh.getCard(gid, pid)));
     }
     
     // POST /game/play
     public static Result playCard(){
-        
-        return TODO;
+
+        try {
+
+            String pid = session().get("pid");
+            String gid = session().get("gid");
+            int cid = Integer.getInteger(request().body().asFormUrlEncoded().get("cid")[0]);
+
+            ServiceLocator.getGameHandler().makeMove(gid, pid, cid);
+        }
+        catch (Exception ex){
+            return badRequest(ex.getMessage());
+        }
+
+        return ok();
     }
     
     // GET /game/status
-    public static Result getStatus(){
+    public static Result getStatus(){       
         
-        return  TODO;
+        GameStatus state = null;
+
+        try {
+            String pid = session().get("pid");
+            String gid = session().get("gid");
+            state = ServiceLocator.getGameHandler().getGameStatus(gid, pid);
+        }
+        catch(Exception ex){
+            
+            return badRequest(ex.getMessage());
+        }
+        
+        return ok(Json.toJson(state));
     }
     
     //POST /game/commit

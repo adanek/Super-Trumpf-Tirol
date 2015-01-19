@@ -1,3 +1,5 @@
+package config;
+
 import contracts.data.DataProvider;
 import contracts.game.GameHandler;
 import data.DatabaseController;
