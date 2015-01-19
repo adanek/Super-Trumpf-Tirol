@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import play.db.ebean.Model;
-import contracts.game.CardI;
+import contracts.game.ICard;
 
 /**
  * Class to save the data about the communes (cards) in a database. H2 is a
@@ -16,7 +16,7 @@ import contracts.game.CardI;
  *
  */
 @Entity
-public class Card extends Model implements CardI {
+public class Card extends Model implements ICard {
 
     @Id
     public UUID ID = UUID.randomUUID();

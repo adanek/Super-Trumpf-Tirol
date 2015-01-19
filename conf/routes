@@ -9,6 +9,7 @@ GET         /langs               controllers.Application.langs()
 
 GET         /login               controllers.LoginController.showLoginForm()
 POST        /login               controllers.LoginController.authenticate()
+GET         /logout              controllers.LoginController.logout()
 
 GET         /game/               controllers.GameController.index()
 POST        /game/create         controllers.GameController.createGame()
