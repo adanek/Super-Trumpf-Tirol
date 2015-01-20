@@ -23,6 +23,17 @@ public class Game extends Model implements GameStatus{
     private int round;
     private Boolean player1sMove;
 
+    public Game(UUID gameID, UUID player1ID, UUID player2ID, Queue<Card> player1Cards, Queue<Card> player2Cards) {
+        GameID = gameID;
+        Player1ID = player1ID;
+        Player2ID = player2ID;
+        // this.status = status; TODO
+        this.player1Cards = player1Cards;
+        this.player2Cards = player2Cards;
+        this.round = 1;
+        this.player1sMove = true;
+    }
+
     @Override
     public String getMessage() {
         return status.toString();
@@ -38,10 +49,10 @@ public class Game extends Model implements GameStatus{
         return player1Cards.size();
     }
 
-    /** Seen from player1`s perspective. */
+    /** Seen from player2`s perspective. */
     @Override
     public int getCardCountCompetitor() {
-        return player1Cards.size();
+        return player2Cards.size();
     }
 
     public UUID getPlayer1ID() {
