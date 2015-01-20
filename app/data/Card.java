@@ -148,7 +148,7 @@ public class Card extends Model implements ICard {
     public String getImageUrl() {
 	return "/images/"
 		+ name.toLowerCase().replaceAll("ü", "ue").replaceAll("ö", "oe").replaceAll("ä", "ae")
-			.replaceAll("[ .]", "");
+			.replaceAll("[ .]", "") + ".jpg";
     }
 
     @Override
