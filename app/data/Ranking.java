@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import play.db.ebean.Model;
+import contracts.data.IRanking;
 
 /**
  * This class contains the information about a village and the position of the
@@ -16,7 +17,7 @@ import play.db.ebean.Model;
  *
  */
 @Entity
-public class Ranking extends Model {
+public class Ranking extends Model implements IRanking {
 
     @Id
     private UUID ID = UUID.randomUUID();
