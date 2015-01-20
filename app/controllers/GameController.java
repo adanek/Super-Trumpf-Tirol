@@ -1,99 +1,97 @@
 package controllers;
 
-import authentication.MyAuthenticator;
-import config.ServiceLocator;
-import contracts.game.GameHandler;
-import contracts.game.GameStatus;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import authentication.MyAuthenticator;
+import config.ServiceLocator;
+import contracts.game.GameHandler;
+import contracts.game.GameStatus;
 
-public class GameController extends Controller{
+public class GameController extends Controller {
 
     // GET /game/
     @Security.Authenticated(MyAuthenticator.class)
     public static Result index() {
-    	
-    	//get uid from request
-    	String pid = request().username();
-    	
-    	//get database connection
-    	//DataProvider dp = DatabaseController.getInstance();
-    	
-    	//CHANGED CHANGED, Ändern bitte, da game.main.html eine Card will, ich jedoch keine geben kann
-        //CHANGED Im der UI benötige keien Zugriff auf die Datensicht, geht nur über Logik
-        //return ok(main.render(dp.getAllCards().get(0)));
-        return ok(views.html.game.mode.render());
+
+	// get uid from request
+	String pid = request().username();
+
+	// get database connection
+	// DataProvider dp = DatabaseController.getInstance();
+
+	// CHANGED CHANGED, Ändern bitte, da game.main.html eine Card will, ich
+	// jedoch keine geben kann
+	// CHANGED Im der UI benötige keien Zugriff auf die Datensicht, geht nur
+	// über Logik
+	// return ok(main.render(dp.getAllCards().get(0)));
+	return ok(views.html.game.mode.render());
     }
 
     // POST /game/create
     @Security.Authenticated(MyAuthenticator.class)
-    public static Result createGame(){
+    public static Result createGame() {
 
-        GameHandler gh = ServiceLocator.getGameHandler();
-        String pid = session().get("pid");
-        String gid;
-        
-        try {
-            gid = gh.createNewGame(pid);
-            session("gid", gid);
-        }
-        catch(Exception ex)
-        {
-            return badRequest();
-        }
-        
-        return ok(views.html.game.main.render(gh.getCard(gid, pid)));
+	GameHandler gh = ServiceLocator.getGameHandler();
+	String pid = session().get("pid");
+	String gid;
+
+	try {
+	    gid = gh.createNewGame(pid);
+	    session("gid", gid);
+	} catch (Exception ex) {
+	    return badRequest();
+	}
+
+	return ok(views.html.game.main.render(gh.getCard(gid, pid)));
     }
-    
+
     // POST /game/play
     @Security.Authenticated(MyAuthenticator.class)
-    public static Result playCard(){
+    public static Result playCard() {
 
-        try {
+	try {
 
-            String pid = session().get("pid");
-            String gid = session().get("gid");
-            int cid = Integer.parseInt(request().body().asFormUrlEncoded().get("cid")[0]);
+	    String pid = session().get("pid");
+	    String gid = session().get("gid");
+	    int cid = Integer.parseInt(request().body().asFormUrlEncoded().get("cid")[0]);
 
-            ServiceLocator.getGameHandler().makeMove(gid, pid, cid);
-        }
-        catch (Exception ex){
-            return badRequest(ex.getMessage());
-        }
+	    ServiceLocator.getGameHandler().makeMove(gid, pid, cid);
+	} catch (Exception ex) {
+	    return badRequest(ex.getMessage());
+	}
 
-        return ok();
+	return ok();
     }
-    
+
     // GET /game/status
     @Security.Authenticated(MyAuthenticator.class)
-    public static Result getStatus(){       
-        
-        GameStatus state = null;
+    public static Result getStatus() {
 
-        try {
-            String pid = session().get("pid");
-            String gid = session().get("gid");
-            state = ServiceLocator.getGameHandler().getGameStatus(gid, pid);
-        }
-        catch(Exception ex){
-            
-            return badRequest(ex.getMessage());
-        }
-        
-        return ok(Json.toJson(state));
+	GameStatus state = null;
+
+	try {
+	    String pid = session().get("pid");
+	    String gid = session().get("gid");
+	    state = ServiceLocator.getGameHandler().getGameStatus(gid, pid);
+	} catch (Exception ex) {
+
+	    return badRequest(ex.getMessage());
+	}
+
+	return ok(Json.toJson(state));
     }
-    
-    //POST /game/commit
-    public static Result commitRound(){
-        
-        return TODO;
+
+    // POST /game/commit
+    public static Result commitRound() {
+
+	return TODO;
     }
-    
-    //POST /game/abord
-    public static Result abortGame(){
-        
-        return TODO;
+
+    // POST /game/abord
+    public static Result abortGame() {
+
+	return TODO;
     }
 }

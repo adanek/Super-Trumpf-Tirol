@@ -1,26 +1,22 @@
 package authentication;
 
+import config.ServiceLocator;
+import contracts.data.DataProvider;
 import contracts.login.LoginHandler;
 import contracts.model.IUser;
-import contracts.data.DataProvider;
-
-import java.io.FileNotFoundException;
-import java.util.UUID;
-
-import data.DatabaseController;
 
 public class MyLoginHandler implements LoginHandler {
 
-	private DataProvider dp;
+    private DataProvider dp;
 
-	public MyLoginHandler() {
-		this.dp = DatabaseController.getInstance();
-	}
+    public MyLoginHandler() {
+	this.dp = ServiceLocator.getDataProvider();
+    }
 
-	@Override
-	public IUser authenticate(String email, String password) {
+    @Override
+    public IUser authenticate(String email, String password) {
 
-		// return user if found
-		return this.dp.checkUser(email, password);
-	}
+	// return user if found
+	return this.dp.checkUser(email, password);
+    }
 }

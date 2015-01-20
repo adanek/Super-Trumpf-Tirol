@@ -1,30 +1,29 @@
 package mock;
 
-import contracts.game.*;
-import contracts.game.Card;
-import contracts.game.CardCategory;
-
 import java.util.UUID;
+
+import contracts.game.GameState;
+import contracts.game.ICard;
 
 public class GameHandler implements contracts.game.GameHandler {
     @Override
     public String createNewGame(String playerId) {
-        return UUID.randomUUID().toString();
+	return UUID.randomUUID().toString();
     }
 
     @Override
     public GameStatus getGameStatus(String gameId, String playerId) {
-        return new GameStatus( GameState.WaitForYourChoice, 12, 40, 22);
+	return new GameStatus(GameState.WaitForYourChoice, 12, 40, 22);
     }
 
     @Override
-    public Card getCard(String gameId, String playerId) {
-        return new mock.Card();
+    public ICard getCard(String gameId, String playerId) {
+	return new mock.Card();
     }
 
     @Override
-    public Card getCardFromCompetitor(String gameId, String playerId) {
-        return null;
+    public ICard getCardFromCompetitor(String gameId, String playerId) {
+	return null;
     }
 
     @Override

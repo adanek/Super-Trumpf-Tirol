@@ -1,5 +1,6 @@
 package contracts.game;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -23,6 +24,16 @@ public interface ICard {
 
     int getSportFields();
 
-    // public URL getImageUrl();
+    /**
+     * 
+     * @return get the URL to the image of the card
+     */
+    public String getImageUrl();
+
+    /**
+     * 
+     * @return a list of category for each card
+     */
+    public List<ICardCategory> getCategories();
 
 }

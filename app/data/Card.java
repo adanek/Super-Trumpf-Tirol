@@ -1,5 +1,7 @@
 package data;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 
 import play.db.ebean.Model;
 import contracts.game.ICard;
+import contracts.game.ICardCategory;
 
 /**
  * Class to save the data about the communes (cards) in a database. H2 is a
@@ -139,5 +142,23 @@ public class Card extends Model implements ICard {
     public String toString() {
 	return "Card [ID=" + ID + ", name=" + name + ", population=" + population + ", area=" + area
 		+ ", indebtedness=" + indebtedness + ", nights=" + nights + ", sportFields=" + sportFields + "]";
+    }
+
+    @Override
+    public String getImageUrl() {
+	return "/images/"
+		+ name.toLowerCase().replaceAll("ü", "ue").replaceAll("ö", "oe").replaceAll("ä", "ae")
+			.replaceAll("[ .]", "");
+    }
+
+    @Override
+    public List<ICardCategory> getCategories() {
+	List<contracts.game.ICardCategory> categories = new LinkedList<>();
+	categories.add(new CardCategory(0, "population", Integer.toString(population)));
+	categories.add(new CardCategory(1, "area", Float.toString(area)));
+	categories.add(new CardCategory(2, "indebtedness", Float.toString(indebtedness) + "%"));
+	categories.add(new CardCategory(3, "overnightstays", Integer.toString(nights)));
+	categories.add(new CardCategory(4, "sportfacilities", Integer.toString(sportFields)));
+	return categories;
     }
 }

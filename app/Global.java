@@ -2,7 +2,8 @@ import java.io.FileNotFoundException;
 
 import play.Application;
 import play.GlobalSettings;
-import data.DatabaseController;
+import config.ServiceLocator;
+import contracts.data.DataProvider;
 
 /**
  * Class to initialize the database with the information about the communes and
@@ -19,7 +20,7 @@ public class Global extends GlobalSettings {
      */
     @Override
     public void onStart(Application arg0) {
-	DatabaseController db = DatabaseController.getInstance();
+	DataProvider db = ServiceLocator.getDataProvider();
 	try {
 	    db.load();
 	} catch (FileNotFoundException e) {

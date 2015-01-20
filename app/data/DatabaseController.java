@@ -15,6 +15,9 @@ public class DatabaseController implements DataProvider {
 
     private boolean flagLoaded = false;
 
+    private DatabaseController() {
+    }
+
     private static class DatabaseControllerHolder {
 	private final static DatabaseController INSTANCE = new DatabaseController();
     }

@@ -8,33 +8,35 @@ import data.DatabaseController;
  * Simulates a simple DependencyInjectionContainer.
  */
 public class ServiceLocator {
-    
+
     public static DataProvider db = null;
     public static GameHandler gh = null;
 
     /**
-     * Returns the dataprovider* 
+     * Returns the dataprovider*
+     * 
      * @return
      */
-    public static DataProvider getDataProvider(){
-        
-        if (db == null){
-            db = new DatabaseController();
-        }
-        
-        return db;
+    public static DataProvider getDataProvider() {
+
+	if (db == null) {
+	    db = DatabaseController.getInstance();
+	}
+
+	return db;
     }
 
     /**
      * Retruns an singelton instance of the Gamehandler*
+     * 
      * @return
      */
     public static GameHandler getGameHandler() {
-        if (gh == null){
-            
-            gh = new mock.GameHandler();
-        }
-        
-        return gh;
+	if (gh == null) {
+
+	    gh = new mock.GameHandler();
+	}
+
+	return gh;
     }
 }
