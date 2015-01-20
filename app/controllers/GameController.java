@@ -11,23 +11,15 @@ import contracts.game.GameStatus;
 
 public class GameController extends Controller {
 
-    // GET /game/
-    @Security.Authenticated(MyAuthenticator.class)
-    public static Result index() {
+	// GET /game/selectMode
+	@Security.Authenticated(MyAuthenticator.class)
+	public static Result selectMode() {
 
-	// get uid from request
-	String pid = request().username();
+		// get pid from request
+		String pid = request().username();
 
-	// get database connection
-	// DataProvider dp = DatabaseController.getInstance();
-
-	// CHANGED CHANGED, Ändern bitte, da game.main.html eine Card will, ich
-	// jedoch keine geben kann
-	// CHANGED Im der UI benötige keien Zugriff auf die Datensicht, geht nur
-	// über Logik
-	// return ok(main.render(dp.getAllCards().get(0)));
-	return ok(views.html.game.mode.render());
-    }
+		return ok(views.html.game.mode.render());
+	}
 
     // POST /game/create
     @Security.Authenticated(MyAuthenticator.class)
@@ -69,12 +61,12 @@ public class GameController extends Controller {
     @Security.Authenticated(MyAuthenticator.class)
     public static Result getStatus() {
 
-	GameStatus state = null;
+		GameStatus state;
 
-	try {
-	    String pid = session().get("pid");
-	    String gid = session().get("gid");
-	    state = ServiceLocator.getGameHandler().getGameStatus(gid, pid);
+		try {
+			String pid = session().get("pid");
+			String gid = session().get("gid");
+			state = ServiceLocator.getGameHandler().getGameStatus(gid, pid);
 	} catch (Exception ex) {
 
 	    return badRequest(ex.getMessage());

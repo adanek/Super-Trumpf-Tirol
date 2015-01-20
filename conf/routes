@@ -10,7 +10,8 @@ GET         /login               controllers.LoginController.showLoginForm()
 POST        /login               controllers.LoginController.authenticate()
 GET         /logout              controllers.LoginController.logout()
 
-GET         /game/               controllers.GameController.index()
+
+GET        /game/selectMode        controllers.GameController.selectMode()
 POST        /game/create         controllers.GameController.createGame()
 GET         /game/status         controllers.GameController.getStatus()
 POST        /game/play           controllers.GameController.playCard()
