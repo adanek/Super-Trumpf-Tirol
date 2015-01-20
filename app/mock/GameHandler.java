@@ -2,6 +2,7 @@ package mock;
 
 import java.util.UUID;
 
+import config.ServiceLocator;
 import contracts.game.GameState;
 import contracts.game.ICard;
 
@@ -18,7 +19,8 @@ public class GameHandler implements contracts.game.GameHandler {
 
     @Override
     public ICard getCard(String gameId, String playerId) {
-	return new mock.Card();
+	return ServiceLocator.getDataProvider().getAllCards().get(20); // test
+								       // card
     }
 
     @Override

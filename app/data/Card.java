@@ -155,7 +155,7 @@ public class Card extends Model implements ICard {
     public List<ICardCategory> getCategories() {
 	List<contracts.game.ICardCategory> categories = new LinkedList<>();
 	categories.add(new CardCategory(0, "population", Integer.toString(population)));
-	categories.add(new CardCategory(1, "area", Float.toString(area)));
+	categories.add(new CardCategory(1, "area", Float.toString(area) + " km²"));
 	categories.add(new CardCategory(2, "indebtedness", Float.toString(indebtedness) + "%"));
 	categories.add(new CardCategory(3, "overnightstays", Integer.toString(nights)));
 	categories.add(new CardCategory(4, "sportfacilities", Integer.toString(sportFields)));
