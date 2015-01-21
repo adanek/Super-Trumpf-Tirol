@@ -38,10 +38,13 @@
 
 }
 
+.card-front {
+    display: none;
+}
+
 .card-back {
 
-    display: none;
+    display: block;
     background-color: #5e5e5e;
-    
 }
 

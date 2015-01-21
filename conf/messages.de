@@ -1,6 +1,4 @@
 app.name=Super Trumpf Tirol
-user-info-label=Angemeldet als
-
 
 index.header=Willkommen auf Super Trumpf Tirol
 index.link-newGame=Spielen
@@ -16,12 +14,12 @@ game-index-multiplayer=anderen Spieler
 
 login-button=login
 
+card-image-alternative=Position auf Landkarte
 card-category-sportfacilities=Sportanlagen
 card-category-population=Einwohner
 card-category-area=Fläche
 card-category-indebtedness=Verschuldung
 card-category-overnightstays=Übernachtungen
-card-image-alternative=Position auf Landkarte
 
 game-state-WaitForYourChoice=Wählen Sie eine Kategorie
 

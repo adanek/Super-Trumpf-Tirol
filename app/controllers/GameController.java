@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -81,7 +82,8 @@ public class GameController extends Controller {
             return badRequest(ex.getMessage());
         }
 
-        return ok(Json.toJson(state));
+        JsonNode jsonNode = Json.toJson(state);
+        return ok(jsonNode);
     }
 
     // POST /game/commit

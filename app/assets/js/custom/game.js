@@ -17,10 +17,10 @@ function updateStatus(){
 
     var url = "/game/status";
     $.get(url, function (state){
-        $('.info-roundnr').text(state.round);
-        $('.info-message').text(state.message);
         $('.game-info-cards-player').text(state.cardCount);
         $('.game-info-cards-competitor').text(state.cardCountCompetitor);
+        
+
     });
 }
 
@@ -29,7 +29,9 @@ function update(){
 }
 
 $(document).ready(function(){
-   update();
+
+    $('.card-back').height($('#card-player').height());
+    update();
 });
 
 function showCompetitorsCard(){

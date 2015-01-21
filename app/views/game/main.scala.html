@@ -11,9 +11,9 @@
                 <!-- player -->
             <div class="col-sm-4 col-sm-offset-1">
                 <div id="card-player" class="card">
-                    <div class="card-title">@card.getName</div>
+                    <div class="card-title">Name</div>
                     <div class="panel panel-default card-img">
-                        <img src="@routes.Assets.at(card.getImageUrl)" alt="@play.i18n.Messages.get("card-image-alternative")"/>
+                        <img src="empty" alt="@play.i18n.Messages.get("card-image-alternative")"/>
                     </div>
                     <div id="card-categories" class="list-group">
                     @for(cat <- card.getCategories) {
@@ -21,9 +21,10 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName)
-                                            :</td>
-                                        <td class="card-content-value"><span class="text-right"><strong id="card-category-population"></strong> @cat.getValue</span></td>
+                                        <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName):</td>
+                                        <td class="card-content-value"><span class="text-right">
+                                            <strong id="card-category-population">Value</strong></span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
