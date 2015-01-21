@@ -1,4 +1,5 @@
 @import play.i18n.Messages;
+@(message:String)
 
 @shared.main() {
 
@@ -15,7 +16,9 @@
 		<div class="form-group">
 			<button type="submit" class="btn btn-default">@Messages.get("login-button")</button>
 		</div>
+		<div>
+			@if(message){@message}
+		</div>
 	</form>
-	
 	
 }

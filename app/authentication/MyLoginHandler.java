@@ -7,16 +7,18 @@ import contracts.model.IUser;
 
 public class MyLoginHandler implements LoginHandler {
 
-    private DataProvider dp;
+	private DataProvider dp;
 
-    public MyLoginHandler() {
-	this.dp = ServiceLocator.getDataProvider();
-    }
+	public MyLoginHandler() {
+		
+		//get data provider
+		this.dp = ServiceLocator.getDataProvider();
+	}
 
-    @Override
-    public IUser authenticate(String email, String password) {
+	@Override
+	public IUser authenticate(String email, String password) {
 
-	// return user if found
-	return this.dp.checkUser(email, password);
-    }
+		// return user if found
+		return this.dp.checkUser(email, password);
+	}
 }

@@ -16,7 +16,9 @@ public class LoginController extends Controller{
     //GET /login
     public static Result showLoginForm() {
 
-        return ok(views.html.login.render());
+    	String message = "";
+    	
+        return ok(views.html.login.render(message));
     }
 
     //GET /logout
@@ -26,7 +28,8 @@ public class LoginController extends Controller{
 		session().clear();
     	
 		//redirect to index page
-    	return redirect("/");
+    	//return redirect("/");
+		return redirect(routes.controllers.Application.index());
     }
     
 
@@ -40,7 +43,7 @@ public class LoginController extends Controller{
 		Credentials c = new Credentials();
 		
 		//get form fields
-		c.email = data.get("email");
+		c.email    = data.get("email");
 		c.password = data.get("password");
 		
 		//check if user exists
@@ -49,7 +52,7 @@ public class LoginController extends Controller{
 
 		//user does not exist or is unauthorized
 		if (user == null) {
-			return unauthorized();
+			return unauthorized(views.html.login.render("Invalid username or password"));
 		}
 		
 		//store session data
