@@ -29,7 +29,7 @@ public class LoginController extends Controller{
     	
 		//redirect to index page
     	//return redirect("/");
-		return redirect(routes.controllers.Application.index());
+		return redirect(routes.Application.index());
     }
     
 
@@ -60,7 +60,7 @@ public class LoginController extends Controller{
 		session("pid", user.getID().toString());
 
 		//redirect to game
-		return redirect("/");
+		return redirect(routes.GameController.selectMode());
 	}
 	
 }
