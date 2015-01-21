@@ -5,6 +5,7 @@ public class CardCategory implements contracts.game.ICardCategory {
     int id;
     String name;
     String value;
+    private boolean choosen = false;
 
     public CardCategory(int id, String name, String value) {
 	this.id = id;
@@ -30,5 +31,15 @@ public class CardCategory implements contracts.game.ICardCategory {
     @Override
     public String getValue() {
 	return value;
+    }
+
+    @Override
+    public boolean isChoosen() {
+        return this.choosen;
+    }
+    
+    public void setChoosen(boolean newValue){
+        
+        this.choosen = newValue;
     }
 }

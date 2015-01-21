@@ -1,7 +1,9 @@
 package config;
 
+import authentication.MyLoginHandler;
 import contracts.data.DataProvider;
 import contracts.game.GameHandler;
+import contracts.login.LoginHandler;
 import data.DatabaseController;
 
 /**
@@ -9,13 +11,13 @@ import data.DatabaseController;
  */
 public class ServiceLocator {
 
-    public static DataProvider db = null;
-    public static GameHandler gh = null;
-
+    private static DataProvider db = null;
+    private static GameHandler gh = null;
+    private static LoginHandler lh;
     /**
      * Returns the dataprovider*
      * 
-     * @return
+     * @return an singelton instance of an dataprovider
      */
     public static DataProvider getDataProvider() {
 
@@ -27,9 +29,9 @@ public class ServiceLocator {
     }
 
     /**
-     * Retruns an singelton instance of the Gamehandler*
+     * Returns an singelton instance of the Gamehandler*
      * 
-     * @return
+     * @return an singelton instance of the Gamehandler
      */
     public static GameHandler getGameHandler() {
 	if (gh == null) {
@@ -38,5 +40,18 @@ public class ServiceLocator {
 	}
 
 	return gh;
+    }
+
+    /**
+     * *
+     * @return an singelton instance of a loginhandler
+     */
+    public static LoginHandler getLoginHandler() {
+
+        if(lh == null){
+            lh = new MyLoginHandler();
+        }
+        
+        return lh;
     }
 }

@@ -1,39 +1,76 @@
-@(card: contracts.game.ICard)
+@(signedIn: Boolean, card: contracts.game.ICard)
 
-@shared.main(true) {
+    @scripts = {
+        <script type="text/javascript" src="@routes.Assets.at("js/custom/game.js")"></script>
+    }
 
-  <div id="info" class="panel panel-default center-block">
-    <div class="panel-heading">
-      <p class="text-center">Runde <span class="info-roundnr"></span>: <span class="info-message" ></span> </p>
-    </div>
-    <table class="table">
-      <tr class="text-center">
-        <td>Sie <span class="info-cardCount label label-info" ></span></td>
-        <td>Gegner <span class="info-competitorCardCount label label-info" ></span></td>
-      </tr>
-    </table>
-  </div>
-  
-  <div id="card" class="center-block">
-    <div class="card-title">@card.getName()</div>
-    <div class="panel panel-default card-img">
-      <img src="@routes.Assets.at(card.getImageUrl())" alt="@play.i18n.Messages.get("card-image-alternative")"/>
-    </div>
-    <div id="card-categories" class="list-group">
+    @shared.main(signedIn, scripts) {
 
-    @for(cat <- card.getCategories) {
-      <a href='@routes.GameController.playCard()' class="card-category list-group-item" data-id="@cat.getId">
-          <table>
-            <tbody>
-              <tr>
-                <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName):</td>
-                <td class="card-content-value"><span class="text-right"><strong id="card-category-population"></strong> @cat.getValue</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </a>
-      }
-    </div>
-  </div>
-  
-}
+        <div class="row center-block">
+
+                <!-- player -->
+            <div class="col-sm-4 col-sm-offset-1">
+                <div id="card-player" class="card">
+                    <div class="card-title">@card.getName</div>
+                    <div class="panel panel-default card-img">
+                        <img src="@routes.Assets.at(card.getImageUrl)" alt="@play.i18n.Messages.get("card-image-alternative")"/>
+                    </div>
+                    <div id="card-categories" class="list-group">
+                    @for(cat <- card.getCategories) {
+                        <a href='@routes.GameController.playCard()' class="card-category list-group-item" data-id="@cat.getId">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName)
+                                            :</td>
+                                        <td class="card-content-value"><span class="text-right"><strong id="card-category-population"></strong> @cat.getValue</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </a>
+                    }
+                    </div>
+                </div>
+
+
+                <div class="player-info panel panel-info">
+                    <div class="panel-body">@play.i18n.Messages.get("game-info-player-before") <span class="game-info-cards-player label label-info"></span> @play.i18n.Messages.get("game-info-player-after")</div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 col-sm-offset-2 " >  <!-- competitor -->
+                <div class="card">
+                    <div class="card-front">
+                        <div class="card-title">@card.getName</div>
+                        <div class="panel panel-default card-img">
+                            <img src="@routes.Assets.at(card.getImageUrl)" alt="@play.i18n.Messages.get("card-image-alternative")"/>
+                        </div>
+                        <div id="card-categories" class="list-group">
+                        @for(cat <- card.getCategories) {
+                            <div class="card-category list-group-item @if(cat.isChoosen){ list-group-item-success }" data-id="@cat.getId">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName)
+                                                :</td>
+                                            <td class="card-content-value"><span class="text-right"><strong id="card-category-population"></strong> @cat.getValue</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        </div>
+                    </div>
+                    <div class="card-back"></div>
+                    
+                </div>
+                    <!-- Infobox competitor-->
+                <div class="player-info panel panel-info">
+                    <div class="panel-body">@play.i18n.Messages.get("game-info-competitor-before") <span class="game-info-cards-competitor label label-info"></span> @play.i18n.Messages.get("game-info-competitor-after")</div>
+                    <a href="javascript:showCompetitorsCard()">hide</a>
+                </div>
+
+            </div>
+
+        </div>
+    }

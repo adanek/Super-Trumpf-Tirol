@@ -24,3 +24,8 @@ card-category-overnightstays=Übernachtungen
 card-image-alternative=Position auf Landkarte
 
 game-state-WaitForYourChoice=Wählen Sie eine Kategorie
+
+game-info-player-before=Sie haben
+game-info-player-after=Karten.
+game-info-competitor-before=Ihr Gegenspieler hat
+game-info-competitor-after=Karten.

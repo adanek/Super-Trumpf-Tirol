@@ -5,6 +5,7 @@ import java.util.UUID;
 import config.ServiceLocator;
 import contracts.game.GameState;
 import contracts.game.ICard;
+import data.Card;
 
 public class GameHandler implements contracts.game.GameHandler {
 	@Override
@@ -19,13 +20,18 @@ public class GameHandler implements contracts.game.GameHandler {
 
 	@Override
 	public ICard getCard(String gameId, String playerId) {
-		return ServiceLocator.getDataProvider().getAllCards().get(35); // test
-		// card
+
+		Card card = ServiceLocator.getDataProvider().getAllCards().get(15);
+		card.getCategories().get(2).setChoosen(true);
+		return  card;
 	}
 
 	@Override
 	public ICard getCardFromCompetitor(String gameId, String playerId) {
-		return null;
+		
+		Card card = ServiceLocator.getDataProvider().getAllCards().get(22);
+		card.getCategories().get(2).setChoosen(true);
+		return  card;
 	}
 
 	@Override

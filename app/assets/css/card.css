@@ -1,0 +1,47 @@
+
+.card {
+    max-width: 300px;
+    border-radius: 10px;
+    border: 1px solid #AAAAAA;
+    box-shadow: 3px 3px 3px 0 #ccc;
+    padding: 1em;
+}
+
+.card-img img {
+    width: 100%;
+    height: auto;
+}
+
+.card .list-group {
+    margin-bottom:15px;
+    
+}
+
+.card table {
+    width: 100%;
+}
+
+.card-content-label {
+    font-size: 0.8em;
+}
+
+.card-content-value {
+    text-align: right;
+}
+
+.player-info{
+
+    max-width: 300px;
+    margin-top: 1em;
+    text-align: center;
+    line-height: 100%;
+
+}
+
+.card-back {
+
+    display: none;
+    background-color: #5e5e5e;
+    
+}
+

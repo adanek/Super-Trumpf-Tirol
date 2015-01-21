@@ -1,5 +1,6 @@
 package controllers;
 
+import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -19,17 +20,14 @@ public class GameController extends Controller {
         
         GameHandler gh = ServiceLocator.getGameHandler();
 
-        return ok(views.html.game.main.render(gh.getCard(gid, pid)));
+        return ok(views.html.game.main.render(true, gh.getCard(gid, pid)));
     }
 
     // GET /game/selectMode
     @Security.Authenticated(MyAuthenticator.class)
     public static Result selectMode() {
 
-        // get pid from request
-        String pid = request().username();
-
-        return ok(views.html.game.mode.render());
+       return ok(views.html.game.mode.render());
     }
 
     // POST /game/create
@@ -59,7 +57,7 @@ public class GameController extends Controller {
             String pid = session().get("pid");
             String gid = session().get("gid");
             int cid = Integer.parseInt(request().body().asFormUrlEncoded().get("cid")[0]);
-
+            Logger.info(String.format("User %s played card-category %d\n", pid, cid));
             ServiceLocator.getGameHandler().makeMove(gid, pid, cid);
         } catch (Exception ex) {
             return badRequest(ex.getMessage());

@@ -9,4 +9,12 @@ public interface ICardCategory {
     String getName();
 
     String getValue();
+
+    /**
+     * *
+     * @return true if the active player has choosen this category.
+     */
+    boolean isChoosen();
+    
+    void setChoosen(boolean newValue);
 }
