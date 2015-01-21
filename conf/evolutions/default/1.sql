@@ -11,6 +11,7 @@ create table card (
   indebtedness              float,
   nights                    integer,
   sport_fields              integer,
+  ranking                   varchar(40),
   constraint pk_card primary key (id))
 ;
 

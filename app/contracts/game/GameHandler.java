@@ -33,7 +33,7 @@ public interface GameHandler {
      *            The ID of the passive player*
      * @return the current card of the player
      */
-    public data.Card getCard(String gameId, String playerId);
+    public ICard getCard(String gameId, String playerId);
 
     /**
      * Returns the current card of the competitor to compare it with your own
@@ -45,7 +45,7 @@ public interface GameHandler {
      *            The ID of the passive player
      * @return the current card of the competitor
      */
-    public data.Card getCardFromCompetitor(String gameId, String playerId);
+    public ICard getCardFromCompetitor(String gameId, String playerId);
 
     /**
      * Submit the chosen category Only available in state WaitForYourChoice

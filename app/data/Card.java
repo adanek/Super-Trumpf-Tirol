@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import play.db.ebean.Model;
+import config.ServiceLocator;
+import contracts.data.DataProvider;
 import contracts.game.ICard;
 import contracts.game.ICardCategory;
 
@@ -37,6 +39,8 @@ public class Card extends Model implements ICard {
     private int nights;
     /** places where everybody can do sport activities like soccer, swimming,.. */
     private int sportFields;
+    /** UUID of the ranking for this card in the database */
+    private UUID ranking;
     /** attribute to make it easier to compute a query in the database */
     protected static Finder<UUID, Card> find = new Finder<UUID, Card>(UUID.class, Card.class);
 
@@ -62,6 +66,10 @@ public class Card extends Model implements ICard {
 
     protected final void setSportFields(int sportFields) {
 	this.sportFields = sportFields;
+    }
+
+    protected final void setRanking(UUID ranking) {
+	this.ranking = ranking;
     }
 
     public final UUID getID() {
@@ -144,6 +152,9 @@ public class Card extends Model implements ICard {
 		+ ", indebtedness=" + indebtedness + ", nights=" + nights + ", sportFields=" + sportFields + "]";
     }
 
+    /**
+     * @return returns the URL to the picture file of this card
+     */
     @Override
     public String getImageUrl() {
 	return "/images/"
@@ -151,6 +162,12 @@ public class Card extends Model implements ICard {
 			.replaceAll("[ .]", "") + ".jpg";
     }
 
+    /**
+     * method to get all Categories of a card in strings
+     * 
+     * @return List of CardCategories in Strings to show the categories and the
+     *         values in the view
+     */
     @Override
     public List<ICardCategory> getCategories() {
 	List<contracts.game.ICardCategory> categories = new LinkedList<>();
@@ -160,5 +177,22 @@ public class Card extends Model implements ICard {
 	categories.add(new CardCategory(3, "overnightstays", Integer.toString(nights)));
 	categories.add(new CardCategory(4, "sportfacilities", Integer.toString(sportFields)));
 	return categories;
+    }
+
+    /**
+     * method to get the rankings of all categories of a card in a Array
+     * 
+     * @return the rankings in a Integer Array
+     */
+    @Override
+    public Integer[] getRankingArray() {
+	Integer[] array = new Integer[5];
+	DataProvider db = ServiceLocator.getDataProvider();
+	array[0] = db.getRankingsByID(this.ranking).getRankPopulation();
+	array[1] = db.getRankingsByID(this.ranking).getRankArea();
+	array[2] = db.getRankingsByID(this.ranking).getRankIndebtedness();
+	array[3] = db.getRankingsByID(this.ranking).getRankNights();
+	array[4] = db.getRankingsByID(this.ranking).getRankSportFields();
+	return array;
     }
 }
