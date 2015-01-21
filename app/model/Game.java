@@ -52,6 +52,8 @@ public class Game{
         player1Cards.add(player2Cards.remove());
         status.updatePlayer1Cards(player1Cards.size());
         status.updatePlayer2Cards(player2Cards.size());
+        player1sMove = true;
+        status.updateStatus(GameState.WaitForYourChoice);
     }
 
     /**
@@ -63,6 +65,8 @@ public class Game{
         status.updatePlayer1Cards(player1Cards.size());
         status.updatePlayer2Cards(player2Cards.size());
         status.updateRound();
+        player1sMove = false;
+        status.updateStatus(GameState.WaitForOtherPlayer);
     }
 
     public UUID getPlayer1ID() {
@@ -71,5 +75,13 @@ public class Game{
 
     public UUID getPlayer2ID() {
         return Player2ID;
+    }
+
+    public Boolean getPlayer1sMove() {
+        return player1sMove;
+    }
+
+    public void setPlayer1sMove(Boolean player1sMove) {
+        this.player1sMove = player1sMove;
     }
 }

@@ -86,12 +86,28 @@ public class Logic implements GameHandler {
 
     @Override
     public void makeMove(String gameId, String playerId, int categoryID) {
-
+        Game game = map.get(UUID.fromString(gameId));
+        if(game.getPlayer1sMove() == true){
+            int player1Value = cards[game.getPlayer1Card()].getRankingArray()[categoryID];
+            int player2Value = cards[game.getPlayer2Card()].getRankingArray()[categoryID];
+            // Smaller rank means better position
+            if(player1Value > player2Value){
+                game.setPlayer1sMove(false);
+            }else if(player1Value < player2Value){
+                game.setPlayer1sMove(true);
+            }
+            game.getStatus().updateStatus(GameState.WaitForCommit);
+        }
     }
 
     @Override
     public void commitRound(String gameId, String playerId) {
-
+        Game game = map.get(UUID.fromString(gameId));
+        if(game.getPlayer1sMove() == true){
+            game.player1win();
+        }else{
+            game.player2win();
+        }
     }
 
     @Override
