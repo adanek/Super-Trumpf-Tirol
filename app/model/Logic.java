@@ -7,6 +7,7 @@ import scala.Array;
 import contracts.game.GameHandler;
 import contracts.game.GameStatus;
 import contracts.game.ICard;
+import contracts.game.GameState;
 
 /**
  * Created by Mark on 19.01.2015.
@@ -16,10 +17,10 @@ public class Logic implements GameHandler {
     /** Holds all games */
     private HashMap<UUID, Game> map;
     /** Holds all cards */
-    private Array<ICard> cards;
+    private data.Card[] cards;
 
     // TODO
-    public Logic(Array<ICard> cards) {
+    public Logic(data.Card[] cards) {
         this.map = new HashMap<UUID, Game>();
         this.cards = cards;
     }
@@ -58,18 +59,29 @@ public class Logic implements GameHandler {
     }
 
     @Override
-    public GameStatus getGameStatus(String gameId, String playerId) {
-	return null;
+    public model.GameStatus getGameStatus(String gameId, String playerId) {
+	    Game game = map.get(UUID.fromString(gameId));
+        return game.getStatus();
     }
 
     @Override
-    public ICard getCard(String gameId, String playerId) {
-	return null;
+    public data.Card getCard(String gameId, String playerId) {
+	Game game = map.get(UUID.fromString(gameId));
+        if (UUID.fromString(playerId) == game.getPlayer1ID()){
+            return cards[game.getPlayer1Card()];
+        }else{
+            return null;
+        }
     }
 
     @Override
-    public ICard getCardFromCompetitor(String gameId, String playerId) {
-	return null;
+    public data.Card getCardFromCompetitor(String gameId, String playerId) {
+        Game game = map.get(UUID.fromString(gameId));
+        if (UUID.fromString(playerId) == game.getPlayer1ID()){
+            return cards[game.getPlayer2Card()];
+        }else{
+            return null;
+        }
     }
 
     @Override

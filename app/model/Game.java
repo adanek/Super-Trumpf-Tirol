@@ -11,53 +11,29 @@ import java.util.UUID;
 /**
  * Created by Mark on 19.01.2015.
  */
-public class Game implements GameStatus{
+public class Game{
 
     private UUID GameID;
     private UUID Player1ID;
     private UUID Player2ID;
-
-    private GameState status;
     private Queue<Integer> player1Cards;
     private Queue<Integer> player2Cards;
-    private int round;
+
+    private model.GameStatus status;
     private Boolean player1sMove;
 
     public Game(UUID gameID, UUID player1ID, UUID player2ID, Queue<Integer> player1Cards, Queue<Integer> player2Cards) {
         GameID = gameID;
         Player1ID = player1ID;
         Player2ID = player2ID;
-        this.status = GameState.WaitForYourChoice;
+        model.GameStatus status = new model.GameStatus(1, 26, 26, GameState.WaitForYourChoice);
         this.player1Cards = player1Cards;
         this.player2Cards = player2Cards;
-        this.round = 1;
         this.player1sMove = true;
     }
 
-    @Override
-    public String getMessage() {
-        return status.toString();
-    }
-
-    @Override
-    public int getRound() {
-        return round;
-    }
-    /** Seen from player1`s perspective. */
-
-    public void increaseRoundNumber(){
-        round++;
-    }
-
-    @Override
-    public int getCardCount() {
-        return player1Cards.size();
-    }
-
-    /** Seen from player2`s perspective. */
-    @Override
-    public int getCardCountCompetitor() {
-        return player2Cards.size();
+    public model.GameStatus getStatus() {
+        return status;
     }
 
     public Integer getPlayer1Card() {
@@ -74,6 +50,8 @@ public class Game implements GameStatus{
     public void player1win(){
         player1Cards.add(player1Cards.remove());
         player1Cards.add(player2Cards.remove());
+        status.updatePlayer1Cards(player1Cards.size());
+        status.updatePlayer2Cards(player2Cards.size());
     }
 
     /**
@@ -82,6 +60,9 @@ public class Game implements GameStatus{
     public void player2win(){
         player2Cards.add(player2Cards.remove());
         player2Cards.add(player1Cards.remove());
+        status.updatePlayer1Cards(player1Cards.size());
+        status.updatePlayer2Cards(player2Cards.size());
+        status.updateRound();
     }
 
     public UUID getPlayer1ID() {
