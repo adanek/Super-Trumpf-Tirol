@@ -31,7 +31,7 @@ public class DatabaseController implements DataProvider {
 	    return;
 
 	File myfile = Play.application().getFile("/app/data/Daten.csv");
-
+	
 	try (Scanner s = new Scanner(myfile);) {
 	    long i = 0;
 	    while (s.hasNextLine()) {
