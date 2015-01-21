@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import play.db.ebean.Model;
-import contracts.data.IRanking;
 
 /**
  * This class contains the information about a village and the position of the
@@ -17,7 +16,7 @@ import contracts.data.IRanking;
  *
  */
 @Entity
-public class Ranking extends Model implements IRanking {
+public class Ranking extends Model {
 
     @Id
     private UUID ID = UUID.randomUUID();
@@ -69,85 +68,36 @@ public class Ranking extends Model implements IRanking {
 	this.rankSportFields = rankSportFields;
     }
 
-    public final UUID getID() {
+    protected final UUID getID() {
 	return ID;
     }
 
-    public final String getName() {
+    protected final String getName() {
 	return name;
     }
 
-    public final int getRankPopulation() {
+    protected final int getRankPopulation() {
 	return rankPopulation;
     }
 
-    public final int getRankArea() {
+    protected final int getRankArea() {
 	return rankArea;
     }
 
-    public final int getRankIndebtedness() {
+    protected final int getRankIndebtedness() {
 	return rankIndebtedness;
     }
 
-    public final int getRankNights() {
+    protected final int getRankNights() {
 	return rankNights;
     }
 
-    public final int getRankSportFields() {
+    protected final int getRankSportFields() {
 	return rankSportFields;
     }
 
-    @Override
-    public int hashCode() {
-	final int prime = 31;
-	int result = super.hashCode();
-	result = prime * result + ((ID == null) ? 0 : ID.hashCode());
-	result = prime * result + ((name == null) ? 0 : name.hashCode());
-	result = prime * result + rankArea;
-	result = prime * result + rankIndebtedness;
-	result = prime * result + rankNights;
-	result = prime * result + rankPopulation;
-	result = prime * result + rankSportFields;
-	return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (!super.equals(obj))
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	Ranking other = (Ranking) obj;
-	if (ID == null) {
-	    if (other.ID != null)
-		return false;
-	} else if (!ID.equals(other.ID))
-	    return false;
-	if (name == null) {
-	    if (other.name != null)
-		return false;
-	} else if (!name.equals(other.name))
-	    return false;
-	if (rankArea != other.rankArea)
-	    return false;
-	if (rankIndebtedness != other.rankIndebtedness)
-	    return false;
-	if (rankNights != other.rankNights)
-	    return false;
-	if (rankPopulation != other.rankPopulation)
-	    return false;
-	if (rankSportFields != other.rankSportFields)
-	    return false;
-	return true;
-    }
-
-    @Override
-    public String toString() {
-	return "Ranking [ID=" + ID + ", name=" + name + ", rankPopulation=" + rankPopulation + ", rankArea=" + rankArea
-		+ ", rankIndebtedness=" + rankIndebtedness + ", rankNights=" + rankNights + ", rankSportFields="
-		+ rankSportFields + "]";
+    protected static final Finder<UUID, Ranking> getFind() {
+	return find;
     }
 
 }

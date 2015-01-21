@@ -22,122 +22,121 @@ public class DatabaseController implements DataProvider {
     }
 
     private static class DatabaseControllerHolder {
-        private final static DatabaseController INSTANCE = new DatabaseController();
+	private final static DatabaseController INSTANCE = new DatabaseController();
     }
 
     public static DatabaseController getInstance() {
-        return DatabaseControllerHolder.INSTANCE;
+	return DatabaseControllerHolder.INSTANCE;
     }
 
     public void load() throws FileNotFoundException {
-        if (flagLoaded)
-            return;
+	if (flagLoaded)
+	    return;
 
+	File myfile = Play.application().getFile("/app/data/Daten.csv");
 
-        File myfile = Play.application().getFile("/app/data/Daten.csv");
+	StringBuilder content = new StringBuilder();
+	try (FileReader rd = new FileReader(myfile);) {
+	    int r;
+	    while ((r = rd.read()) != -1) {
+		content.append((char) r);
+	    }
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
 
+	try (Scanner s = new Scanner(content.toString());) {
 
-        StringBuilder content = new StringBuilder();
-        try (FileReader rd = new FileReader(myfile);) {
-            int r;
-            while ((r = rd.read()) != -1) {
-                content.append((char) r);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+	    long i = 0;
+	    while (s.hasNextLine()) {
+		Scanner line = new Scanner(s.nextLine());
+		line.useDelimiter(";");
+		line.useLocale(Locale.GERMAN);
 
-        try (Scanner s = new Scanner(content.toString());) {
+		Card c = new Card();
+		c.setName(line.next());
+		c.setPopulation(line.nextInt());
+		c.setArea(line.nextFloat());
+		c.setIndebtedness(line.nextFloat());
+		c.setNights(line.nextInt());
+		c.setSportFields(line.nextInt());
 
+		Ranking rank = new Ranking();
+		rank.setName(c.getName());
+		rank.setRankPopulation(line.nextInt());
+		rank.setRankArea(line.nextInt());
+		rank.setRankIndebtedness(line.nextInt());
+		rank.setRankNights(line.nextInt());
+		rank.setRankSportFields(line.nextInt());
 
-            long i = 0;
-            while (s.hasNextLine()) {
-                Scanner line = new Scanner(s.nextLine());
-                line.useDelimiter(";");
-                line.useLocale(Locale.GERMAN);
+		c.setRanking(rank.getID());
+		c.save();
+		rank.save();
+		line.close();
+	    }
+	}
 
-                Card c = new Card();
-                c.setName(line.next());
-                c.setPopulation(line.nextInt());
-                c.setArea(line.nextFloat());
-                c.setIndebtedness(line.nextFloat());
-                c.setNights(line.nextInt());
-                c.setSportFields(line.nextInt());
-                c.save();
-
-                Ranking rank = new Ranking();
-                rank.setName(c.getName());
-                rank.setRankPopulation(line.nextInt());
-                rank.setRankArea(line.nextInt());
-                rank.setRankIndebtedness(line.nextInt());
-                rank.setRankNights(line.nextInt());
-                rank.setRankSportFields(line.nextInt());
-                rank.save();
-                line.close();
-            }
-        }
-
-        /**
-         * temporary users
-         */
-        this.createUser("admin", "admin@gmx.at", "123456");
-        this.createUser("admin", "sdfad", "admin");
-        this.createUser("test", "test@gmx.at", "654321");
+	/**
+	 * temporary users
+	 */
+	this.createUser("admin", "admin@gmx.at", "123456");
+	this.createUser("admin", "sdfad", "admin");
+	this.createUser("test", "test@gmx.at", "654321");
     }
 
     @Override
     public IUser createUser(String name, String email, String password) {
-        User newUser = null;
-        List<User> userList = User.find.where().eq("name", name).eq("email", email).findList();
-        if (userList.size() == 0) {
-            try {
-                newUser = new User(name, email, PasswordHash.getSaltedHash(password));
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-            newUser.save();
-        }
-        return newUser;
+	User newUser = null;
+	List<User> userList = User.find.where().eq("name", name).eq("email", email).findList();
+	if (userList.size() == 0) {
+	    try {
+		newUser = new User(name, email, PasswordHash.getSaltedHash(password));
+	    } catch (Exception e) {
+		System.out.println(e);
+	    }
+	    newUser.save();
+	}
+	return newUser;
     }
 
     public List<Card> getAllCards() {
-        return Card.find.all();
+	return Card.find.all();
     }
 
     @Override
     public ICard getCardByID(UUID id) {
-        return Card.find.byId(id);
+	return Card.find.byId(id);
     }
 
     public List<Ranking> getAllRankings() {
-        return Ranking.find.all();
+	return Ranking.find.all();
     }
 
     @Override
     public Ranking getRankingsByID(UUID id) {
-        return Ranking.find.byId(id);
+	return Ranking.find.byId(id);
     }
 
     public List<User> getAllUsers() {
-        return User.find.all();
+	return User.find.all();
     }
 
     @Override
     public IUser getUserByID(UUID id) {
-        return User.find.byId(id);
+	return User.find.byId(id);
     }
 
     @Override
     public IUser checkUser(String email, String password) {
-        User toCheck = null;
-        List<User> users = User.find.where().eq("email", email).findList();
-        for (User u : users)
-            try {
-                if (PasswordHash.check(password, u.getPassword()))
-                    toCheck = u;
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        return toCheck;
+	User toCheck = null;
+	List<User> users = User.find.where().eq("email", email).findList();
+	for (User u : users)
+	    try {
+		if (PasswordHash.check(password, u.getPassword()))
+		    toCheck = u;
+	    } catch (Exception e) {
+		System.out.println(e);
+	    }
+	return toCheck;
     }
 }

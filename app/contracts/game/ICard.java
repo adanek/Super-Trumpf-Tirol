@@ -36,4 +36,10 @@ public interface ICard {
      */
     public List<ICardCategory> getCategories();
 
+    /**
+     * 
+     * @return a array with the ranking of all 5 categories
+     */
+    public Integer[] getRankingArray();
+
 }
