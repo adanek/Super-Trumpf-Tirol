@@ -8,6 +8,7 @@ import contracts.game.GameHandler;
 import contracts.game.GameStatus;
 import contracts.game.ICard;
 import contracts.game.GameState;
+import java.util.Random;
 
 /**
  * Created by Mark on 19.01.2015.
@@ -19,7 +20,12 @@ public class Logic implements GameHandler {
     /** Holds all cards */
     private data.Card[] cards;
 
-    // TODO
+    /**
+     * Constructor
+     *
+     * @param cards:
+     * Array containing all cards
+     */
     public Logic(data.Card[] cards) {
         this.map = new HashMap<UUID, Game>();
         this.cards = cards;
@@ -88,21 +94,14 @@ public class Logic implements GameHandler {
     public void makeMove(String gameId, String playerId, int categoryID) {
         Game game = map.get(UUID.fromString(gameId));
         if(game.getPlayer1sMove() == true){
-            int player1Value = cards[game.getPlayer1Card()].getRankingArray()[categoryID];
-            int player2Value = cards[game.getPlayer2Card()].getRankingArray()[categoryID];
-            // Smaller rank means better position
-            if(player1Value > player2Value){
-                game.setPlayer1sMove(false);
-            }else if(player1Value < player2Value){
-                game.setPlayer1sMove(true);
-            }
-            game.getStatus().updateStatus(GameState.WaitForCommit);
+            compareCategories(game, categoryID);
         }
     }
 
     @Override
     public void commitRound(String gameId, String playerId) {
         Game game = map.get(UUID.fromString(gameId));
+        // If player1 moves next round, he won this round.
         if(game.getPlayer1sMove() == true){
             game.player1win();
         }else{
@@ -112,6 +111,25 @@ public class Logic implements GameHandler {
 
     @Override
     public void commitCard(String gameId, String playerId) {
+        Game game = map.get(UUID.fromString(gameId));
+        Random rand = new Random();
+        // Random number from 0 to 4
+        int categoryID = rand.nextInt(5);
+        compareCategories(game, categoryID);
+    }
 
+    public void compareCategories(Game game, int categoryID){
+        // Get Ranks of the cards
+        int player1Value = cards[game.getPlayer1Card()].getRankingArray()[categoryID];
+        int player2Value = cards[game.getPlayer2Card()].getRankingArray()[categoryID];
+        // Smaller rank means better position
+        if(player1Value > player2Value){
+            // If player1 loses, he does not move in the next round.
+            game.setPlayer1sMove(false);
+        }else if(player1Value < player2Value){
+            // If player1 win, he moves next round.
+            game.setPlayer1sMove(true);
+        }
+        game.getStatus().updateStatus(GameState.WaitForCommit);
     }
 }
