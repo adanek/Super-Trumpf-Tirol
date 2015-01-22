@@ -53,7 +53,11 @@ public class Game{
         status.updatePlayer1Cards(player1Cards.size());
         status.updatePlayer2Cards(player2Cards.size());
         player1sMove = true;
-        status.updateStatus(GameState.WaitForYourChoice);
+        if(player1Cards.size() == 52){
+            status.updateStatus(GameState.Won);
+        }else {
+            status.updateStatus(GameState.WaitForYourChoice);
+        }
     }
 
     /**
@@ -66,7 +70,11 @@ public class Game{
         status.updatePlayer2Cards(player2Cards.size());
         status.updateRound();
         player1sMove = false;
-        status.updateStatus(GameState.WaitForOtherPlayer);
+        if(player1Cards.size() == 52){
+            status.updateStatus(GameState.Lose);
+        }else {
+            status.updateStatus(GameState.WaitForOtherPlayer);
+        }
     }
 
     public UUID getPlayer1ID() {
