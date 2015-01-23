@@ -26,7 +26,7 @@ public class Game{
         GameID = gameID;
         Player1ID = player1ID;
         Player2ID = player2ID;
-        model.GameStatus status = new model.GameStatus(1, 26, 26, GameState.WaitForYourChoice);
+        this.status = new model.GameStatus(1, 26, 26, GameState.WaitForYourChoice);
         this.player1Cards = player1Cards;
         this.player2Cards = player2Cards;
         this.player1sMove = true;

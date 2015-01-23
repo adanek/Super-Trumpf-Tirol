@@ -15,7 +15,7 @@
                 
             </div>
         </div>
-        <div class="row center-block">
+        <div class="row">
 
                 <!-- player -->
             <div class="col-sm-4 col-sm-offset-1">
@@ -26,7 +26,7 @@
                     </div>
                     <div id="card-categories" class="list-group">
                     @for(cat <- card.getCategories) {
-                        <a href='@routes.GameController.playCard()' class="card-category list-group-item" data-id="@cat.getId">
+                        <a class="card-category list-group-item" data-id="@cat.getId">
                             <table>
                                 <tbody>
                                     <tr>
@@ -78,9 +78,7 @@
                     <!-- Infobox competitor-->
                 <div class="player-info panel panel-info">
                     <div class="panel-body">@play.i18n.Messages.get("game-info-competitor-before") <span class="game-info-cards-competitor label label-info"></span> @play.i18n.Messages.get("game-info-competitor-after")</div>
-                    <a href="javascript:showCompetitorsCard()">hide</a>
                 </div>
-
             </div>
 
         </div>

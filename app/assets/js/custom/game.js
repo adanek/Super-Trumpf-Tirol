@@ -1,26 +1,11 @@
-function chooseCategory(category, url) {
+function chooseCategory(category) {
 
+    var url = "/game/play";
     $.post(url, {cid: category});
-    update();
-}
-
-$('.card-category').click(function (event) {
-
-    event.preventDefault();
-    var cat = $(this).attr('data-id');
-    var url = $(this).attr('href');
-    chooseCategory(cat, url);
-
-});
-
-function updateStatus() {
-
-    var url = "/game/status";
-    $.get(url, function (state) {
-        $('.game-info-cards-player').text(state.CardCountPlayer);
-        $('.game-info-cards-competitor').text(state.CardCountCompetitor);
-        $('#info-box').find('.message').text(state.Message);
-    });
+    
+    disableCategories();
+    setTimeout(update, 500);
+    
 }
 
 function update() {
@@ -29,16 +14,50 @@ function update() {
     updateCompetitiorCard();
 }
 
-$(document).ready(function () {
+function updateStatus() {
 
-    $('.card-back').height($('#card-player').height());
-    update();
-});
+    var url = "/game/status";
+    $.get(url, function (state) {
+        $('.game-info-cards-player').text(state.CardCountPlayer);
+        $('.game-info-cards-competitor').text(state.CardCountCompetitor);
+        $('#info-box').find('.message').text(state.Message);
 
-function showCompetitorsCard() {
+        switch (state.State) {
+            case "WaitForYourChoice":
+                setStateChoise();
+                break;
+            case "WaitForOtherPlayer":
+            case "WaitForCommit":
+            case "Won":
 
-    $('.card-front').toggle();
-    $('.card-back').height($('#card-player').height()).toggle();
+        }
+
+    });
+}
+
+function setStateChoise() {
+
+    // Enable the category-buttons
+    enableCategories();
+    showCompetitorsCard(false);
+  }
+
+
+function showCompetitorsCard(val) {
+
+    var front = $('.card-front');
+    var back = $('.card-back');
+    
+    if(val)
+    {
+        back.hide();
+        front.show();        
+    }
+    else
+    {
+        front.hide();
+        back.height($('#card-player').height()).show();        
+    }    
 }
 
 function updatePlayerCard() {
@@ -72,7 +91,7 @@ function updateCompetitiorCard() {
 
         // Set Categories
         for (var cid = 0; cid < card.categories.length; cid++) {
-            
+
             var cat = card.categories[cid];
             var selector = '#card-competitor .card-category-' + cat.name;
 
@@ -83,10 +102,32 @@ function updateCompetitiorCard() {
             if (cat.choosen) {
                 $(selector).addClass('list-group-item-info');
             }
-            
+
         }
     });
 
-    $('.card-back').height($('#card-player').height());
 
 }
+
+// Bind click-event on categories
+function enableCategories() {
+
+    $('#card-player').find('.card-category').addClass('btn').click(function (event) {
+
+        event.preventDefault();
+        var cat = $(this).attr('data-id');
+        chooseCategory(cat);
+    });
+}
+
+function disableCategories(){
+
+    $('.card-category').removeClass('btn').unbind('click');
+}
+
+/* Window Events */
+$(document).ready(function () {
+
+    update();
+});
+

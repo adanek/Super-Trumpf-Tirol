@@ -73,7 +73,7 @@ public class Logic implements GameHandler {
     @Override
     public data.Card getCard(String gameId, String playerId) {
 	Game game = map.get(UUID.fromString(gameId));
-        if (UUID.fromString(playerId) == game.getPlayer1ID()){
+        if (UUID.fromString(playerId).equals(game.getPlayer1ID())){
             return cards[game.getPlayer1Card()];
         }else{
             return null;
@@ -83,7 +83,7 @@ public class Logic implements GameHandler {
     @Override
     public data.Card getCardFromCompetitor(String gameId, String playerId) {
         Game game = map.get(UUID.fromString(gameId));
-        if (UUID.fromString(playerId) == game.getPlayer1ID()){
+        if (UUID.fromString(playerId).equals(game.getPlayer1ID())){
             return cards[game.getPlayer2Card()];
         }else{
             return null;
