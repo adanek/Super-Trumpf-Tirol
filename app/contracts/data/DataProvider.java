@@ -11,7 +11,7 @@ import data.Ranking;
 import data.User;
 
 /**
- * 
+ * interface for the communication with the databasecontroller
  * @author Witsch Daniel
  *
  */

@@ -3,7 +3,8 @@ package contracts.model;
 import java.util.UUID;
 
 /**
- * Created by adanek on 14/01/15.
+ * interface for the model class user
+ * @author Witsch Daniel
  */
 public interface IUser {
 
