@@ -6,6 +6,15 @@
 
     @shared.main(signedIn, scripts) {
 
+        <div class="row">
+            <div id="info-box" class="panel panel-info center-block text-center">
+                <div class="panel-body">
+                    <span class="glyphicon glyphicon-user"></span>
+                    : <span class="message"></span>
+                </div>
+                
+            </div>
+        </div>
         <div class="row center-block">
 
                 <!-- player -->
@@ -13,7 +22,7 @@
                 <div id="card-player" class="card">
                     <div class="card-title">Name</div>
                     <div class="panel panel-default card-img">
-                        <img src="empty" alt="@play.i18n.Messages.get("card-image-alternative")"/>
+                        <img src="about:blank" alt="@play.i18n.Messages.get("card-image-alternative")"/>
                     </div>
                     <div id="card-categories" class="list-group">
                     @for(cat <- card.getCategories) {
@@ -23,7 +32,7 @@
                                     <tr>
                                         <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName):</td>
                                         <td class="card-content-value"><span class="text-right">
-                                            <strong id="card-category-population">Value</strong></span>
+                                            <strong class="card-category-@cat.getName">Value</strong></span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -40,21 +49,22 @@
             </div>
 
             <div class="col-sm-4 col-sm-offset-2 " >  <!-- competitor -->
-                <div class="card">
+                <div id="card-competitor" class="card">
                     <div class="card-front">
-                        <div class="card-title">@card.getName</div>
+                        <div class="card-title">Name</div>
                         <div class="panel panel-default card-img">
-                            <img src="@routes.Assets.at(card.getImageUrl)" alt="@play.i18n.Messages.get("card-image-alternative")"/>
+                            <img src="about:blank" alt="@play.i18n.Messages.get("card-image-alternative")"/>
                         </div>
                         <div id="card-categories" class="list-group">
                         @for(cat <- card.getCategories) {
-                            <div class="card-category list-group-item @if(cat.isChoosen){ list-group-item-success }" data-id="@cat.getId">
+                            <div class="card-category card-category-@cat.getName list-group-item" data-id="@cat.getId">
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName)
-                                                :</td>
-                                            <td class="card-content-value"><span class="text-right"><strong id="card-category-population"></strong> @cat.getValue</span></td>
+                                            <td class="card-content-label">@play.i18n.Messages.get("card-category-" + cat.getName):</td>
+                                            <td class="card-content-value"><span class="text-right">
+                                                <strong class="card-category-@cat.getName-value">Value</strong></span>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

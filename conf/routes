@@ -3,20 +3,22 @@
 # ~~~~
 
 #Methods    URL                     Controller
-GET         /                    controllers.Application.index()
-GET         /manual              controllers.Application.manual()
+GET         /                       controllers.Application.index()
+GET         /manual                 controllers.Application.manual()
+ 
+GET         /login                  controllers.LoginController.showLoginForm()
+POST        /login                  controllers.LoginController.authenticate()
+GET         /logout                 controllers.LoginController.logout()
 
-GET         /login               controllers.LoginController.showLoginForm()
-POST        /login               controllers.LoginController.authenticate()
-GET         /logout              controllers.LoginController.logout()
-
-GET         /game                controllers.GameController.index()
-GET         /game/selectMode     controllers.GameController.selectMode()
-POST        /game/create         controllers.GameController.createGame()
-GET         /game/status         controllers.GameController.getStatus()
-POST        /game/play           controllers.GameController.playCard()
-POST        /game/commit         controllers.GameController.commitRound()
-POST        /game/abort          controllers.GameController.abortGame()
+GET         /game                   controllers.GameController.index()
+GET         /game/selectMode        controllers.GameController.selectMode()
+POST        /game/create            controllers.GameController.createGame()
+GET         /game/status            controllers.GameController.getStatus()
+GET         /game/card              controllers.GameController.getCard()
+POST        /game/competitorcard    controllers.GameController.getCompetitorCard()
+POST        /game/play              controllers.GameController.playCard()
+POST        /game/commit            controllers.GameController.commitRound()
+POST        /game/abort             controllers.GameController.abortGame()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file           controllers.Assets.at(path="/public", file)

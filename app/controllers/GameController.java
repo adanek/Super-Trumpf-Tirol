@@ -1,6 +1,9 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import contracts.game.ICard;
+import controllers.helpers.CardAjax;
+import controllers.helpers.GameStateAjax;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -20,8 +23,7 @@ public class GameController extends Controller {
         String gid= session().get("gid");
         
         GameHandler gh = ServiceLocator.getGameHandler();
-
-        return ok(views.html.game.main.render(true, gh.getCard(gid, pid)));
+        return ok(views.html.game.main.render((pid != null), gh.getCard(gid,pid)));
     }
 
     // GET /game/selectMode
@@ -82,10 +84,53 @@ public class GameController extends Controller {
             return badRequest(ex.getMessage());
         }
 
-        JsonNode jsonNode = Json.toJson(state);
+        JsonNode jsonNode = Json.toJson(new GameStateAjax(state));
         return ok(jsonNode);
     }
 
+    // GET  /game/card
+    @Security.Authenticated(MyAuthenticator.class)
+    public static Result getCard(){
+        
+        ICard card;
+        
+        try {
+            String pid = session().get("pid");
+            String gid = session().get("gid");
+
+            GameHandler gameHandler = ServiceLocator.getGameHandler();
+            card = gameHandler.getCard(gid, pid);
+        }
+        catch(Exception ex)
+        {
+            return badRequest();
+        }
+        
+        return ok(Json.toJson(new CardAjax(card)));
+    }
+    
+    
+    // POST /game/competitorcard
+    @Security.Authenticated(MyAuthenticator.class)
+    public static Result getCompetitorCard(){
+
+        ICard card;
+        
+        try {
+            String pid = session().get("pid");
+            String gid = session().get("gid");
+
+       
+            card = ServiceLocator.getGameHandler().getCardFromCompetitor(gid, pid);
+        }
+        catch (Exception ex)
+        {
+            return badRequest();
+        }
+        
+        return ok(Json.toJson(new CardAjax(card)));
+    }
+    
     // POST /game/commit
     public static Result commitRound() {
 

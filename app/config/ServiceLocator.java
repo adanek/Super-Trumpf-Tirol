@@ -4,7 +4,12 @@ import authentication.MyLoginHandler;
 import contracts.data.DataProvider;
 import contracts.game.GameHandler;
 import contracts.login.LoginHandler;
+import data.Card;
 import data.DatabaseController;
+import model.Logic;
+import play.Logger;
+
+import java.util.List;
 
 /**
  * Simulates a simple DependencyInjectionContainer.
@@ -20,9 +25,11 @@ public class ServiceLocator {
      * @return an singelton instance of an dataprovider
      */
     public static DataProvider getDataProvider() {
-
+        
 	if (db == null) {
-	    db = DatabaseController.getInstance();
+
+        Logger.info("Dataprovider initialized");
+        db = DatabaseController.getInstance();
 	}
 
 	return db;
@@ -35,8 +42,12 @@ public class ServiceLocator {
      */
     public static GameHandler getGameHandler() {
 	if (gh == null) {
-
-	    gh = new mock.GameHandler();
+        
+        Logger.info("GameHandler initialized");
+        //gh = new mock.GameHandler();
+        List<Card> allCards = ServiceLocator.getDataProvider().getAllCards();
+        Card[] cards = allCards.toArray(new Card[allCards.size()]);
+        gh= new Logic(cards);
 	}
 
 	return gh;
@@ -49,6 +60,7 @@ public class ServiceLocator {
     public static LoginHandler getLoginHandler() {
 
         if(lh == null){
+            Logger.info("LoginHandler initialized");
             lh = new MyLoginHandler();
         }
         
