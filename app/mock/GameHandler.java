@@ -22,7 +22,6 @@ public class GameHandler implements contracts.game.GameHandler {
 	public ICard getCard(String gameId, String playerId) {
 
 		Card card = ServiceLocator.getDataProvider().getAllCards().get(15);
-		card.getCategories().get(2).setChoosen(true);
 		return  card;
 	}
 
@@ -30,7 +29,6 @@ public class GameHandler implements contracts.game.GameHandler {
 	public ICard getCardFromCompetitor(String gameId, String playerId) {
 		
 		Card card = ServiceLocator.getDataProvider().getAllCards().get(22);
-		card.getCategories().get(2).setChoosen(true);
 		return  card;
 	}
 

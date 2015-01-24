@@ -48,14 +48,4 @@ public class CardCategory implements contracts.game.ICardCategory {
     public String getValue() {
 	return value;
     }
-
-    @Override
-    public boolean isChoosen() {
-        return this.choosen;
-    }
-    
-    public void setChoosen(boolean newValue){
-        
-        this.choosen = newValue;
-    }
 }

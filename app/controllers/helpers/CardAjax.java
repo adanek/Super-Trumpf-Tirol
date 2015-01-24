@@ -18,7 +18,6 @@ public class CardAjax {
         this.name = card.getName();
         this.image = "assets" + card.getImageUrl();
         this.categories = card.getCategories();
-        this.categories.get(2).setChoosen(true);
     }
     
     public String name;

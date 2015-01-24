@@ -19,6 +19,7 @@ public class GameStateAjax {
         this.RoundState=contracts.game.RoundState.WON.toString();
         this.CardCountPlayer=state.getCardCount();
         this.CardCountCompetitor = state.getCardCountCompetitor();
+        this.ChoosenCategory=state.getChoosenCategory();
     }
     
     public String Message;
@@ -27,6 +28,7 @@ public class GameStateAjax {
     public String RoundState;
     public int CardCountPlayer;
     public int CardCountCompetitor;
+    public String ChoosenCategory;
     
     
 }

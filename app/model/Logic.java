@@ -130,6 +130,7 @@ public class Logic implements GameHandler {
             // If player1 win, he moves next round.
             game.setPlayer1sMove(true);
         }
+        game.getStatus().setChoosenCategory(cards[0].getCategories().get(categoryID).getName());
         game.getStatus().updateStatus(GameState.WaitForCommit);
     }
 }

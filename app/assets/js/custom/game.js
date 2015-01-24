@@ -63,7 +63,7 @@ function setState(state){
     roundstate = state.RoundState;
     
     if(roundstate != "OUTSTANDING"){
-        highlightCategory("population");        
+        highlightCategory(state.ChoosenCategory);
     }
     else
     {
