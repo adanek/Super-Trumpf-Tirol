@@ -1,6 +1,5 @@
 package controllers.helpers;
 
-import contracts.game.GameState;
 import contracts.game.GameStatus;
 
 import static contracts.game.GameState.WaitForCommit;
@@ -28,6 +27,9 @@ public class GameStateAjax {
                     break;
                 case LOST:
                     this.Message = play.i18n.Messages.get("game-state-commit-lost");
+                    break;
+                case DRAWN:
+                    this.Message = play.i18n.Messages.get("game-state-commit-drawn");
                     break;
             }
         }

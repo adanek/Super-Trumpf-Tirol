@@ -63,8 +63,7 @@ function setState(state){
 
     $('.game-info-cards-player').text(state.CardCountPlayer);
     $('.game-info-cards-competitor').text(state.CardCountCompetitor);
-    $('#info-box').find('.round').text(state.Round);
-    $('#info-box').find('.message').text(state.Message);
+    $('#info-box').find('.round').text(state.Round).find('.message').text(state.Message);
     
     if(state.RoundState != "OUTSTANDING"){
         highlightCategory(state.ChoosenCategory, state.RoundState);
@@ -106,34 +105,37 @@ function updatePlayerCard() {
 
 function setCard(card) {
     
-    $('#card-player').find('.card-title').text(card.name);
-    $('#card-player').find('img').attr('src', card.image).load(function () {
+    var elem = $('#card-player');
+    
+    elem.find('.card-title').text(card.name);
+    elem.find('img').attr('src', card.image).load(function () {
         $('.card-back').height($('#card-player').height());
     });
 
     for (cid = 0; cid < card.categories.length; cid++) {
         var cat = card.categories[cid];
         var selector = ".card-category-" + cat.name + '-value';
-        $('#card-player').find(selector).text(cat.value);
+        elem.find(selector).text(cat.value);
     }
 }
 
 function updateCompetitiorCard(card) {
 
+    var competitor = $('#card-competitor');
     // Set title
-    $('#card-competitor .card-title').text(card.name);
+    competitor.find('.card-title').text(card.name);
 
     // Set image
-    $('#card-competitor img').attr('src', card.image);
+    competitor.find('img').attr('src', card.image);
 
     // Set Categories
     for (var cid = 0; cid < card.categories.length; cid++) {
 
         var cat = card.categories[cid];
-        var selector = '#card-competitor .card-category-' + cat.name;
+        var selector = ' .card-category-' + cat.name;
 
         // Set Value
-        $(selector + '-value').text(cat.value);
+        competitor.find(selector + '-value').text(cat.value);
     }
 }
 
@@ -179,20 +181,26 @@ function setStateEndGame(){
 function highlightCategory(category, roundstate) {
 
     var selector = '.card-category-' + category;
-
+    var player = $('#card-player').find(selector);
+    var competitor = $('#card-competitor').find(selector);
+    
     if (roundstate == "WON") {
-        $('#card-player').find(selector).addClass('list-group-item-success');
-        $('#card-competitor').find(selector).addClass('list-group-item-danger');
+        player.addClass('list-group-item-success');
+        competitor.addClass('list-group-item-danger');
     }
-    else {
-        $('#card-player').find(selector).addClass('list-group-item-danger');
-        $('#card-competitor').find(selector).addClass('list-group-item-success');
+    else if(roundstate == "LOST"){
+        player.addClass('list-group-item-danger');
+        competitor.addClass('list-group-item-success');
+    }
+    else if(roundstate == "DRAWN"){
+        player.addClass('list-group-item-warning');
+        competitor.addClass('list-group-item-warning');
     }
 }
 
 function clearHighlighting(){
     
-    $('.card-category').removeClass('list-group-item-danger list-group-item-success');
+    $('.card-category').removeClass('list-group-item-danger list-group-item-success list-group-item-warning');
     
 }
 /* Behavior */
@@ -264,8 +272,7 @@ $(document).ready(function () {
 });
 
 window.onbeforeunload = function (){
-    var msg = $('#abort-message').text();
-    return msg;
+    return $('#abort-message').text();
 };
 
 window.addEventListener("unload", function () {
