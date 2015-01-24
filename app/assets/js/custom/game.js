@@ -95,10 +95,10 @@ function setState(state){
 function setStateChoise() {
 
     clearCategoryHighlight();
-    setCompetitorsCardVisibilityTo(true);
+    setCompetitorsCardVisibilityTo(false);
     setCommitRoundButtonVisibilityTo(false);
     setCommitCardButtonVisibilityTo(false);
-    getCompetitorsCard();
+
     getCard();
     enableCategorySelection();
 }
