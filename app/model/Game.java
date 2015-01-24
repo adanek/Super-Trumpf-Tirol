@@ -54,7 +54,6 @@ public class Game{
         status.updatePlayer1Cards(player1Cards.size());
         status.updatePlayer2Cards(player2Cards.size());
         player1sMove = true;
-        status.setRoundState(RoundState.WON);
         if(player1Cards.size() == 52){
             status.updateStatus(GameState.Won);
         }else {
@@ -71,11 +70,22 @@ public class Game{
         status.updatePlayer1Cards(player1Cards.size());
         status.updatePlayer2Cards(player2Cards.size());
         player1sMove = false;
-        status.setRoundState(RoundState.LOST);
         if(player2Cards.size() == 52){
             status.updateStatus(GameState.Lose);
         }else {
             status.updateStatus(GameState.WaitForOtherPlayer);
+        }
+    }
+
+    public void draw(){
+        player1Cards.add(player1Cards.remove());
+        player2Cards.add(player2Cards.remove());
+        status.updatePlayer1Cards(player1Cards.size());
+        status.updatePlayer2Cards(player2Cards.size());
+        if(player1Cards.size() == 52){
+            status.updateStatus(GameState.Won);
+        }else {
+            status.updateStatus(GameState.WaitForYourChoice);
         }
     }
 
