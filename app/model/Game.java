@@ -1,4 +1,5 @@
 package model;
+import contracts.game.RoundState;
 import data.Card;
 import play.db.ebean.Model;
 import contracts.game.GameState;
@@ -53,6 +54,7 @@ public class Game{
         status.updatePlayer1Cards(player1Cards.size());
         status.updatePlayer2Cards(player2Cards.size());
         player1sMove = true;
+        status.setRoundState(RoundState.WON);
         if(player1Cards.size() == 52){
             status.updateStatus(GameState.Won);
         }else {
@@ -69,6 +71,7 @@ public class Game{
         status.updatePlayer1Cards(player1Cards.size());
         status.updatePlayer2Cards(player2Cards.size());
         player1sMove = false;
+        status.setRoundState(RoundState.LOST);
         if(player1Cards.size() == 52){
             status.updateStatus(GameState.Lose);
         }else {
