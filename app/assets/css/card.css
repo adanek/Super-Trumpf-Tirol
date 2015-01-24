@@ -1,4 +1,13 @@
 
+#info-box .panel-body {
+    min-height: 64px;
+}
+
+#info-box .panel-body span {
+    line-height: 34px;
+    vertical-align: middle;
+}
+
 .card {
     max-width: 300px;
     margin-left: auto;
@@ -7,6 +16,16 @@
     border: 1px solid #AAAAAA;
     box-shadow: 3px 3px 3px 0 #ccc;
     padding: 1em;
+}
+
+.card-front {
+    display: none;
+}
+
+.card-back {
+
+    display: block;
+    background-color: #5e5e5e;
 }
 
 .card-img img {
@@ -42,17 +61,13 @@
 
 }
 
-.card-front {
-    display: none;
-}
-
-.card-back {
-
-    display: block;
-    background-color: #5e5e5e;
-}
-
 #game-result {
     display: none;
     
+}
+
+#info-button-commit-card,
+#info-button-commit-round {
+    
+    display: none;
 }

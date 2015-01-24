@@ -1,5 +1,8 @@
 package contracts.game;
 
+/**
+ * Main interface for the communication between UI and Logic 
+ */
 public interface GameHandler {
 
     /**
@@ -13,31 +16,32 @@ public interface GameHandler {
     public String createNewGame(String playerId);
 
     /**
-     * Returns the current state of the game
+     * Returns the current state of the game from the sight of the player
      * 
      * @param gameId
      *            the id of the game
      * @param playerId
      *            the ID of the player which made the request
      * 
-     * @return the current game state
+     * @return an object representing the current game state
      */
     public GameStatus getGameStatus(String gameId, String playerId);
 
     /**
-     * Returns the current card of the player *
+     * Returns the current card of the player 
      * 
      * @param gameId
      *            The ID of the current game
      * @param playerId
-     *            The ID of the passive player*
-     * @return the current card of the player
+     *            The ID of the player
+     * @return an object representing the current ard of the player
      */
     public ICard getCard(String gameId, String playerId);
 
     /**
      * Returns the current card of the competitor to compare it with your own
-     * after the choice is made Only possible between GameState WaitForCommit *
+     * after the choice is made 
+     * This is only possible in GameState WaitForCommit
      * 
      * @param gameId
      *            The ID of the current game
@@ -48,7 +52,9 @@ public interface GameHandler {
     public ICard getCardFromCompetitor(String gameId, String playerId);
 
     /**
-     * Submit the chosen category Only available in state WaitForYourChoice
+     * Submit the chosen category 
+     * 
+     * Only available in state WaitForYourChoice
      *
      * @param gameId
      *            The ID of the current game
@@ -63,7 +69,7 @@ public interface GameHandler {
      * Finishes a round.
      *
      * Both players have to commit each round. This gives them the opportunity
-     * to look at theirs competitors card to see why the won or lose
+     * to look at theirs competitors card to see why the have won or lost
      * 
      * Only available for the state WaitForCommit
      * 
@@ -76,7 +82,8 @@ public interface GameHandler {
 
     /**
      * The passiv player has to commit his card before the evaluation of the
-     * round can be done
+     * round can be done. This gives him the opportunity to take a look at his
+     * card. Also this slows down the game speed intentionally.
      *
      * @param gameId
      *            The ID of the current game
@@ -84,7 +91,6 @@ public interface GameHandler {
      *            The ID of the passive player
      */
     public void commitCard(String gameId, String playerId);
-
 
     /**
      * Aborts the game.

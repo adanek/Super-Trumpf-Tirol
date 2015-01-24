@@ -18,5 +18,10 @@ public enum RoundState {
     /**
      * The player has lost the round*
      */
-    LOST, 
+    LOST,
+
+    /**
+     * Both players have the same value 
+     */
+    DRAWN
 }

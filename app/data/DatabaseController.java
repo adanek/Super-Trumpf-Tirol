@@ -55,20 +55,21 @@ public class DatabaseController implements DataProvider {
 		 * next codeblock open the file and read out the information
 		 * this code works in Linux and in Windows
 		 */
-	StringBuilder content = new StringBuilder();
-	try (FileReader rd = new FileReader(myfile);) {
-	    int r;
-	    while ((r = rd.read()) != -1) {
-		content.append((char) r);
-	    }
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+//	StringBuilder content = new StringBuilder();
+//	try (FileReader rd = new FileReader(myfile);) {
+//	    int r;
+//	    while ((r = rd.read()) != -1) {
+//		content.append((char) r);
+//	    }
+//	} catch (IOException e) {
+//	    e.printStackTrace();
+//	}
 
 		/**
 		 * Scanner split the file into the different communes and save them
 		 */
-	try (Scanner s = new Scanner(content.toString());) {
+//	try (Scanner s = new Scanner(content.toString());) {
+	try (Scanner s = new Scanner(myfile, "utf-8")) {
 
 	    long i = 0;
 	    while (s.hasNextLine()) {

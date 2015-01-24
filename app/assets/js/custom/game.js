@@ -107,7 +107,9 @@ function updatePlayerCard() {
 function setCard(card) {
     
     $('#card-player').find('.card-title').text(card.name);
-    $('#card-player').find('img').attr('src', card.image);
+    $('#card-player').find('img').attr('src', card.image).load(function () {
+        $('.card-back').height($('#card-player').height());
+    });
 
     for (cid = 0; cid < card.categories.length; cid++) {
         var cat = card.categories[cid];
