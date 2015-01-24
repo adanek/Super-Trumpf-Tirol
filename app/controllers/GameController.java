@@ -43,6 +43,9 @@ public class GameController extends Controller {
 
         try {
             gid = gh.createNewGame(pid);
+
+            Logger.info(String.format("User %s started a new game.",pid));
+            
             session("gid", gid);
         } catch (Exception ex) {
             return badRequest();
@@ -172,9 +175,21 @@ public class GameController extends Controller {
         return ok();
     }
 
-    // POST /game/abord
+    // POST /game/abort
     public static Result abortGame() {
 
-        return TODO;
+        try {
+            String pid = session().get("pid");
+            String gid = session().get("gid");
+
+            Logger.info(String.format("User %s has aborted the game.\n", pid));
+            
+            ServiceLocator.getGameHandler().abortGame(gid, pid);
+
+        } catch (Exception ex) {
+            return badRequest();
+        }
+
+        return ok();
     }
 }

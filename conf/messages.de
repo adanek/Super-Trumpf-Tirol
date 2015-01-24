@@ -34,3 +34,5 @@ game-info-competitor-before=Ihr Gegenspieler hat
 game-info-competitor-after=Karten.
 game-info-round=Runde
 game-info-commit=Weiter
+
+game-abort-message=Wenn Sie die Seite verlassen, wird das Spiel abgebrochen und Ihr Gegenspieler gewinnt.

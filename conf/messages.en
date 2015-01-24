@@ -34,3 +34,5 @@ game-info-competitor-before=Your competitor owns
 game-info-competitor-after=cards.
 game-info-round=Round
 game-info-commit=Next
+
+game-abort-message=If you leave now, the game will end and your competitor wins.

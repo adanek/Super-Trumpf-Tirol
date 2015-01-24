@@ -127,6 +127,11 @@ public class Logic implements GameHandler {
         compareCategories(game, categoryID);
     }
 
+    @Override
+    public void abortGame(String gameId, String playerId) {
+        //TODO abort Game.
+    }
+
     public void compareCategories(Game game, int categoryID){
         // Get Ranks of the cards
         int player1Value = cards[game.getPlayer1Card()].getRankingArray()[categoryID];

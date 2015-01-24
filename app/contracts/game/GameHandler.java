@@ -84,4 +84,12 @@ public interface GameHandler {
      *            The ID of the passive player
      */
     public void commitCard(String gameId, String playerId);
+
+
+    /**
+     * Aborts the game.
+     * @param gameId
+     * @param playerId
+     */
+    public void abortGame(String gameId, String playerId);
 }

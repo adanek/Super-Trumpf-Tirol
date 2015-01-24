@@ -46,4 +46,9 @@ public class GameHandler implements contracts.game.GameHandler {
 	public void commitCard(String gameId, String playerId) {
 
 	}
+
+	@Override
+	public void abortGame(String gameId, String playerId) {
+
+	}
 }

@@ -52,6 +52,13 @@ function getState() {
         cache: false
     });
 }
+
+function abortGame() {
+    var url = "/game/abort";
+    $.post(url);
+    setTimeout(update, 500);
+}
+
 /* Section Logic */
 
 function setState(state){
@@ -247,4 +254,12 @@ $(document).ready(function () {
     update();
 });
 
+window.onbeforeunload = function (){
+    var msg = $('#abort-message').text();
+    return msg;
+};
+
+window.addEventListener("unload", function () {
+  abortGame();
+});
 
