@@ -72,7 +72,7 @@ public class Game{
         status.updatePlayer2Cards(player2Cards.size());
         player1sMove = false;
         status.setRoundState(RoundState.LOST);
-        if(player1Cards.size() == 52){
+        if(player2Cards.size() == 52){
             status.updateStatus(GameState.Lose);
         }else {
             status.updateStatus(GameState.WaitForOtherPlayer);
