@@ -177,11 +177,11 @@ public class Card extends Model implements ICard {
     @Override
     public List<ICardCategory> getCategories() {
 	List<contracts.game.ICardCategory> categories = new LinkedList<>();
-	categories.add(new CardCategory(0, "population", Integer.toString(population)));
+	categories.add(new CardCategory(0, "population", String.format("%,d", population)));
 	categories.add(new CardCategory(1, "area", String.format("%.2f km²", area)));
-	categories.add(new CardCategory(2, "indebtedness", Float.toString(indebtedness) + "%"));
+	categories.add(new CardCategory(2, "indebtedness", String.format("%.2f%%", indebtedness)));
 	categories.add(new CardCategory(3, "overnightstays", String.format("%,d", nights)));
-	categories.add(new CardCategory(4, "sportfacilities", Integer.toString(sportFields)));
+	categories.add(new CardCategory(4, "sportfacilities", String.format("%,d",sportFields)));
 	return categories;
     }
 
