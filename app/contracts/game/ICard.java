@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * 
+ * interface for the Card
  * @author Witsch Daniel
  *
  */
@@ -41,5 +41,12 @@ public interface ICard {
      * @return a array with the ranking of all 5 categories
      */
     public Integer[] getRankingArray();
+
+    /**
+     * method to get the rankings of all categories of a card in a Array
+     *
+     * @return the rankings in a Integer Array
+     */
+    Integer[] getRankingArray();
 
 }
