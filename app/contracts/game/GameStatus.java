@@ -17,6 +17,12 @@ public interface GameStatus {
      * @return the current round of the game
      */
     int getRound();
+
+    /**
+     * *
+     * @return the state of the current round.
+     */
+    RoundState getRoundState();
     
     // number of cards in your stack
     int getCardCount();
