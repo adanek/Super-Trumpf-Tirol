@@ -29,4 +29,10 @@ public interface GameStatus {
     
     // number of cards in your competitors stack
     int getCardCountCompetitor();
+
+    /**
+     * The choosen category of this round.*
+     * @return Null if the category is not yet choosen.
+     */
+    String getChoosenCategory();
 }

@@ -15,6 +15,16 @@ public class GameStatus implements contracts.game.GameStatus{
     private int round;
     private RoundState roundState = RoundState.OUTSTANDING;
 
+    public void setChoosenCategory(String choosenCategory) {
+        this.choosenCategory = choosenCategory;
+    }
+
+    public void setRoundState(RoundState roundState) {
+        this.roundState = roundState;
+    }
+
+    private String choosenCategory = null;
+
     public GameStatus(int round, int player1Cards, int player2Cards, GameState state){
         this.round = round;
         this.player1Cards = player1Cards;
@@ -61,5 +71,10 @@ public class GameStatus implements contracts.game.GameStatus{
     @Override
     public int getCardCountCompetitor() {
         return player2Cards;
+    }
+
+    @Override
+    public String getChoosenCategory() {
+        return this.choosenCategory;
     }
 }

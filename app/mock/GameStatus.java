@@ -1,6 +1,7 @@
 package mock;
 
 import contracts.game.GameState;
+import contracts.game.RoundState;
 import play.i18n.Messages;
 
 import java.util.UUID;
@@ -38,6 +39,11 @@ public class GameStatus implements contracts.game.GameStatus {
     }
 
     @Override
+    public RoundState getRoundState() {
+        return null;
+    }
+
+    @Override
     public int getCardCount() {
         return this.cardCount;
     }
@@ -45,5 +51,10 @@ public class GameStatus implements contracts.game.GameStatus {
     @Override
     public int getCardCountCompetitor() {
         return this.competitorCardCount;
+    }
+
+    @Override
+    public String getChoosenCategory() {
+        return null;
     }
 }

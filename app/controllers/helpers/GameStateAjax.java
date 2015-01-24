@@ -2,6 +2,7 @@ package controllers.helpers;
 
 import contracts.game.GameState;
 import contracts.game.GameStatus;
+import contracts.game.RoundState;
 
 /**
  * Created by adanek on 23.01.15.
@@ -12,9 +13,10 @@ public class GameStateAjax {
     public GameStateAjax(GameStatus state){
      
         this.State = state.getMessage();
-        this.Message = play.i18n.Messages.get("game-state-"+ state.getMessage());
+        this.Message = play.i18n.Messages.get("game-state-" + state.getMessage());
         this.Round= state.getRound();
-        this.RoundState="won";
+        //this.RoundState=state.getRoundState().toString();
+        this.RoundState=contracts.game.RoundState.WON.toString();
         this.CardCountPlayer=state.getCardCount();
         this.CardCountCompetitor = state.getCardCountCompetitor();
     }

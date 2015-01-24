@@ -61,6 +61,14 @@ function setState(state){
     $('#info-box').find('.round').text(state.Round);
     $('#info-box').find('.message').text(state.Message);
     roundstate = state.RoundState;
+    
+    if(roundstate != "OUTSTANDING"){
+        highlightCategory("population");        
+    }
+    else
+    {
+        clearHighlighting();
+    }
 
     switch (state.State) {
         case "WaitForYourChoice":
@@ -120,12 +128,6 @@ function updateCompetitiorCard(card) {
 
         // Set Value
         $(selector + '-value').text(cat.value);
-
-        // Set color
-        if (cat.choosen) {
-
-            highlightCategory(cat.name);
-        }
     }
 }
 
@@ -162,7 +164,7 @@ function highlightCategory(category) {
 
     var selector = '.card-category-' + category;
 
-    if (roundstate == "won") {
+    if (roundstate == "WON") {
         $('#card-player').find(selector).addClass('list-group-item-success');
         $('#card-competitor').find(selector).addClass('list-group-item-danger');
     }
