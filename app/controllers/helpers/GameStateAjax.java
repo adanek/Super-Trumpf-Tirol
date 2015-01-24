@@ -12,11 +12,10 @@ import static contracts.game.GameState.WaitForCommit;
 public class GameStateAjax {
     
     public GameStateAjax(GameStatus state){
-     
-        this.State = state.getGameState();        
+
+        this.State = state.getGameState();
         this.Round= state.getRound();
         this.RoundState=state.getRoundState().toString();
-        //this.RoundState=contracts.game.RoundState.WON.toString();
         this.CardCountPlayer=state.getCardCount();
         this.CardCountCompetitor = state.getCardCountCompetitor();
         this.ChoosenCategory=state.getChoosenCategory();

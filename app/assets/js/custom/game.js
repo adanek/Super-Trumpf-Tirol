@@ -1,7 +1,5 @@
 /* Globals */
 
-var roundstate;
-
 
 /* Section AJAX */
 
@@ -67,13 +65,11 @@ function setState(state){
     $('.game-info-cards-competitor').text(state.CardCountCompetitor);
     $('#info-box').find('.round').text(state.Round);
     $('#info-box').find('.message').text(state.Message);
-    roundstate = state.RoundState;
     
-    if(roundstate != "OUTSTANDING"){
-        highlightCategory(state.ChoosenCategory);
+    if(state.RoundState != "OUTSTANDING"){
+        highlightCategory(state.ChoosenCategory, state.RoundState);
     }
-    else
-    {
+    else{
         clearHighlighting();
     }
 
@@ -89,6 +85,7 @@ function setState(state){
             break;
         case "Won":
         case "Lose":
+            setStateEndGame();
             break;
     }
 }
@@ -167,7 +164,17 @@ function setStateCommit() {
     CommitCardButtonVisible(false);
 }
 
-function highlightCategory(category) {
+function setStateEndGame(){
+
+    window.onbeforeunload = null;
+    CommitCardButtonVisible(false);
+    CommitRoundButtonVisible(false);
+    $("#cards").hide();
+    $('#game-result').show();
+    
+}
+
+function highlightCategory(category, roundstate) {
 
     var selector = '.card-category-' + category;
 
@@ -263,3 +270,6 @@ window.addEventListener("unload", function () {
   abortGame();
 });
 
+$('game-result').find('button').click(function () {
+    window.location.href = "/";
+});

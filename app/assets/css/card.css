@@ -51,3 +51,8 @@
     display: block;
     background-color: #5e5e5e;
 }
+
+#game-result {
+    display: none;
+    
+}

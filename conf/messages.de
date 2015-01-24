@@ -25,8 +25,8 @@ game-state-WaitForYourChoice=Wählen Sie eine Kategorie
 game-state-WaitForOtherPlayer=Ihr Gegenspieler ist an der Reihe ...
 game-state-commit-won=Sie haben diese Runde gewonnen.
 game-state-commit-lost=Sie habe diese Runde verloren.
-game-state-won=Gratulation! Sie haben das Spiel gewonnen!
-game-state-lose=Sie haben das Spiel leider verloren. Viel Glück beim nächsten mal.
+game-state-Won=Gratulation! Sie haben das Spiel gewonnen!
+game-state-Lose=Sie haben das Spiel leider verloren. Viel Glück beim nächsten mal.
 
 game-info-player-before=Sie haben
 game-info-player-after=Karten.
@@ -36,3 +36,4 @@ game-info-round=Runde
 game-info-commit=Weiter
 
 game-abort-message=Wenn Sie die Seite verlassen, wird das Spiel abgebrochen und Ihr Gegenspieler gewinnt.
+game-end-button=Beenden

@@ -1,6 +1,8 @@
 package controllers;
 
 import authentication.MyLoginHandler;
+import config.ServiceLocator;
+import play.Logger;
 import play.mvc.Result;
 import play.mvc.Controller;
 import views.html.*;
@@ -23,12 +25,16 @@ public class LoginController extends Controller{
 
     //GET /logout
     public static Result logout(){
-    	
+
+		String pid = session().get("pid");
+		String gid = session().get("gid");
+
+		Logger.info(String.format("User %s has aborted the game.\n", pid));
+		ServiceLocator.getGameHandler().abortGame(gid, pid);
+
     	//clear session data
 		session().clear();
-    	
-		//redirect to index page
-    	//return redirect("/");
+	
 		return redirect(routes.Application.index());
     }
     

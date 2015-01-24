@@ -22,7 +22,7 @@
             </div>
         </div>
         <!-- Cards -->
-        <div class="row">
+        <div id="cards" class="row">
 
                 <!-- player -->
             <div class="col-sm-4 col-sm-offset-1">
@@ -90,8 +90,12 @@
                     <div class="panel-body">@play.i18n.Messages.get("game-info-competitor-before") <span class="game-info-cards-competitor label label-info"></span> @play.i18n.Messages.get("game-info-competitor-after")</div>
                 </div>
             </div>
-            
-            <div id="abort-message" class="hidden">@play.i18n.Messages.get("game-abort-message")</div>
-
         </div>
+
+        <!-- Game Result -->
+        <div id="game-result" class="text-center">
+            <a class="btn btn-lg btn-primary" href="/">@play.i18n.Messages.get("game-end-button")</a>
+        </div>
+
+        <div id="abort-message" class="hidden">@play.i18n.Messages.get("game-abort-message")</div>
     }
