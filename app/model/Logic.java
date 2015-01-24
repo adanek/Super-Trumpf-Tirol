@@ -80,7 +80,8 @@ public class Logic implements GameHandler {
 
     @Override
     public data.Card getCard(String gameId, String playerId) {
-	Game game = map.get(UUID.fromString(gameId));
+	    Game game = map.get(UUID.fromString(gameId));
+        game.getStatus().setRoundState(RoundState.OUTSTANDING);
         if (UUID.fromString(playerId).equals(game.getPlayer1ID())){
             return cards[game.getPlayer1Card()];
         }else{
