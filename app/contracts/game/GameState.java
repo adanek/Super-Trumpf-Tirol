@@ -7,5 +7,4 @@ public enum GameState {
     WaitForCommit,
     Won,
     Lose
-    
 }

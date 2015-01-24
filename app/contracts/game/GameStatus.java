@@ -7,9 +7,9 @@ public interface GameStatus {
     /**
      * The current state of the game
      * *
-     * @return a string representring the current state of the game
+     * @return a string representing the current state of the game
      */
-    String getMessage();
+    String getGameState();
 
     /**
      * The current round of the game

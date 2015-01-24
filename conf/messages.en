@@ -14,7 +14,7 @@ game-index-multiplayer=Real Person
 
 login-button=login
 
-card-image-alternativ=Position on map
+card-image-alternative=Position on map
 card-category-population=Population
 card-category-area=Area
 card-category-indebtedness=Indebtedness
@@ -22,8 +22,11 @@ card-category-overnightstays=Overnight stays
 card-category-sportfacilities=Sport facilities
 
 game-state-WaitForYourChoice=Choose a category
-game-state-WaitForCommit=You won this round
 game-state-WaitForOtherPlayer=Wait for your competitor's turn
+game-state-commit-won=You won this round.
+game-state-commit-lost=You lost this round.
+game-state-won=Congratulation! You won the game.
+game-state-lose=I'm sorry. You lost the game. Better luck next time.
 
 game-info-player-before=You own
 game-info-player-after=cards.

@@ -2,7 +2,8 @@ package controllers.helpers;
 
 import contracts.game.GameState;
 import contracts.game.GameStatus;
-import contracts.game.RoundState;
+
+import static contracts.game.GameState.WaitForCommit;
 
 /**
  * Created by adanek on 23.01.15.
@@ -12,14 +13,28 @@ public class GameStateAjax {
     
     public GameStateAjax(GameStatus state){
      
-        this.State = state.getMessage();
-        this.Message = play.i18n.Messages.get("game-state-" + state.getMessage());
+        this.State = state.getGameState();        
         this.Round= state.getRound();
-        //this.RoundState=state.getRoundState().toString();
-        this.RoundState=contracts.game.RoundState.WON.toString();
+        this.RoundState=state.getRoundState().toString();
+        //this.RoundState=contracts.game.RoundState.WON.toString();
         this.CardCountPlayer=state.getCardCount();
         this.CardCountCompetitor = state.getCardCountCompetitor();
         this.ChoosenCategory=state.getChoosenCategory();
+
+        if(state.getGameState().equals(WaitForCommit.toString()))
+        {
+            switch (state.getRoundState()) {
+                case WON:
+                    this.Message = play.i18n.Messages.get("game-state-commit-won");
+                    break;
+                case LOST:
+                    this.Message = play.i18n.Messages.get("game-state-commit-lost");
+                    break;
+            }
+        }
+        else {
+            this.Message = play.i18n.Messages.get("game-state-" + state.getGameState());
+        }
     }
     
     public String Message;

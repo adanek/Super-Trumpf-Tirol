@@ -2,12 +2,11 @@ package model;
 
 import java.util.*;
 
+import contracts.game.*;
+import contracts.game.GameStatus;
 import play.db.ebean.Model;
 import scala.Array;
-import contracts.game.GameHandler;
-import contracts.game.GameStatus;
-import contracts.game.ICard;
-import contracts.game.GameState;
+
 import java.util.Random;
 
 /**
@@ -67,7 +66,16 @@ public class Logic implements GameHandler {
     @Override
     public model.GameStatus getGameStatus(String gameId, String playerId) {
 	    Game game = map.get(UUID.fromString(gameId));
-        return game.getStatus();
+        model.GameStatus status = game.getStatus();
+        if(status.getChoosenCategory() != null){
+            if(game.getPlayer1sMove()){
+                status.setRoundState(RoundState.WON);
+            }
+            else {
+                status.setRoundState(RoundState.LOST);
+            }
+        }
+        return status;
     }
 
     @Override

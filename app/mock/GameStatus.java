@@ -29,7 +29,7 @@ public class GameStatus implements contracts.game.GameStatus {
 
     @Override
 
-    public String getMessage() {
+    public String getGameState() {
         return Messages.get("game-state-" + this.state.toString());
     }
 
