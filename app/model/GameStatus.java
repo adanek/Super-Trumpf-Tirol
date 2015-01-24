@@ -1,6 +1,7 @@
 package model;
 
 import contracts.game.GameState;
+import contracts.game.RoundState;
 
 import java.util.Queue;
 
@@ -12,6 +13,7 @@ public class GameStatus implements contracts.game.GameStatus{
     private int player1Cards;
     private int player2Cards;
     private int round;
+    private RoundState roundState = RoundState.OUTSTANDING;
 
     public GameStatus(int round, int player1Cards, int player2Cards, GameState state){
         this.round = round;
@@ -44,6 +46,11 @@ public class GameStatus implements contracts.game.GameStatus{
     @Override
     public int getRound() {
         return round;
+    }
+
+    @Override
+    public RoundState getRoundState() {
+        return this.roundState;
     }
 
     @Override
