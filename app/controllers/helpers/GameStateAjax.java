@@ -14,7 +14,7 @@ public class GameStateAjax {
         this.State = state.getMessage();
         this.Message = play.i18n.Messages.get("game-state-"+ state.getMessage());
         this.Round= state.getRound();
-        this.RoundState="undecided";
+        this.RoundState="won";
         this.CardCountPlayer=state.getCardCount();
         this.CardCountCompetitor = state.getCardCountCompetitor();
     }

@@ -42,11 +42,4 @@ public interface ICard {
      */
     public Integer[] getRankingArray();
 
-    /**
-     * method to get the rankings of all categories of a card in a Array
-     *
-     * @return the rankings in a Integer Array
-     */
-    Integer[] getRankingArray();
-
 }

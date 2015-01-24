@@ -17,7 +17,8 @@ GET         /game/status            controllers.GameController.getStatus()
 GET         /game/card              controllers.GameController.getCard()
 POST        /game/competitorcard    controllers.GameController.getCompetitorCard()
 POST        /game/play              controllers.GameController.playCard()
-POST        /game/commit            controllers.GameController.commitRound()
+POST        /game/commitcard        controllers.GameController.commitCard()
+POST        /game/commitround       controllers.GameController.commitRound()
 POST        /game/abort             controllers.GameController.abortGame()
 
 # Map static resources from the /public folder to the /assets URL path

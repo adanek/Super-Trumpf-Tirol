@@ -1,148 +1,231 @@
+/* Globals */
+
+var roundstate;
+
+
+/* Section AJAX */
+
 function chooseCategory(category) {
 
     var url = "/game/play";
     $.post(url, {cid: category});
-    
+   
     disableCategories();
     setTimeout(update, 500);
-    
-}
+ }
 
-function commitRound(){
-    
-    var url="/game/commit";
+function commitRound() {
+
+    var url = "/game/commitround";
     $.post(url);
     setTimeout(update, 500);
 }
 
+function commitCard() {
+
+    var url = "/game/commitcard";
+    $.post(url);
+    setTimeout(update, 500);
+}
+
+function getCompetitorsCard() {
+    var url = '/game/competitorcard';
+    $.post(url, updateCompetitiorCard);
+}
+
+function getCard() {
+
+    var url = "/game/card";
+    $.ajax({
+        url: url,
+        success:setCard,
+        cache: false
+    });
+}
+
+function getState() {
+
+    var url = "/game/status";
+    $.ajax({
+        url: url,
+        success:setState,
+        cache: false
+    });
+}
+/* Section Logic */
+
+function setState(state){
+
+    $('.game-info-cards-player').text(state.CardCountPlayer);
+    $('.game-info-cards-competitor').text(state.CardCountCompetitor);
+    $('#info-box').find('.round').text(state.Round);
+    $('#info-box').find('.message').text(state.Message);
+    roundstate = state.RoundState;
+
+    switch (state.State) {
+        case "WaitForYourChoice":
+            setStateChoise();
+            break;
+        case "WaitForOtherPlayer":
+            setStateWait();
+            break;
+        case "WaitForCommit":
+            setStateCommit();
+            break;
+        case "Won":
+        case "Lose":
+            break;
+    }
+}
+
 function update() {
     updateStatus();
-    updatePlayerCard();    
 }
 
 function updateStatus() {
 
-    var url = "/game/status";
-    $.get(url, function (state) {
-        $('.game-info-cards-player').text(state.CardCountPlayer);
-        $('.game-info-cards-competitor').text(state.CardCountCompetitor);
-        $('#info-box').find('.message').text(state.Message);
+    getState();
+}
 
-        switch (state.State) {
-            case "WaitForYourChoice":
-                setStateChoise();
-                break;
-            case "WaitForOtherPlayer":
-            case "WaitForCommit":
-                setStateCommit();
-                break;
-            case "Won":
+function updatePlayerCard() {
 
+    getCard();
+}
+
+function setCard(card) {
+    
+    $('#card-player').find('.card-title').text(card.name);
+    $('#card-player').find('img').attr('src', card.image);
+
+    for (cid = 0; cid < card.categories.length; cid++) {
+        var cat = card.categories[cid];
+        var selector = ".card-category-" + cat.name + '-value';
+        $('#card-player').find(selector).text(cat.value);
+    }
+}
+
+function updateCompetitiorCard(card) {
+
+    // Set title
+    $('#card-competitor .card-title').text(card.name);
+
+    // Set image
+    $('#card-competitor img').attr('src', card.image);
+
+    // Set Categories
+    for (var cid = 0; cid < card.categories.length; cid++) {
+
+        var cat = card.categories[cid];
+        var selector = '#card-competitor .card-category-' + cat.name;
+
+        // Set Value
+        $(selector + '-value').text(cat.value);
+
+        // Set color
+        if (cat.choosen) {
+
+            highlightCategory(cat.name);
         }
-
-    });
+    }
 }
 
 function setStateChoise() {
-    
-    updateCompetitiorCard();
-    CommitButtonVisible(false);
+
+    clearHighlighting();
     CompetitorsCardVisible(false);
+    CommitRoundButtonVisible(false);
+    CommitCardButtonVisible(false);
+    
+    updatePlayerCard();
     enableCategories();
-  }
+}
+
+function setStateWait() {
+
+    clearHighlighting();
+    CompetitorsCardVisible(false);
+    CommitRoundButtonVisible(false);
+    CommitCardButtonVisible(true);
+
+    updatePlayerCard();
+}
 
 function setStateCommit() {
-    
+
+    getCompetitorsCard();
     CompetitorsCardVisible(true);
-    CommitButtonVisible(true);
+    CommitRoundButtonVisible(true);
+    CommitCardButtonVisible(false);
 }
+
+function highlightCategory(category) {
+
+    var selector = '.card-category-' + category;
+
+    if (roundstate == "won") {
+        $('#card-player').find(selector).addClass('list-group-item-success');
+        $('#card-competitor').find(selector).addClass('list-group-item-danger');
+    }
+    else {
+        $('#card-player').find(selector).addClass('list-group-item-danger');
+        $('#card-competitor').find(selector).addClass('list-group-item-success');
+    }
+}
+
+function clearHighlighting(){
+    
+    $('.card-category').removeClass('list-group-item-danger list-group-item-success');
+    
+}
+/* Behavior */
+
 
 function CompetitorsCardVisible(val) {
 
     var front = $('.card-front');
     var back = $('.card-back');
-    
-    if(val)
-    {
+
+    if (val) {
         back.hide();
-        front.show();        
+        front.show();
     }
-    else
-    {
+    else {
         front.hide();
-        back.height($('#card-player').height()).show();        
-    }    
+        back.height($('#card-player').height()).show();
+    }
 }
 
-function CommitButtonVisible(val){
-    
-    var btn = $('#info-button-commit');
+function CommitRoundButtonVisible(val) {
+
+    var btn = $('#info-button-commit-round');
     if (val) {
-        
+
         btn.click(commitRound);
         btn.show();
-        
+
     } else {
         btn.hide();
         btn.unbind("click");
     }
 }
 
+function CommitCardButtonVisible(val) {
 
+    var btn = $('#info-button-commit-card');
+    if (val) {
 
-function updatePlayerCard() {
+        btn.click(commitCard);
+        btn.show();
 
-    var url = "/game/card";
-    $.get(url, function (card) {
-
-        $('#card-player .card-title').text(card.name);
-        $('#card-player img').attr('src', card.image);
-
-        for (cid = 0; cid < card.categories.length; cid++) {
-            var cat = card.categories[cid];
-            var cls = "card-category-" + cat.name;
-            var elm = $('#card-player .' + cls);
-            elm.text(cat.value);
-        }
-
-    });
+    } else {
+        btn.hide();
+        btn.unbind("click");
+    }
 }
 
-function updateCompetitiorCard() {
-
-    var url = '/game/competitorcard';
-    $.post(url, function (card) {
-
-        // Set title
-        $('#card-competitor .card-title').text(card.name);
-
-        // Set image
-        $('#card-competitor img').attr('src', card.image);
-
-        // Set Categories
-        for (var cid = 0; cid < card.categories.length; cid++) {
-
-            var cat = card.categories[cid];
-            var selector = '#card-competitor .card-category-' + cat.name;
-
-            // Set Value
-            $(selector + '-value').text(cat.value);
-
-            // Set color
-            if (cat.choosen) {
-                $(selector).addClass('list-group-item-info');
-            }
-
-        }
-    });
-
-
-}
-
-// Bind click-event on categories
 function enableCategories() {
 
-    $('#card-player').find('.card-category').click(function (event) {
+    $('#card-player').find('.card-category').bind('click tap',function (event) {
 
         event.preventDefault();
         var cat = $(this).attr('data-id');
@@ -150,12 +233,13 @@ function enableCategories() {
     });
 }
 
-function disableCategories(){
+function disableCategories() {
 
-    $('.card-category').removeClass('btn').unbind('click');
+    $('.card-category').removeClass('btn').unbind('click tap');
 }
 
 /* Window Events */
+
 $(document).ready(function () {
 
     update();

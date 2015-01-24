@@ -23,10 +23,11 @@ card-category-overnightstays=Übernachtungen
 
 game-state-WaitForYourChoice=Wählen Sie eine Kategorie
 game-state-WaitForCommit=Sie haben diese Runde gewonnen.
+game-state-WaitForOtherPlayer=Ihr Gegenspieler ist an der Reihe ...
 
 game-info-player-before=Sie haben
 game-info-player-after=Karten.
 game-info-competitor-before=Ihr Gegenspieler hat
 game-info-competitor-after=Karten.
-
+game-info-round=Runde
 game-info-commit=Weiter

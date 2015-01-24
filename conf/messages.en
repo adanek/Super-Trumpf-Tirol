@@ -22,8 +22,12 @@ card-category-overnightstays=Overnight stays
 card-category-sportfacilities=Sport facilities
 
 game-state-WaitForYourChoice=Choose a category
+game-state-WaitForCommit=You won this round
+game-state-WaitForOtherPlayer=Wait for your competitor's turn
 
 game-info-player-before=You own
 game-info-player-after=cards.
 game-info-competitor-before=Your competitor owns
 game-info-competitor-after=cards.
+game-info-round=Round
+game-info-commit=Next

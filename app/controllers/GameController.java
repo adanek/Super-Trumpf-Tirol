@@ -133,8 +133,28 @@ public class GameController extends Controller {
         
         return ok(Json.toJson(new CardAjax(card)));
     }
+
+    // POST /game/commitcard
+    @Security.Authenticated(MyAuthenticator.class)
+    public static Result commitCard(){
+
+        try {
+            String pid = session().get("pid");
+            String gid = session().get("gid");
+
+            Logger.info(String.format("User %s has committed his card.\n", pid));
+
+            ServiceLocator.getGameHandler().commitCard(gid, pid);
+
+        } catch (Exception ex) {
+            return badRequest();
+        }
+
+        return ok();
+    }    
     
-    // POST /game/commit
+    // POST /game/commitround
+    @Security.Authenticated(MyAuthenticator.class)
     public static Result commitRound() {
 
         try {
