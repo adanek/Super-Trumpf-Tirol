@@ -105,8 +105,11 @@ public class GameController extends Controller {
         {
             return badRequest();
         }
-        
-        return ok(Json.toJson(new CardAjax(card)));
+        response().setContentType("text/json; charset=utf-8");
+
+        CardAjax cardAjax = new CardAjax(card);
+        JsonNode jsonNode = Json.toJson(cardAjax);
+        return ok(jsonNode, "utf-8");
     }
     
     
@@ -134,7 +137,19 @@ public class GameController extends Controller {
     // POST /game/commit
     public static Result commitRound() {
 
-        return TODO;
+        try {
+            String pid = session().get("pid");
+            String gid = session().get("gid");           
+           
+            Logger.info(String.format("User %s has committed the round.\n", pid));
+            
+            ServiceLocator.getGameHandler().commitRound(gid, pid);
+            
+        } catch (Exception ex) {
+            return badRequest();
+        }
+
+        return ok();
     }
 
     // POST /game/abord

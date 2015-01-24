@@ -8,10 +8,16 @@ function chooseCategory(category) {
     
 }
 
+function commitRound(){
+    
+    var url="/game/commit";
+    $.post(url);
+    setTimeout(update, 500);
+}
+
 function update() {
     updateStatus();
-    updatePlayerCard();
-    updateCompetitiorCard();
+    updatePlayerCard();    
 }
 
 function updateStatus() {
@@ -28,6 +34,8 @@ function updateStatus() {
                 break;
             case "WaitForOtherPlayer":
             case "WaitForCommit":
+                setStateCommit();
+                break;
             case "Won":
 
         }
@@ -36,14 +44,20 @@ function updateStatus() {
 }
 
 function setStateChoise() {
-
-    // Enable the category-buttons
+    
+    updateCompetitiorCard();
+    CommitButtonVisible(false);
+    CompetitorsCardVisible(false);
     enableCategories();
-    showCompetitorsCard(false);
   }
 
+function setStateCommit() {
+    
+    CompetitorsCardVisible(true);
+    CommitButtonVisible(true);
+}
 
-function showCompetitorsCard(val) {
+function CompetitorsCardVisible(val) {
 
     var front = $('.card-front');
     var back = $('.card-back');
@@ -59,6 +73,22 @@ function showCompetitorsCard(val) {
         back.height($('#card-player').height()).show();        
     }    
 }
+
+function CommitButtonVisible(val){
+    
+    var btn = $('#info-button-commit');
+    if (val) {
+        
+        btn.click(commitRound);
+        btn.show();
+        
+    } else {
+        btn.hide();
+        btn.unbind("click");
+    }
+}
+
+
 
 function updatePlayerCard() {
 
@@ -112,7 +142,7 @@ function updateCompetitiorCard() {
 // Bind click-event on categories
 function enableCategories() {
 
-    $('#card-player').find('.card-category').addClass('btn').click(function (event) {
+    $('#card-player').find('.card-category').click(function (event) {
 
         event.preventDefault();
         var cat = $(this).attr('data-id');
@@ -130,4 +160,5 @@ $(document).ready(function () {
 
     update();
 });
+
 

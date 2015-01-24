@@ -157,9 +157,15 @@ public class Card extends Model implements ICard {
      */
     @Override
     public String getImageUrl() {
-	return "/images/"
-		+ name.toLowerCase().replaceAll("ü", "ue").replaceAll("ö", "oe").replaceAll("ä", "ae")
-			.replaceAll("[ .]", "") + ".jpg";
+	String res = "/images/"+ name;
+		res = res.toLowerCase();
+		res = res.replaceAll("ü", "ue");
+		res = res.replaceAll("ö", "oe");
+		res = res.replaceAll("ä", "ae");
+		res = res.replaceAll("[ .]", "");
+		res = res + ".jpg";
+		
+		return res;
     }
 
     /**
@@ -172,9 +178,9 @@ public class Card extends Model implements ICard {
     public List<ICardCategory> getCategories() {
 	List<contracts.game.ICardCategory> categories = new LinkedList<>();
 	categories.add(new CardCategory(0, "population", Integer.toString(population)));
-	categories.add(new CardCategory(1, "area", Float.toString(area) + " km²"));
+	categories.add(new CardCategory(1, "area", String.format("%.2f km²", area)));
 	categories.add(new CardCategory(2, "indebtedness", Float.toString(indebtedness) + "%"));
-	categories.add(new CardCategory(3, "overnightstays", Integer.toString(nights)));
+	categories.add(new CardCategory(3, "overnightstays", String.format("%,d", nights)));
 	categories.add(new CardCategory(4, "sportfacilities", Integer.toString(sportFields)));
 	return categories;
     }

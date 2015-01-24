@@ -41,7 +41,7 @@ public class Game{
     }
 
     public Integer getPlayer2Card() {
-        return player1Cards.peek();
+        return player2Cards.peek();
     }
 
     /**

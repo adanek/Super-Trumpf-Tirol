@@ -22,9 +22,11 @@ card-category-indebtedness=Verschuldung
 card-category-overnightstays=Übernachtungen
 
 game-state-WaitForYourChoice=Wählen Sie eine Kategorie
-game-state-WaitForCommit=Sie haben diese Runde gewonnen. Drücken Sie Weiter um fortzufahren
+game-state-WaitForCommit=Sie haben diese Runde gewonnen.
 
 game-info-player-before=Sie haben
 game-info-player-after=Karten.
 game-info-competitor-before=Ihr Gegenspieler hat
 game-info-competitor-after=Karten.
+
+game-info-commit=Weiter
