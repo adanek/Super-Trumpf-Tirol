@@ -33,7 +33,7 @@ public class GameStatus implements contracts.game.GameStatus{
     }
 
     public void updateRound(){
-        round = round++;
+        round++;
     }
 
     public void updatePlayer1Cards(int newPlayer1Cards){

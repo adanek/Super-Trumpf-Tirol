@@ -68,7 +68,6 @@ public class Game{
         player2Cards.add(player1Cards.remove());
         status.updatePlayer1Cards(player1Cards.size());
         status.updatePlayer2Cards(player2Cards.size());
-        status.updateRound();
         player1sMove = false;
         if(player1Cards.size() == 52){
             status.updateStatus(GameState.Lose);

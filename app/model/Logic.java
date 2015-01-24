@@ -115,6 +115,7 @@ public class Logic implements GameHandler {
         }else{
             game.player2win();
         }
+        game.getStatus().updateRound();
     }
 
     @Override
