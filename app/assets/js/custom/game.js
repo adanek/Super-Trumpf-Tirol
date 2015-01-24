@@ -1,34 +1,13 @@
-/* Globals */
-
-
 /* Section AJAX */
 
-function chooseCategory(category) {
+function getState() {
 
-    var url = "/game/play";
-    $.post(url, {cid: category});
-   
-    disableCategories();
-    setTimeout(update, 500);
- }
-
-function commitRound() {
-
-    var url = "/game/commitround";
-    $.post(url);
-    setTimeout(update, 500);
-}
-
-function commitCard() {
-
-    var url = "/game/commitcard";
-    $.post(url);
-    setTimeout(update, 500);
-}
-
-function getCompetitorsCard() {
-    var url = '/game/competitorcard';
-    $.post(url, updateCompetitiorCard);
+    var url = "/game/status";
+    $.ajax({
+        url: url,
+        success:setState,
+        cache: false
+    });
 }
 
 function getCard() {
@@ -41,14 +20,32 @@ function getCard() {
     });
 }
 
-function getState() {
+function getCompetitorsCard() {
+    var url = '/game/competitorcard';
+    $.post(url, setCompetitorCard);
+}
 
-    var url = "/game/status";
-    $.ajax({
-        url: url,
-        success:setState,
-        cache: false
-    });
+function chooseCategory(category) {
+
+    var url = "/game/play";
+    $.post(url, {cid: category});
+   
+    disableCategorySelection();
+    setTimeout(update, 500);
+ }
+
+function commitCard() {
+
+    var url = "/game/commitcard";
+    $.post(url);
+    setTimeout(update, 500);
+}
+
+function commitRound() {
+
+    var url = "/game/commitround";
+    $.post(url);
+    setTimeout(update, 500);
 }
 
 function abortGame() {
@@ -58,18 +55,24 @@ function abortGame() {
 }
 
 /* Section Logic */
+function update() {
+    getState();
+}
 
 function setState(state){
 
     $('.game-info-cards-player').text(state.CardCountPlayer);
     $('.game-info-cards-competitor').text(state.CardCountCompetitor);
-    $('#info-box').find('.round').text(state.Round).find('.message').text(state.Message);
+    //noinspection JSJQueryEfficiency
+    $('#info-box').find('.round').text(state.Round);
+    //noinspection JSJQueryEfficiency
+    $('#info-box').find('.message').text(state.Message);
     
     if(state.RoundState != "OUTSTANDING"){
-        highlightCategory(state.ChoosenCategory, state.RoundState);
+        setCategoryHighlight(state.ChoosenCategory, state.RoundState);
     }
     else{
-        clearHighlighting();
+        clearCategoryHighlight();
     }
 
     switch (state.State) {
@@ -89,18 +92,42 @@ function setState(state){
     }
 }
 
-function update() {
-    updateStatus();
+function setStateChoise() {
+
+    clearCategoryHighlight();
+    setCompetitorsCardVisibilityTo(true);
+    setCommitRoundButtonVisibilityTo(false);
+    setCommitCardButtonVisibilityTo(false);
+    getCompetitorsCard();
+    getCard();
+    enableCategorySelection();
 }
 
-function updateStatus() {
+function setStateWait() {
 
-    getState();
-}
-
-function updatePlayerCard() {
+    clearCategoryHighlight();
+    setCompetitorsCardVisibilityTo(false);
+    setCommitRoundButtonVisibilityTo(false);
+    setCommitCardButtonVisibilityTo(true);
 
     getCard();
+}
+
+function setStateCommit() {
+
+    getCompetitorsCard();
+    setCompetitorsCardVisibilityTo(true);
+    setCommitRoundButtonVisibilityTo(true);
+    setCommitCardButtonVisibilityTo(false);
+}
+
+function setStateEndGame(){
+
+    setCommitCardButtonVisibilityTo(false);
+    setCommitRoundButtonVisibilityTo(false);
+    $("#cards").hide();
+    $('#game-result').show();
+    $(window).off('beforeunload', preventNavigation);
 }
 
 function setCard(card) {
@@ -119,7 +146,7 @@ function setCard(card) {
     }
 }
 
-function updateCompetitiorCard(card) {
+function setCompetitorCard(card) {
 
     var competitor = $('#card-competitor');
     // Set title
@@ -139,46 +166,7 @@ function updateCompetitiorCard(card) {
     }
 }
 
-function setStateChoise() {
-
-    clearHighlighting();
-    CompetitorsCardVisible(false);
-    CommitRoundButtonVisible(false);
-    CommitCardButtonVisible(false);
-    
-    updatePlayerCard();
-    enableCategories();
-}
-
-function setStateWait() {
-
-    clearHighlighting();
-    CompetitorsCardVisible(false);
-    CommitRoundButtonVisible(false);
-    CommitCardButtonVisible(true);
-
-    updatePlayerCard();
-}
-
-function setStateCommit() {
-
-    getCompetitorsCard();
-    CompetitorsCardVisible(true);
-    CommitRoundButtonVisible(true);
-    CommitCardButtonVisible(false);
-}
-
-function setStateEndGame(){
-
-    window.onbeforeunload = null;
-    CommitCardButtonVisible(false);
-    CommitRoundButtonVisible(false);
-    $("#cards").hide();
-    $('#game-result').show();
-    
-}
-
-function highlightCategory(category, roundstate) {
+function setCategoryHighlight(category, roundstate) {
 
     var selector = '.card-category-' + category;
     var player = $('#card-player').find(selector);
@@ -198,15 +186,13 @@ function highlightCategory(category, roundstate) {
     }
 }
 
-function clearHighlighting(){
+function clearCategoryHighlight(){
     
     $('.card-category').removeClass('list-group-item-danger list-group-item-success list-group-item-warning');
     
 }
-/* Behavior */
 
-
-function CompetitorsCardVisible(val) {
+function setCompetitorsCardVisibilityTo(val) {
 
     var front = $('.card-front');
     var back = $('.card-back');
@@ -221,7 +207,7 @@ function CompetitorsCardVisible(val) {
     }
 }
 
-function CommitRoundButtonVisible(val) {
+function setCommitRoundButtonVisibilityTo(val) {
 
     var btn = $('#info-button-commit-round');
     if (val) {
@@ -235,7 +221,7 @@ function CommitRoundButtonVisible(val) {
     }
 }
 
-function CommitCardButtonVisible(val) {
+function setCommitCardButtonVisibilityTo(val) {
 
     var btn = $('#info-button-commit-card');
     if (val) {
@@ -249,7 +235,7 @@ function CommitCardButtonVisible(val) {
     }
 }
 
-function enableCategories() {
+function enableCategorySelection() {
 
     $('#card-player').find('.card-category').bind('click tap',function (event) {
 
@@ -259,26 +245,21 @@ function enableCategories() {
     });
 }
 
-function disableCategories() {
+function disableCategorySelection() {
 
     $('.card-category').removeClass('btn').unbind('click tap');
 }
 
+function preventNavigation(){
+    return $('#abort-message').text();
+}
 /* Window Events */
 
+// StartUp
 $(document).ready(function () {
-
     update();
 });
 
-window.onbeforeunload = function (){
-    return $('#abort-message').text();
-};
+// Prevent Navigation while inGame
+$(window).on('beforeunload', preventNavigation).on('unload', abortGame);
 
-window.addEventListener("unload", function () {
-  abortGame();
-});
-
-$('game-result').find('button').click(function () {
-    window.location.href = "/";
-});
