@@ -63,7 +63,7 @@ public class GameController extends Controller {
             String pid = session().get("pid");
             String gid = session().get("gid");
             int cid = Integer.parseInt(request().body().asFormUrlEncoded().get("cid")[0]);
-            Logger.info(String.format("User %s played card-category %d\n", pid, cid));
+            Logger.info(String.format("User %s played card-category %d", pid, cid));
             ServiceLocator.getGameHandler().makeMove(gid, pid, cid);
         } catch (Exception ex) {
             return badRequest(ex.getMessage());
@@ -145,7 +145,7 @@ public class GameController extends Controller {
             String pid = session().get("pid");
             String gid = session().get("gid");
 
-            Logger.info(String.format("User %s has committed his card.\n", pid));
+            Logger.info(String.format("User %s has committed his card.", pid));
 
             ServiceLocator.getGameHandler().commitCard(gid, pid);
 
@@ -164,7 +164,7 @@ public class GameController extends Controller {
             String pid = session().get("pid");
             String gid = session().get("gid");           
            
-            Logger.info(String.format("User %s has committed the round.\n", pid));
+            Logger.info(String.format("User %s has committed the round.", pid));
             
             ServiceLocator.getGameHandler().commitRound(gid, pid);
             
@@ -183,7 +183,7 @@ public class GameController extends Controller {
             String pid = session().get("pid");
             String gid = session().get("gid");
 
-            Logger.info(String.format("User %s has aborted the game.\n", pid));
+            Logger.info(String.format("User %s has aborted the game.", pid));
             
             ServiceLocator.getGameHandler().abortGame(gid, pid);
 
