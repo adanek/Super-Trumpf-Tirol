@@ -92,7 +92,7 @@ public class Logic implements GameHandler {
     @Override
     public data.Card getCardFromCompetitor(String gameId, String playerId) {
         Game game = map.get(UUID.fromString(gameId));
-        if(!game.getStatus().getGameState().equals(GameState.WaitForCommit)){
+        if(!game.getStatus().getGameState().equals(GameState.WaitForCommit.toString())){
             throw new IllegalStateException();
         }
         if (UUID.fromString(playerId).equals(game.getPlayer1ID())){
