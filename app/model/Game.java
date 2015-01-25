@@ -33,18 +33,6 @@ public class Game{
         this.player1sMove = true;
     }
 
-    public model.GameStatus getStatus() {
-        return status;
-    }
-
-    public Integer getPlayer1Card() {
-        return player1Cards.peek();
-    }
-
-    public Integer getPlayer2Card() {
-        return player2Cards.peek();
-    }
-
     /**
     Moves the first card of each player to player1's queue.
      */
@@ -87,6 +75,18 @@ public class Game{
         }else {
             status.updateStatus(GameState.WaitForYourChoice);
         }
+    }
+
+    public model.GameStatus getStatus() {
+        return status;
+    }
+
+    public Integer getPlayer1Card() {
+        return player1Cards.peek();
+    }
+
+    public Integer getPlayer2Card() {
+        return player2Cards.peek();
     }
 
     public UUID getPlayer1ID() {

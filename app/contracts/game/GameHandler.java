@@ -47,9 +47,11 @@ public interface GameHandler {
      *            The ID of the current game
      * @param playerId
      *            The ID of the passive player
+     * @throws java.lang.IllegalStateException
+     *            If state is not WaitForCommit
      * @return the current card of the competitor
      */
-    public ICard getCardFromCompetitor(String gameId, String playerId);
+    public ICard getCardFromCompetitor(String gameId, String playerId) throws IllegalStateException;
 
     /**
      * Submit the chosen category 

@@ -92,6 +92,9 @@ public class Logic implements GameHandler {
     @Override
     public data.Card getCardFromCompetitor(String gameId, String playerId) {
         Game game = map.get(UUID.fromString(gameId));
+        if(!game.getStatus().getGameState().equals(GameState.WaitForCommit)){
+            throw new IllegalStateException();
+        }
         if (UUID.fromString(playerId).equals(game.getPlayer1ID())){
             return cards[game.getPlayer2Card()];
         }else{
@@ -135,7 +138,7 @@ public class Logic implements GameHandler {
         //TODO abort Game.
     }
 
-    public void compareCategories(Game game, int categoryID){
+    private void compareCategories(Game game, int categoryID){
         // Get Ranks of the cards
         int player1Value = cards[game.getPlayer1Card()].getRankingArray()[categoryID];
         int player2Value = cards[game.getPlayer2Card()].getRankingArray()[categoryID];
