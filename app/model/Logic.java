@@ -111,10 +111,12 @@ public class Logic implements GameHandler {
     public void commitRound(String gameId, String playerId) {
         Game game = map.get(UUID.fromString(gameId));
         // If player1 moves next round, he won this round.
-        if(game.getPlayer1sMove() == true){
+        if(game.getStatus().getRoundState().equals(RoundState.WON)){
             game.player1win();
-        }else{
+        }else if(game.getStatus().getRoundState().equals(RoundState.LOST)){
             game.player2win();
+        }else if(game.getStatus().getRoundState().equals(RoundState.LOST)){
+            game.draw();
         }
         game.getStatus().updateRound();
     }
@@ -141,9 +143,13 @@ public class Logic implements GameHandler {
         if(player1Value > player2Value){
             // If player1 loses, he does not move in the next round.
             game.setPlayer1sMove(false);
+            game.getStatus().setRoundState(RoundState.LOST);
         }else if(player1Value < player2Value){
             // If player1 win, he moves next round.
             game.setPlayer1sMove(true);
+            game.getStatus().setRoundState(RoundState.WON);
+        }else if(player1Value == player2Value){
+            game.getStatus().setRoundState(RoundState.DRAWN);
         }
         game.getStatus().setChoosenCategory(cards[0].getCategories().get(categoryID).getName());
         game.getStatus().updateStatus(GameState.WaitForCommit);
