@@ -38,3 +38,8 @@ game-info-commit=Next
 
 game-abort-message=If you leave now, the game will end and your competitor wins.
 game-end-button=Finished
+
+user-story.header=User stories
+user-story.text=Due to the short time of code development, our main goal was to finish the game-play functionalities. “Fancy features” are missing but will be implemented in the future. The following user stories act as a manual and represent Exercise 9 of the assignment.
+user-story.user1=Ted is, like any other player who enters Top Trump Tyrol for the first time, not familiar with the game so he reads the manual where he can find information about what Top Trump Tyrol actually is, how to play etc. For a first try he wants to play against the computer. Ted starts by choosing a category, which he believes, will win the computer’s card. After Ted’s decision the computer shows his card and the winner is determined. Suppose it’s the computer’s turn, then Ted controls the game with the ‘Next’ button.
+user-story.user2=(to be implemented) Alex likes to spend his leisure time playing with his smartphone. Often he has some minutes to play Top Trump Tyrol. In order not to waste a lot of time by annoying authentication etc. he likes games where he can play right away. Top Trump Tyrol lets him play without the necessity to log in against random online players or the computer. Alex may like to play against friends in the future so he creates an account once and Top Trump Tyrol saves his login-data in order to guarantee a fast game access.

@@ -38,3 +38,8 @@ game-info-commit=Weiter
 
 game-abort-message=Wenn Sie die Seite verlassen, wird das Spiel abgebrochen und Ihr Gegenspieler gewinnt.
 game-end-button=Beenden
+
+user-story.header=User stories
+user-story.text=Aufgrund der kurzen Entwicklungszeit lag der Fokus auf der Spiele-Funktionalität. Die "Fancy Features" fehlen in dieser Version noch, sollen aber noch folgen. Die Anleitung ist hier durch User stories niedergeschrieben und entspricht zugleich der Aufgabe 9 des Übungsblattes.
+user-story.user1=Ted möchte beim ersten Einstieg bevor er spielt Informationen zum Spiel erhalten. Unter dem Punkt 'Anleitung' kann er nachlesen worum es in 'Super Trumpf Tirol' geht, wie man es spielt und wie die Spielregeln lauten. Danach soll es ans Spielen gehen! Zum Aufwärmen spielt Ted eine Runde gegen den Computer. Er beginnt und wählt eine Kategorie aus, von der er glaubt, dass sein Ort die Karte des Computers schlägt. Nach der Auswahl zeigt sich die gegnerische Karte und wer die Runde gewinnt. Ist der Computer am Zug kann Ted den Spielablauf über den 'Weiter' Button steuern.
+user-story.user2=(Offene Implementierungen) Alex überbrückt Bus-Wartezeiten oder Pausen in der Schule am liebsten mit seinem Smartphone. Daher mag er keine Spiele, bei denen man nur mit großer Geduld schlussendlich zum Spiel gelangt. Bei Super Trumpf Tirol möchte er entweder ohne Anmeldung gegen den Computer bzw. gegen beliebige Gegner, die gerade online sind spielen, oder Super Trumpf Tirol merkt sich seine Login-Daten. Da er öfters weniger Zeit hat kann er auch das Spiel unterbrechen und bei der nächsten Pause fortsetzen.

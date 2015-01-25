@@ -3,8 +3,16 @@
 
     <div>
         <article>
-            <header class="h3">@play.i18n.Messages.get("manual.header")</header>
-            <p>@play.i18n.Messages.get("manual.text")</p>
+            <header class="h3">@play.i18n.Messages.get("user-story.header")</header>
+            <p>@play.i18n.Messages.get("user-story.text")</p>
+            <p>
+                <h4>Ted</h4>
+                @play.i18n.Messages.get("user-story.user1")
+            </p>
+            <p>
+                <h4>Alex</h4>
+                @play.i18n.Messages.get("user-story.user2")
+            </p>
         </article>
 
         <a class="btn btn-primary" href="@routes.Application.index()">@play.i18n.Messages.get("manual.backbutton")</a>
