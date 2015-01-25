@@ -129,7 +129,7 @@ public class GameController extends Controller {
        
             card = ServiceLocator.getGameHandler().getCardFromCompetitor(gid, pid);
         }
-        catch (Exception ex)
+        catch (IllegalStateException e)
         {
             return badRequest();
         }
@@ -176,6 +176,7 @@ public class GameController extends Controller {
     }
 
     // POST /game/abort
+    @Security.Authenticated(MyAuthenticator.class)
     public static Result abortGame() {
 
         try {
