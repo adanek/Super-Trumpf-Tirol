@@ -44,7 +44,6 @@ public class ServiceLocator {
 	if (gh == null) {
         
         Logger.info("GameHandler initialized");
-        //gh = new mock.GameHandler();
         List<Card> allCards = ServiceLocator.getDataProvider().getAllCards();
         Card[] cards = allCards.toArray(new Card[allCards.size()]);
         gh= new Logic(cards);
