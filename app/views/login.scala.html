@@ -16,6 +16,9 @@
 		<div class="form-group">
 			<button type="submit" class="btn btn-default">@Messages.get("login-button")</button>
 		</div>
+		<div>
+			<a href="@routes.LoginController.register()">Register</a>
+		</div>
 		@if(message){
 			<div class="alert alert-danger" role="alert">
 				@message

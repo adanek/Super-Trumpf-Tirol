@@ -8,6 +8,8 @@ GET         /manual                 controllers.Application.manual()
  
 GET         /login                  controllers.LoginController.showLoginForm()
 POST        /login                  controllers.LoginController.authenticate()
+GET         /register               controllers.LoginController.showRegisterForm()
+POST        /register               controllers.LoginController.register()
 GET         /logout                 controllers.LoginController.logout()
 
 GET         /game                   controllers.GameController.index()
