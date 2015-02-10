@@ -21,4 +21,14 @@ public class MyLoginHandler implements LoginHandler {
 		// return user if found
 		return this.dp.checkUser(email, password);
 	}
+
+	@Override
+	public IUser register(String firstName, String lastName, String email,
+			String password) {
+
+		//create User
+		return this.dp.createUser(firstName, email, password);
+	}
+	
+
 }
