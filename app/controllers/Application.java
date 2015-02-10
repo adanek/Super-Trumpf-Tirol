@@ -9,13 +9,18 @@ public class Application extends Controller {
 
     // GET /
     public static Result index() {
-	return ok(index.render(isSignedIn()));
+        return ok(index.render(isSignedIn()));
     }
 
     // GET /manual
     public static Result manual() {
-
-	return ok(manual.render(isSignedIn()));
+        
+        return ok(manual.render(isSignedIn()));
+    }
+    
+    // Get /impressum
+    public static Result impressum(){
+        return ok(views.html.impressum.render(isSignedIn()));
     }
 
     /**
@@ -25,6 +30,6 @@ public class Application extends Controller {
      */
     private static Boolean isSignedIn() {
 
-	return session().get("pid") != null;
+        return session().get("pid") != null;
     }
 }
