@@ -4,9 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 
-/**
- * Created by adanek on 09.02.15.
- */
 public class PlayerAI implements Observer{
     
     private UUID Id;
@@ -15,8 +12,8 @@ public class PlayerAI implements Observer{
         Id = id;
     }
 
-    public UUID getId() {
-        return Id;
+    public String getId() {
+        return this.Id.toString();
     }
 
     @Override

@@ -1,28 +1,34 @@
 package core;
 
-import contracts.game.IGameHandler;
+import config.ServiceLocator;
+import contracts.data.DataProvider;
 import contracts.game.GameState;
-import contracts.game.RoundState;
+import contracts.game.ICard;
+import contracts.game.IGameHandler;
+import data.Card;
 
 import java.util.*;
 
 
 public class GameHandler implements IGameHandler {
 
-    /** Holds all games */
-    private HashMap<UUID, Game> map;
-    /** Holds all cards */
+    /**
+     * Holds all games
+     */
+    private HashMap<String, Game> games;
+    /**
+     * Holds all cards
+     */
     private data.Card[] cards;
 
     /**
      * Constructor
-     *
-     * @param cards:
-     * Array containing all cards
      */
-    public GameHandler(data.Card[] cards) {
-        this.map = new HashMap<>();
-        this.cards = cards;
+    public GameHandler() {
+        DataProvider dataProvider = ServiceLocator.getDataProvider();
+        List<Card> allCards = dataProvider.getAllCards();
+        this.games = new HashMap<>();
+        this.cards = allCards.toArray(new Card[allCards.size()]);
     }
 
     /**
@@ -30,137 +36,120 @@ public class GameHandler implements IGameHandler {
      */
     @Override
     public String createNewGame(String playerId) {
-        UUID pid = UUID.fromString(playerId);
+
         PlayerAI cp = new PlayerAI(UUID.randomUUID());
-        Game game = createGame(pid, cp.getId());
+        Game game = createGame(playerId, cp.getId());
         game.addObserver(cp);
-        return game.getGameID().toString();
+        return game.getGameID();
     }
 
     @Override
     public String createNewGame(String player1Id, String player2Id) {
-        UUID p1Id = UUID.fromString(player1Id);
-        UUID p2Id = UUID.fromString(player2Id);
 
-        Game game = createGame(p1Id, p2Id);
+        Game game = createGame(player1Id, player2Id);
 
-        return game.getGameID().toString();
+        return game.getGameID();
     }
 
-    private Game createGame(UUID p1Id, UUID p2Id) {
+    @Override
+    public GameStatus getGameStatus(String gameId, String playerId) {
+
+        Game game = getGame(gameId);
+        return game.getGameStatus(playerId);
+    }
+
+    @Override
+    public ICard getCard(String gameId, String playerId) {
+
+        Game game = getGame(gameId);
+        int cardId = game.getCardId(playerId);
+
+        return cards[cardId];
+    }
+
+    @Override
+    public ICard getCardFromCompetitor(String gameId, String playerId) throws IllegalStateException {
         
-        UUID gid = UUID.randomUUID();
+        Game game = getGame(gameId);
+        
+        String currentState = game.getGameStatus(playerId).getGameState();
+        String expectedState = GameState.WaitForCommitRound.toString();
+        if(!currentState.equals(expectedState))
+            throw new IllegalStateException("The competitors card is only accessible in state WaitForCommit.");
+
+        int cardId = game.getCompetitorCardId(playerId);
+        return cards[cardId];
+    }
+
+    
+    
+    
+    
+    @Override
+    public void makeMove(String gameId, String playerId, int categoryID) {
+
+    }
+
+    @Override
+    public void commitRound(String gameId, String playerId) {
+
+    }
+
+    @Override
+    public void commitCard(String gameId, String playerId) {
+
+    }
+
+    @Override
+    public void abortGame(String gameId, String playerId) {
+
+    }
+
+    /**
+     * Creates a new Game instance*
+     *
+     * @param p1Id the id of the first player
+     * @param p2Id the id of the second player
+     * @return a new game instance
+     */
+    private Game createGame(String p1Id, String p2Id) {
+
+        String gid = UUID.randomUUID().toString();
+
         ArrayList<Integer> shuffleArray = new ArrayList<>();
-        for(int i = 0; i < 52; i++){
+        for (int i = 0; i < 52; i++) {
             shuffleArray.add(i);
         }
         Collections.shuffle(shuffleArray);
 
         Queue<Integer> player1Cards = new LinkedList<>();
-        for(int i = 0; i < 26; i++){
+        for (int i = 0; i < 26; i++) {
             player1Cards.add(shuffleArray.get(i));
         }
 
         Queue<Integer> player2Cards = new LinkedList<>();
-        for(int i = 26; i < 52; i++){
+        for (int i = 26; i < 52; i++) {
             player2Cards.add(shuffleArray.get(i));
         }
-        Game game = new Game(gid,p1Id,p2Id,player1Cards, player2Cards);
-        map.put(gid, game);
+        Game game = new Game(gid, p1Id, p2Id, player1Cards, player2Cards);
+        games.put(gid, game);
+
+        return game;
     }
 
-    @Override
-    public GameStatus getGameStatus(String gameId, String playerId) {
-	    Game game = map.get(UUID.fromString(gameId));
-        GameStatus status = game.getStatus();
-        if(status.getChoosenCategory() != null){
-            if(game.getPlayer1sMove()){
-                status.setRoundState(RoundState.WON);
-            }
-            else {
-                status.setRoundState(RoundState.LOST);
-            }
-        }
-        return status;
-    }
+    /**
+     * Returns the game with the given id if it exists, otherwise it throws an exception
+     *
+     * @param gameId the id of the game
+     * @throws java.lang.IllegalArgumentException if the game does not exist
+     * @return the game with the given id
+     */
+    private Game getGame(String gameId) {
+        Game game = games.get(gameId);
 
-    @Override
-    public data.Card getCard(String gameId, String playerId) {
-	    Game game = map.get(UUID.fromString(gameId));
-        game.getStatus().setRoundState(RoundState.OUTSTANDING);
-        if (UUID.fromString(playerId).equals(game.getPlayer1ID())){
-            return cards[game.getPlayer1Card()];
-        }else{
-            return null;
-        }
-    }
+        if (game == null)
+            throw new IllegalArgumentException("There exists no game with the given identifier.");
 
-    @Override
-    public data.Card getCardFromCompetitor(String gameId, String playerId) {
-        Game game = map.get(UUID.fromString(gameId));
-        if(!game.getStatus().getGameState().equals(GameState.WaitForCommit.toString())){
-            throw new IllegalStateException();
-        }
-        if (UUID.fromString(playerId).equals(game.getPlayer1ID())){
-            return cards[game.getPlayer2Card()];
-        }else{
-            return null;
-        }
-    }
-
-    @Override
-    public void makeMove(String gameId, String playerId, int categoryID) {
-        Game game = map.get(UUID.fromString(gameId));
-        if(game.getPlayer1sMove() == true){
-            compareCategories(game, categoryID);
-        }
-    }
-
-    @Override
-    public void commitRound(String gameId, String playerId) {
-        Game game = map.get(UUID.fromString(gameId));
-        // If player1 moves next round, he won this round.
-        if(game.getStatus().getRoundState().equals(RoundState.WON)){
-            game.player1win();
-        }else if(game.getStatus().getRoundState().equals(RoundState.LOST)){
-            game.player2win();
-        }else if(game.getStatus().getRoundState().equals(RoundState.LOST)){
-            game.draw();
-        }
-        game.getStatus().updateRound();
-    }
-
-    @Override
-    public void commitCard(String gameId, String playerId) {
-        Game game = map.get(UUID.fromString(gameId));
-        Random rand = new Random();
-        // Random number from 0 to 4
-        int categoryID = rand.nextInt(5);
-        compareCategories(game, categoryID);
-    }
-
-    @Override
-    public void abortGame(String gameId, String playerId) {
-        //TODO abort Game.
-    }
-
-    private void compareCategories(Game game, int categoryID){
-        // Get Ranks of the cards
-        int player1Value = cards[game.getPlayer1Card()].getRankingArray()[categoryID];
-        int player2Value = cards[game.getPlayer2Card()].getRankingArray()[categoryID];
-        // Smaller rank means better position
-        if(player1Value > player2Value){
-            // If player1 loses, he does not move in the next round.
-            game.setPlayer1sMove(false);
-            game.getStatus().setRoundState(RoundState.LOST);
-        }else if(player1Value < player2Value){
-            // If player1 win, he moves next round.
-            game.setPlayer1sMove(true);
-            game.getStatus().setRoundState(RoundState.WON);
-        }else if(player1Value == player2Value){
-            game.getStatus().setRoundState(RoundState.DRAWN);
-        }
-        game.getStatus().setChoosenCategory(cards[0].getCategories().get(categoryID).getName());
-        game.getStatus().updateStatus(GameState.WaitForCommit);
+        return game;
     }
 }

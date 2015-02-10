@@ -3,75 +3,78 @@ package core;
 import contracts.game.GameState;
 import contracts.game.RoundState;
 
-/**
- * Created by Mark on 21.01.2015.
- */
 public class GameStatus implements contracts.game.GameStatus{
-    private GameState state;
-    private int player1Cards;
-    private int player2Cards;
+    
+    // Fields
     private int round;
-    private RoundState roundState = RoundState.OUTSTANDING;
-    private String choosenCategory = null;
-
-    public void setChoosenCategory(String choosenCategory) {
-        this.choosenCategory = choosenCategory;
+    private int playerCardCount;
+    private int competitorCardCount;
+    private GameState gameState;
+    private RoundState roundState;
+    private String choosenCategory;
+    
+    // Constructor
+    public GameStatus() {
+        this.round = 0;
+        this.playerCardCount = 0;
+        this.competitorCardCount=0;
+        this.gameState = GameState.WaitForYourChoice;
+        this.roundState = RoundState.OUTSTANDING;
+        this.choosenCategory = null;
     }
 
-    public void setRoundState(RoundState roundState) {
-        this.roundState = roundState;
-    }
-
-    public GameStatus(int round, int player1Cards, int player2Cards, GameState state){
-        this.round = round;
-        this.player1Cards = player1Cards;
-        this.player2Cards = player2Cards;
-        this.state = state;
-    }
-
-    public void updateRound(){
-        round++;
-    }
-
-    public void updatePlayer1Cards(int newPlayer1Cards){
-        player1Cards = newPlayer1Cards;
-    }
-
-    public void updatePlayer2Cards(int newPlayer2Cards){
-        player2Cards = newPlayer2Cards;
-    }
-
-    public void updateStatus (GameState newState){
-        state = newState;
-    }
-
+    // Properties
     @Override
     public String getGameState() {
-        return state.toString();
+       return this.gameState.toString();
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     @Override
     public int getRound() {
-        return round;
+        return this.round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
     }
 
     @Override
     public RoundState getRoundState() {
         return this.roundState;
     }
-
+    
+    public void setRoundState(RoundState roundState) {
+        this.roundState = roundState;
+    }
+    
     @Override
     public int getCardCount() {
-        return player1Cards;
+        return this.playerCardCount;
     }
 
+    public void setPlayerCardCount(int playerCardCount) {
+        this.playerCardCount = playerCardCount;
+    }
+    
     @Override
     public int getCardCountCompetitor() {
-        return player2Cards;
+        return this.competitorCardCount;
+    }
+
+    public void setCompetitorCardCount(int competitorCardCount) {
+        this.competitorCardCount = competitorCardCount;
     }
 
     @Override
     public String getChoosenCategory() {
         return this.choosenCategory;
+    }
+
+    public void setChoosenCategory(String choosenCategory) {
+        this.choosenCategory = choosenCategory;
     }
 }

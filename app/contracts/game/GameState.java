@@ -4,7 +4,8 @@ public enum GameState {
 
     WaitForYourChoice,
     WaitForOtherPlayer,
-    WaitForCommit,
+    WaitForCommitCard,
+    WaitForCommitRound,
     Won,
-    Lose
+    Lost
 }

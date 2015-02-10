@@ -1,8 +1,7 @@
 package controllers.helpers;
 
 import contracts.game.GameStatus;
-
-import static contracts.game.GameState.WaitForCommit;
+import static contracts.game.GameState.WaitForCommitRound;
 
 /**
  * Created by adanek on 23.01.15.
@@ -19,7 +18,7 @@ public class GameStateAjax {
         this.CardCountCompetitor = state.getCardCountCompetitor();
         this.ChoosenCategory=state.getChoosenCategory();
 
-        if(state.getGameState().equals(WaitForCommit.toString()))
+        if(state.getGameState().equals(WaitForCommitRound.toString()))
         {
             switch (state.getRoundState()) {
                 case WON:

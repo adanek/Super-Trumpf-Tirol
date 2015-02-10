@@ -6,9 +6,6 @@ import contracts.game.*;
 
 import java.util.Random;
 
-/**
- * Created by Mark on 19.01.2015.
- */
 public class Logic implements IGameHandler {
 
     /** Holds all games */
@@ -23,7 +20,7 @@ public class Logic implements IGameHandler {
      * Array containing all cards
      */
     public Logic(data.Card[] cards) {
-        this.map = new HashMap<UUID, Game>();
+        this.map = new HashMap<>();
         this.cards = cards;
     }
 
@@ -61,6 +58,11 @@ public class Logic implements IGameHandler {
     }
 
     @Override
+    public String createNewGame(String player1Id, String player2Id) {
+        return null;
+    }
+
+    @Override
     public model.GameStatus getGameStatus(String gameId, String playerId) {
 	    Game game = map.get(UUID.fromString(gameId));
         model.GameStatus status = game.getStatus();
@@ -89,7 +91,7 @@ public class Logic implements IGameHandler {
     @Override
     public data.Card getCardFromCompetitor(String gameId, String playerId) {
         Game game = map.get(UUID.fromString(gameId));
-        if(!game.getStatus().getGameState().equals(GameState.WaitForCommit.toString())){
+        if(!game.getStatus().getGameState().equals(GameState.WaitForCommitRound.toString())){
             throw new IllegalStateException();
         }
         if (UUID.fromString(playerId).equals(game.getPlayer1ID())){
@@ -152,6 +154,6 @@ public class Logic implements IGameHandler {
             game.getStatus().setRoundState(RoundState.DRAWN);
         }
         game.getStatus().setChoosenCategory(cards[0].getCategories().get(categoryID).getName());
-        game.getStatus().updateStatus(GameState.WaitForCommit);
+        game.getStatus().updateStatus(GameState.WaitForCommitRound);
     }
 }
