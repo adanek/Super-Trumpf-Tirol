@@ -2,7 +2,7 @@ package config;
 
 import authentication.MyLoginHandler;
 import contracts.data.DataProvider;
-import contracts.game.GameHandler;
+import contracts.game.IGameHandler;
 import contracts.login.LoginHandler;
 import data.Card;
 import data.DatabaseController;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ServiceLocator {
 
     private static DataProvider db = null;
-    private static GameHandler gh = null;
+    private static IGameHandler gh = null;
     private static LoginHandler lh;
     /**
      * Returns the dataprovider*
@@ -40,10 +40,10 @@ public class ServiceLocator {
      * 
      * @return an singelton instance of the Gamehandler
      */
-    public static GameHandler getGameHandler() {
+    public static IGameHandler getGameHandler() {
 	if (gh == null) {
         
-        Logger.info("GameHandler initialized");
+        Logger.info("IGameHandler initialized");
         List<Card> allCards = ServiceLocator.getDataProvider().getAllCards();
         Card[] cards = allCards.toArray(new Card[allCards.size()]);
         gh= new Logic(cards);

@@ -1,9 +1,9 @@
 package contracts.game;
 
 /**
- * Main interface for the communication between UI and Logic 
+ * Main interface for the communication between UI and IGameHandler
  */
-public interface GameHandler {
+public interface IGameHandler {
 
     /**
      * Creates a new single player game
@@ -15,6 +15,13 @@ public interface GameHandler {
      */
     public String createNewGame(String playerId);
 
+    /**
+     * Creates a new multiplayer game* 
+     * @param player1Id the id of player1
+     * @param player2Id the id of player2
+     * @return the id of the new game
+     */
+    public String createNewGame(String player1Id, String player2Id);
     /**
      * Returns the current state of the game from the sight of the player
      * 

@@ -1,15 +1,13 @@
-package model;
+package core;
+
+import contracts.game.IGameHandler;
+import contracts.game.GameState;
+import contracts.game.RoundState;
 
 import java.util.*;
 
-import contracts.game.*;
 
-import java.util.Random;
-
-/**
- * Created by Mark on 19.01.2015.
- */
-public class Logic implements IGameHandler {
+public class GameHandler implements IGameHandler {
 
     /** Holds all games */
     private HashMap<UUID, Game> map;
@@ -22,8 +20,8 @@ public class Logic implements IGameHandler {
      * @param cards:
      * Array containing all cards
      */
-    public Logic(data.Card[] cards) {
-        this.map = new HashMap<UUID, Game>();
+    public GameHandler(data.Card[] cards) {
+        this.map = new HashMap<>();
         this.cards = cards;
     }
 
@@ -32,38 +30,49 @@ public class Logic implements IGameHandler {
      */
     @Override
     public String createNewGame(String playerId) {
-        final UUID gameID = UUID.randomUUID();
-        final UUID player1Id = UUID.fromString(playerId);
-        final UUID player2Id = UUID.randomUUID();
+        UUID pid = UUID.fromString(playerId);
+        PlayerAI cp = new PlayerAI(UUID.randomUUID());
+        Game game = createGame(pid, cp.getId());
+        game.addObserver(cp);
+        return game.getGameID().toString();
+    }
 
-        /**
-         * Creates and shuffles Array in order to get random cards
-         */
-        ArrayList<Integer> shuffleArray = new ArrayList<Integer>();
+    @Override
+    public String createNewGame(String player1Id, String player2Id) {
+        UUID p1Id = UUID.fromString(player1Id);
+        UUID p2Id = UUID.fromString(player2Id);
+
+        Game game = createGame(p1Id, p2Id);
+
+        return game.getGameID().toString();
+    }
+
+    private Game createGame(UUID p1Id, UUID p2Id) {
+        
+        UUID gid = UUID.randomUUID();
+        ArrayList<Integer> shuffleArray = new ArrayList<>();
         for(int i = 0; i < 52; i++){
             shuffleArray.add(i);
         }
         Collections.shuffle(shuffleArray);
 
-        Queue<Integer> player1Cards = new LinkedList<Integer>();
+        Queue<Integer> player1Cards = new LinkedList<>();
         for(int i = 0; i < 26; i++){
             player1Cards.add(shuffleArray.get(i));
         }
 
-        Queue<Integer> player2Cards = new LinkedList<Integer>();
+        Queue<Integer> player2Cards = new LinkedList<>();
         for(int i = 26; i < 52; i++){
             player2Cards.add(shuffleArray.get(i));
         }
-        Game game = new Game(gameID, player1Id, player2Id, player1Cards, player2Cards);
-        map.put(gameID, game);
-
-	return gameID.toString();
+        Game game = new Game(gid,p1Id,p2Id,player1Cards, player2Cards);
+        map.put(gid, game);
     }
 
     @Override
-    public model.GameStatus getGameStatus(String gameId, String playerId) {
+    public GameStatus getGameStatus(String gameId, String playerId) {
 	    Game game = map.get(UUID.fromString(gameId));
-        model.GameStatus status = game.getStatus();
+        GameStatus status = game.getStatus();
         if(status.getChoosenCategory() != null){
             if(game.getPlayer1sMove()){
                 status.setRoundState(RoundState.WON);

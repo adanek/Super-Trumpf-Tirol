@@ -118,7 +118,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="14" language="java" name="contracts.game.GameHandler" project="quartett-app" 
+  <interface id="14" language="java" name="contracts.game.IGameHandler" project="quartett-app"
     file="/quartett-app/app/contracts/game/GameHandler.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="935" y="-60"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 

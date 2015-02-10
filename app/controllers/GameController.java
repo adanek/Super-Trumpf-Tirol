@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import contracts.game.ICard;
+import contracts.game.IGameHandler;
 import controllers.helpers.CardAjax;
 import controllers.helpers.GameStateAjax;
 import play.Logger;
@@ -11,7 +12,6 @@ import play.mvc.Result;
 import play.mvc.Security;
 import authentication.MyAuthenticator;
 import config.ServiceLocator;
-import contracts.game.GameHandler;
 import contracts.game.GameStatus;
 
 public class GameController extends Controller {
@@ -22,7 +22,7 @@ public class GameController extends Controller {
         String pid = session().get("pid");
         String gid= session().get("gid");
         
-        GameHandler gh = ServiceLocator.getGameHandler();
+        IGameHandler gh = ServiceLocator.getGameHandler();
         return ok(views.html.game.main.render((pid != null), gh.getCard(gid,pid)));
     }
 
@@ -37,7 +37,7 @@ public class GameController extends Controller {
     @Security.Authenticated(MyAuthenticator.class)
     public static Result createGame() {
 
-        GameHandler gh = ServiceLocator.getGameHandler();
+        IGameHandler gh = ServiceLocator.getGameHandler();
         String pid = session().get("pid");
         String gid;
 
@@ -101,7 +101,7 @@ public class GameController extends Controller {
             String pid = session().get("pid");
             String gid = session().get("gid");
 
-            GameHandler gameHandler = ServiceLocator.getGameHandler();
+            IGameHandler gameHandler = ServiceLocator.getGameHandler();
             card = gameHandler.getCard(gid, pid);
         }
         catch(Exception ex)
