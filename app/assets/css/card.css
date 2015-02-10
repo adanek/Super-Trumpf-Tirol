@@ -16,6 +16,7 @@
     border: 1px solid #AAAAAA;
     box-shadow: 3px 3px 3px 0 #ccc;
     padding: 1em;
+    background-color: #ffffff;
 }
 
 .card-front {
@@ -24,8 +25,19 @@
 
 .card-back {
 
-    display: block;
+    display: table;
     background-color: #5e5e5e;
+    width: 100%;
+}
+
+.card-back div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.card-back p {
+   color: #ffffff;
+    
 }
 
 .card-img img {
