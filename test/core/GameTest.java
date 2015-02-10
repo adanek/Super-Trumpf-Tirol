@@ -1,5 +1,6 @@
 package core;
 
+import contracts.game.GameState;
 import org.junit.*;
 
 import java.util.LinkedList;
@@ -35,6 +36,91 @@ public class GameTest {
         assertThat(expected).isEqualTo(actual);
     }
 
+    @Test(expected = UnknownPlayerException.class)
+    public void chooseCategory_invalidPlayerId_throwsException(){
+        
+        String p1 = UUID.randomUUID().toString();
+        String fake = UUID.randomUUID().toString();
+        Game sut = createGameForPlayer(p1);
+        
+        sut.chooseCategory(fake, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void chooseCategory_invalidCategory_throwsException(){
+
+        String p1 = UUID.randomUUID().toString();
+        Game sut = createGameForPlayer(p1);
+        String fake = null;
+        sut.chooseCategory(p1, fake);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void chooseCategory_passivePlayer_throwsException(){
+
+        Game sut = createGame();
+        String passivePlayer = sut.getPassivPlayer();
+        
+        sut.chooseCategory(passivePlayer, "passivePlayer");
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void chooseCategory_activePlayerChooseTwice_throwsException(){
+
+        Game sut = createGame();
+        String activePlayer = sut.getActivePlayer();
+        
+        sut.chooseCategory(activePlayer, "activePlayer");
+        sut.chooseCategory(activePlayer, "activePlayer");        
+    }    
+    
+    @Test
+    public void chooseCategory_activePlayerChooseOnce_changesState(){
+
+        Game sut = createGame();
+        String activePlayer = sut.getActivePlayer();
+        
+        sut.chooseCategory(activePlayer, "activePlayer");
+        
+        String expected = GameState.WaitForOtherPlayer.toString();
+        String actual = sut.getGameStatus(activePlayer).getGameState();
+        
+        assertThat(actual).isEqualTo(expected);
+    }
+    
+    @Test(expected = IllegalStateException.class)
+    public void commitCard_activePlayer_throwsException(){
+
+        Game sut = createGame();
+        String activePlayer = sut.getActivePlayer();
+        
+        sut.commitCard(activePlayer);
+    }
+
+    @Test
+    public void commitCard_passivePlayerCommitsOnce_changesState(){
+
+        Game sut = createGame();
+        String passivePlayer = sut.getPassivPlayer();
+        
+        sut.commitCard(passivePlayer);
+        
+        String expected = GameState.WaitForOtherPlayer.toString();
+        String actual = sut.getGameStatus(passivePlayer).getGameState();
+        
+        assertThat(actual).isEqualTo(expected);        
+    }    
+    
+    @Test(expected = IllegalStateException.class)
+    public void commitCard_passivePlayerCommitsTwice_throwsException(){
+
+        Game sut = createGame();
+        String passivePlayer = sut.getPassivPlayer();
+        
+        sut.commitCard(passivePlayer);
+        sut.commitCard(passivePlayer);
+    }
+    
     // Helpers
     
     private Game createGameWithId(String id){
@@ -52,7 +138,23 @@ public class GameTest {
         
         return createGame(gid, p1Id, p2Id);
     }
+    
+    private Game createGameForPlayers(String p1Id, String p2Id) {
 
+        String gid = UUID.randomUUID().toString();
+         
+        return createGame(gid, p1Id, p2Id);
+    }
+
+    private Game createGame(){
+
+        String gid = UUID.randomUUID().toString();
+        String p1Id = UUID.randomUUID().toString();
+        String p2Id = UUID.randomUUID().toString();
+
+        return createGame(gid, p1Id, p2Id);
+    }
+    
     private Game createGame(String gid, String p1Id, String p2Id) {        
      
         Queue<Integer> cardsP1 = new LinkedList<>();

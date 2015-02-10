@@ -44,6 +44,25 @@ public class Game extends Observable {
         return gid;
     }
 
+
+    /**
+     * Returns the id of the active player in the current round
+     * Needed for testing* 
+     * * @return the id of the active player in the current round
+     */
+    public String getActivePlayer(){
+        return round.getActivePlayer();        
+    }
+
+    /**
+     * Returns the id of the passive player in the current round 
+     * Needed for testing
+     * @return the id of the passive player in the current round 
+     */
+    public String getPassivPlayer(){
+        return getCompetitorId(getActivePlayer());        
+    }
+
     /**
      * Returns the index of the current card form the player
      *
@@ -103,6 +122,63 @@ public class Game extends Observable {
         state.setChoosenCategory(round.getChoosenCategory());
 
         return state;
+    }
+
+    /**
+     * Chooses the given category for the current round* 
+     * @param playerId the id of the player which wants to make the choice
+     * @param category the name of the choosen category
+     * @throws core.UnknownPlayerException if the player is neither player1 or player2
+     * @throws java.lang.IllegalArgumentException if the category is not valid 
+     * @throws java.lang.IllegalStateException if the player is not active in this round
+     * @throws java.lang.IllegalStateException if the current state is not WaitForYourChoice 
+     */
+    public void chooseCategory(String playerId, String category){
+        
+        validatePlayerId(playerId);
+        validateCategory(category);
+        
+        if(!round.getActivePlayer().equals(playerId)){
+            throw new IllegalStateException("Only the active player can choose a category");
+        }
+        
+        if(!getGameState(playerId).equals(GameState.WaitForYourChoice)){
+            throw new IllegalStateException("The category can only be choosen in state WaitForYourChoice");
+        }
+        
+        this.round.setChoosenCategory(category);
+    }
+
+    /**
+     * Commits the card of the passive player in the current round 
+     * @param playerId the id of the player which wants to commit his card
+     * @throws core.UnknownPlayerException if the player is neither player1 or player2
+     * @throws java.lang.IllegalStateException if the player is not passive in this round
+     * * 
+     */
+    public void commitCard(String playerId){
+        
+        validatePlayerId(playerId);
+        
+        if(round.getActivePlayer().equals(playerId)){
+            throw new IllegalStateException("Only the passive player can commit his card.");
+        }
+        
+        if(!getGameState(playerId).equals(GameState.WaitForCommitCard)){
+            throw new IllegalStateException("The card of the passive player can only be commited in state WaitForCommitCard");
+        }
+        
+        round.setPassivPlayerCommitedCard();
+    }
+    
+    
+    /**
+     * Validates that the give category is valid *
+      * @param category the category to check
+     */
+    private void validateCategory(String category) {
+        if(category == null)
+            throw new IllegalArgumentException("Choosen category can not be null.");
     }
 
     /**

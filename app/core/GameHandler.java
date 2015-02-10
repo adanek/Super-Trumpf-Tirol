@@ -4,8 +4,10 @@ import config.ServiceLocator;
 import contracts.data.DataProvider;
 import contracts.game.GameState;
 import contracts.game.ICard;
+import contracts.game.ICardCategory;
 import contracts.game.IGameHandler;
 import data.Card;
+import play.Logger;
 
 import java.util.*;
 
@@ -69,25 +71,28 @@ public class GameHandler implements IGameHandler {
 
     @Override
     public ICard getCardFromCompetitor(String gameId, String playerId) throws IllegalStateException {
-        
+
         Game game = getGame(gameId);
-        
+
         String currentState = game.getGameStatus(playerId).getGameState();
         String expectedState = GameState.WaitForCommitRound.toString();
-        if(!currentState.equals(expectedState))
+        if (!currentState.equals(expectedState))
             throw new IllegalStateException("The competitors card is only accessible in state WaitForCommit.");
 
         int cardId = game.getCompetitorCardId(playerId);
         return cards[cardId];
     }
 
-    
-    
-    
-    
     @Override
     public void makeMove(String gameId, String playerId, int categoryID) {
 
+        try {
+            Game game = getGame(gameId);
+            ICardCategory cat = cards[0].getCategories().get(categoryID);
+            game.chooseCategory(playerId, cat.getName());
+        } catch (IllegalStateException ex) {
+            Logger.error(ex.getMessage());
+        }
     }
 
     @Override
@@ -98,6 +103,12 @@ public class GameHandler implements IGameHandler {
     @Override
     public void commitCard(String gameId, String playerId) {
 
+        try{
+            Game game = getGame(gameId);
+            game.commitCard(playerId);
+        } catch (IllegalStateException ex){
+            Logger.error(ex.getMessage());
+        }
     }
 
     @Override
@@ -141,8 +152,8 @@ public class GameHandler implements IGameHandler {
      * Returns the game with the given id if it exists, otherwise it throws an exception
      *
      * @param gameId the id of the game
-     * @throws java.lang.IllegalArgumentException if the game does not exist
      * @return the game with the given id
+     * @throws java.lang.IllegalArgumentException if the game does not exist
      */
     private Game getGame(String gameId) {
         Game game = games.get(gameId);
