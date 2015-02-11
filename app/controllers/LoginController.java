@@ -5,13 +5,11 @@ import config.ServiceLocator;
 import play.Logger;
 import play.mvc.Result;
 import play.mvc.Controller;
-import views.html.*;
 import contracts.login.*;
 import contracts.model.IUser;
 import play.data.*;
 
 import java.util.Map;
-import java.util.UUID;
 
 public class LoginController extends Controller{
 

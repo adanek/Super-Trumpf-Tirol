@@ -1,7 +1,5 @@
 package contracts.game;
 
-import java.util.UUID;
-
 public interface GameStatus {
 
     /**
@@ -34,5 +32,5 @@ public interface GameStatus {
      * The choosen category of this round.*
      * @return Null if the category is not yet choosen.
      */
-    String getChoosenCategory();
+    Integer getChoosenCategoryId();
 }

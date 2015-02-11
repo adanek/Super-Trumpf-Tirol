@@ -2,10 +2,6 @@ package controllers.helpers;
 
 import contracts.game.ICard;
 import contracts.game.ICardCategory;
-import controllers.Assets;
-import data.Card;
-import play.api.mvc.Action;
-import play.api.mvc.AnyContent;
 
 import java.util.List;
 
@@ -20,9 +16,21 @@ public class CardAjax {
         this.categories = card.getCategories();
     }
     
-    public String name;
-    public String image;
-    public List<ICardCategory> categories;
+    private String name;
+    private String image;
+    private List<ICardCategory> categories;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public List<ICardCategory> getCategories() {
+        return categories;
+    }
 }
 
 

@@ -4,8 +4,10 @@ import config.ServiceLocator;
 import contracts.data.DataProvider;
 import contracts.game.GameState;
 import contracts.game.ICard;
-import contracts.game.ICardCategory;
+import contracts.game.IGame;
 import contracts.game.IGameHandler;
+import core.ai.PlayerAI;
+import core.ai.SimplePlayerAI;
 import data.Card;
 import play.Logger;
 
@@ -17,11 +19,11 @@ public class GameHandler implements IGameHandler {
     /**
      * Holds all games
      */
-    private HashMap<String, Game> games;
+    private final HashMap<String, Game> games;
     /**
      * Holds all cards
      */
-    private data.Card[] cards;
+    private final data.Card[] cards;
 
     /**
      * Constructor
@@ -39,9 +41,12 @@ public class GameHandler implements IGameHandler {
     @Override
     public String createNewGame(String playerId) {
 
-        PlayerAI cp = new PlayerAI(UUID.randomUUID());
+        PlayerAI cp = new SimplePlayerAI(UUID.randomUUID().toString());
+        Logger.info(String.format("Player %s has started a new single player game.", playerId));
         Game game = createGame(playerId, cp.getId());
         game.addObserver(cp);
+        game.notifyObservers();
+        
         return game.getGameID();
     }
 
@@ -49,6 +54,7 @@ public class GameHandler implements IGameHandler {
     public String createNewGame(String player1Id, String player2Id) {
 
         Game game = createGame(player1Id, player2Id);
+        Logger.info(String.format("Player %s and %s has started a new multi player game.", player1Id, player2Id));
 
         return game.getGameID();
     }
@@ -88,26 +94,38 @@ public class GameHandler implements IGameHandler {
 
         try {
             Game game = getGame(gameId);
-            ICardCategory cat = cards[0].getCategories().get(categoryID);
-            game.chooseCategory(playerId, cat.getName());
+            Logger.info(String.format("Player %s has choosen category %d.", playerId, categoryID));
+            game.chooseCategory(playerId, categoryID);
+            tryEvaluateRound(game);
+            
         } catch (IllegalStateException ex) {
             Logger.error(ex.getMessage());
         }
-    }
-
-    @Override
-    public void commitRound(String gameId, String playerId) {
-
-    }
+    }   
 
     @Override
     public void commitCard(String gameId, String playerId) {
 
         try{
             Game game = getGame(gameId);
+            Logger.info(String.format("Player %s has committed his card.", playerId));
             game.commitCard(playerId);
+            tryEvaluateRound(game);
+            
         } catch (IllegalStateException ex){
             Logger.error(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void commitRound(String gameId, String playerId) {
+        try {
+            IGame game = getGame(gameId);
+            Logger.info(String.format("Player %s has committed the round.", playerId));
+            game.commitRound(playerId);      
+            
+        } catch (IllegalStateException ex){
+            Logger.error(ex.toString());
         }
     }
 
@@ -162,5 +180,27 @@ public class GameHandler implements IGameHandler {
             throw new IllegalArgumentException("There exists no game with the given identifier.");
 
         return game;
+    }
+
+    /**
+     * Tries to evaluate the current round in the game
+     * @param game the game which should be evaluated
+     */
+    private void tryEvaluateRound(Game game){
+        if(game.canEvaluateRound()){
+         
+            String pid = game.getActivePlayer();           
+            int category = game.getGameStatus(pid).getChoosenCategoryId();
+            ICard c1 = cards[game.getCardId(pid)];
+            ICard c2 = cards[game.getCompetitorCardId(pid)];
+            Integer rank1 = c1.getRankingArray()[category];
+            Integer rank2 = c2.getRankingArray()[category];
+            
+            if(rank1 < rank2){
+                game.setWinner(pid);
+            } else {
+                game.setWinner(game.getPassivePlayer());
+            }
+        }        
     }
 }

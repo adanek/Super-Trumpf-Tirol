@@ -31,6 +31,7 @@ function chooseCategory(category) {
     $.post(url, {cid: category});
    
     disableCategorySelection();
+    setCategoryHighlightChoosen(category);
     setTimeout(update, 500);
  }
 
@@ -69,30 +70,31 @@ function setState(state){
     $('#info-box').find('.message').text(state.Message);
     
     if(state.RoundState != "OUTSTANDING"){
-        setCategoryHighlight(state.ChoosenCategory, state.RoundState);
-    }
-    else{
         clearCategoryHighlight();
-    }
+        setCategoryHighlight(state.ChoosenCategory, state.RoundState);
+    }    
 
     switch (state.State) {
         case "WaitForYourChoice":
-            setStateChoise();
+            setStateChoice();
+            break;
+        case "WaitForCommitCard":
+            setStateCommitCard();
             break;
         case "WaitForOtherPlayer":
             setStateWait();
             break;
-        case "WaitForCommit":
+        case "WaitForCommitRound":
             setStateCommit();
             break;
         case "Won":
-        case "Lose":
+        case "Lost":
             setStateEndGame();
             break;
     }
 }
 
-function setStateChoise() {
+function setStateChoice() {
 
     clearCategoryHighlight();
     setCompetitorsCardVisibilityTo(false);
@@ -103,7 +105,7 @@ function setStateChoise() {
     enableCategorySelection();
 }
 
-function setStateWait() {
+function setStateCommitCard() {
 
     clearCategoryHighlight();
     setCompetitorsCardVisibilityTo(false);
@@ -111,6 +113,11 @@ function setStateWait() {
     setCommitCardButtonVisibilityTo(true);
 
     getCard();
+}
+
+function setStateWait() {
+
+    setTimeout(update, 1000);
 }
 
 function setStateCommit() {
@@ -141,7 +148,7 @@ function setCard(card) {
 
     for (cid = 0; cid < card.categories.length; cid++) {
         var cat = card.categories[cid];
-        var selector = ".card-category-" + cat.name + '-value';
+        var selector = ".card-category-" + cid + '-value';
         elem.find(selector).text(cat.value);
     }
 }
@@ -159,7 +166,7 @@ function setCompetitorCard(card) {
     for (var cid = 0; cid < card.categories.length; cid++) {
 
         var cat = card.categories[cid];
-        var selector = ' .card-category-' + cat.name;
+        var selector = ' .card-category-' + cid;
 
         // Set Value
         competitor.find(selector + '-value').text(cat.value);
@@ -186,9 +193,16 @@ function setCategoryHighlight(category, roundstate) {
     }
 }
 
+function setCategoryHighlightChoosen(category){
+    var selector = '.card-category-'+category;
+    var player = $('#card-player').find(selector);
+    
+    player.addClass('list-group-item-info');   
+}
+
 function clearCategoryHighlight(){
     
-    $('.card-category').removeClass('list-group-item-danger list-group-item-success list-group-item-warning');
+    $('.card-category').removeClass('list-group-item-danger list-group-item-success list-group-item-warning list-group-item-info');
     
 }
 

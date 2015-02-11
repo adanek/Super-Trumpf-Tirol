@@ -4,12 +4,10 @@ import authentication.MyLoginHandler;
 import contracts.data.DataProvider;
 import contracts.game.IGameHandler;
 import contracts.login.LoginHandler;
-import data.Card;
+import core.GameHandler;
 import data.DatabaseController;
-import model.Logic;
 import play.Logger;
 
-import java.util.List;
 
 /**
  * Simulates a simple DependencyInjectionContainer.
@@ -42,11 +40,8 @@ public class ServiceLocator {
      */
     public static IGameHandler getGameHandler() {
 	if (gh == null) {
-        
         Logger.info("IGameHandler initialized");
-        List<Card> allCards = ServiceLocator.getDataProvider().getAllCards();
-        Card[] cards = allCards.toArray(new Card[allCards.size()]);
-        gh= new Logic(cards);
+        gh= new GameHandler();
 	}
 
 	return gh;

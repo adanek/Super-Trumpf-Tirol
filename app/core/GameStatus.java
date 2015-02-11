@@ -11,7 +11,7 @@ public class GameStatus implements contracts.game.GameStatus{
     private int competitorCardCount;
     private GameState gameState;
     private RoundState roundState;
-    private String choosenCategory;
+    private int choosenCategory;
     
     // Constructor
     public GameStatus() {
@@ -20,7 +20,7 @@ public class GameStatus implements contracts.game.GameStatus{
         this.competitorCardCount=0;
         this.gameState = GameState.WaitForYourChoice;
         this.roundState = RoundState.OUTSTANDING;
-        this.choosenCategory = null;
+        this.choosenCategory = -1;
     }
 
     // Properties
@@ -70,11 +70,11 @@ public class GameStatus implements contracts.game.GameStatus{
     }
 
     @Override
-    public String getChoosenCategory() {
+    public Integer getChoosenCategoryId() {
         return this.choosenCategory;
     }
 
-    public void setChoosenCategory(String choosenCategory) {
+    public void setChoosenCategoryId(Integer choosenCategory) {
         this.choosenCategory = choosenCategory;
     }
 }

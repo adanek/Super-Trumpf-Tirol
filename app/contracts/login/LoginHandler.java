@@ -1,7 +1,5 @@
 package contracts.login;
 
-import java.util.UUID;
-
 import contracts.model.IUser;
 
 /**

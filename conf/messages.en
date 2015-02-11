@@ -22,7 +22,8 @@ card-category-overnightstays=Overnight stays
 card-category-sportfacilities=Sport facilities
 
 game-state-WaitForYourChoice=Choose a category
-game-state-WaitForOtherPlayer=Wait for your competitor's turn
+game-state-WaitForCommitCard=It's your competitors turn
+game-state-WaitForOtherPlayer=Wait until your competitor has finished his move
 game-state-commit-won=You won this round.
 game-state-commit-lost=You lost this round.
 game-state-commit-drawn=Drawn!

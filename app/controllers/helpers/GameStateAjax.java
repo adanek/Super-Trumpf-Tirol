@@ -16,7 +16,7 @@ public class GameStateAjax {
         this.RoundState=state.getRoundState().toString();
         this.CardCountPlayer=state.getCardCount();
         this.CardCountCompetitor = state.getCardCountCompetitor();
-        this.ChoosenCategory=state.getChoosenCategory();
+        this.ChoosenCategory=state.getChoosenCategoryId();
 
         if(state.getGameState().equals(WaitForCommitRound.toString()))
         {
@@ -43,7 +43,5 @@ public class GameStateAjax {
     public String RoundState;
     public int CardCountPlayer;
     public int CardCountCompetitor;
-    public String ChoosenCategory;
-    
-    
+    public int ChoosenCategory;
 }

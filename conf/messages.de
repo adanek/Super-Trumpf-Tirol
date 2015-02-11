@@ -22,7 +22,8 @@ card-category-overnightstays=Übernachtungen
 card-category-sportfacilities=Sportanlagen
 
 game-state-WaitForYourChoice=Wählen Sie eine Kategorie
-game-state-WaitForOtherPlayer=Ihr Gegenspieler ist an der Reihe ...
+game-state-WaitForCommitCard=Ihr Gegenspieler ist an der Reihe
+game-state-WaitForOtherPlayer=Warten Sie bis Ihr Gegenspieler seinen Zug beendet hat
 game-state-commit-won=Sie haben diese Runde gewonnen.
 game-state-commit-lost=Sie habe diese Runde verloren.
 game-state-commit-drawn=Unentschieden!

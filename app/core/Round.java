@@ -3,12 +3,12 @@ package core;
 /**
  * Represents one round in a game 
  */
-public class Round {
+class Round {
 
     // Fields
-    private int number;
-    private String activePlayer;
-    private String choosenCategory;
+    private final int number;
+    private final String activePlayer;
+    private int choosenCategoryId;
     private Boolean passivePlayerHasCommitedCard;
     private Boolean activePlayerHasCommitedRound;
     private Boolean passivePlayerHasCommitedRound;
@@ -27,6 +27,7 @@ public class Round {
         this.passivePlayerHasCommitedCard = false;
         this.activePlayerHasCommitedRound = false;
         this.passivePlayerHasCommitedRound= false;
+        this.choosenCategoryId = -1;
     }
 
     // Properties
@@ -51,16 +52,16 @@ public class Round {
      * Returns the choosen category in this round 
      * @return the choosen category in this round
      */
-    public String getChoosenCategory() {
-        return choosenCategory;
+    public int getChoosenCategory() {
+        return choosenCategoryId;
     }
 
     /**
      * Sets the given category to the choosen one in this round. 
      * @param choosenCategory the choosen category.
      */
-    public void setChoosenCategory(String choosenCategory) {
-        this.choosenCategory = choosenCategory;
+    public void setChoosenCategory(int choosenCategoryId) {
+        this.choosenCategoryId = choosenCategoryId;
     }
 
     /**
