@@ -1,6 +1,7 @@
 package core;
 
 import contracts.game.GameState;
+import contracts.game.ICard;
 import contracts.game.RoundState;
 
 import java.util.Observable;
@@ -377,7 +378,21 @@ public class Game extends Observable implements contracts.game.IGame {
     private void tryFinishRound() {
 
         if(round.hasActivePlayerHasCommitedRound() && round.hasPassivePlayerHasCommitedRound()){
-
+            
+            Queue<Integer> cardsWinner;
+            Queue<Integer> cardsLoser;
+            
+            if(round.getWinner().equals(p1Id)){
+                cardsWinner = player1Cards;
+                cardsLoser = player2Cards;
+            } else {
+                cardsWinner = player2Cards;
+                cardsLoser = player1Cards;
+            }
+            
+            cardsWinner.add(cardsWinner.remove());
+            cardsWinner.add(cardsLoser.remove());
+            
             this.round = new Round(round.getNumber() + 1, round.getWinner());
         }
     }
