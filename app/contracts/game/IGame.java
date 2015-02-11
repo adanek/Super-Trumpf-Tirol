@@ -26,4 +26,6 @@ public interface IGame {
     void setAborted(String playerId);
 
     Boolean isFinished();
+    
+    void notifyObservers();
 }

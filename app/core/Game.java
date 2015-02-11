@@ -1,7 +1,6 @@
 package core;
 
 import contracts.game.GameState;
-import contracts.game.ICard;
 import contracts.game.RoundState;
 
 import java.util.Observable;
@@ -270,7 +269,6 @@ public class Game extends Observable implements contracts.game.IGame {
             this.aborted = true;
 
             this.setChanged();
-            this.notifyObservers();
         } else {
             this.finished = true;
         }

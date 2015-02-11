@@ -133,15 +133,17 @@ public class GameHandler implements IGameHandler {
     public void abortGame(String gameId, String playerId) {
         
         try{
-            IGame game = getGame(gameId);
+             IGame game = getGame(gameId);
             
-            Logger.info(String.format("Player %s has aborted game %s.", playerId, gameId));
+                                              Logger.info(String.format("Player %s has aborted game %s.", playerId, gameId));
             game.setAborted(playerId);
             
             // Delete the game if both players have aborted.
             if(game.isFinished()){
                 games.remove(game.getGameID());
                 Logger.info(String.format("Game %s has been removed.", gameId));
+            } else {
+                game.notifyObservers();
             }
             
         }catch(UnknownPlayerException ex) {
