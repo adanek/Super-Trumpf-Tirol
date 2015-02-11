@@ -52,7 +52,7 @@
 
 
                 <div class="player-info panel panel-info">
-                    <div class="panel-body">@play.i18n.Messages.get("game-info-player-before") <span class="game-info-cards-player label label-info"></span> @play.i18n.Messages.get("game-info-player-after")</div>
+                    <div class="panel-body">@play.i18n.Messages.get("game-info-player-before") <strong><span class="game-info-cards-player"></span></strong> @play.i18n.Messages.get("game-info-player-after")</div>
                 </div>
             </div>
 
@@ -82,12 +82,18 @@
                         }
                         </div>
                     </div>
-                    <div class="card-back"></div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <p>Hier sollte Ihre Werbung stehen</p>
+                        </div>
+                    </div>
 
                 </div>
                     <!-- Infobox competitor-->
                 <div class="player-info panel panel-info">
-                    <div class="panel-body">@play.i18n.Messages.get("game-info-competitor-before") <span class="game-info-cards-competitor label label-info"></span> @play.i18n.Messages.get("game-info-competitor-after")</div>
+                    <div class="panel-body">@play.i18n.Messages.get("game-info-competitor-before") 
+                        <strong><span class="game-info-cards-competitor"></span></strong> @play.i18n.Messages.get("game-info-competitor-after")
+                    </div>
                 </div>
             </div>
         </div>

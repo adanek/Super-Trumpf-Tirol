@@ -8,4 +8,6 @@ import contracts.model.IUser;
 public interface LoginHandler {
     
     public IUser authenticate(String email, String password);
+    
+    public IUser register(String firstName, String lastName, String email, String password);
 }

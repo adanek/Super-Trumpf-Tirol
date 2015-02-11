@@ -13,6 +13,7 @@ game-index-singleplayer=Computer
 game-index-multiplayer=Real Person
 
 login-button=login
+register-button=register
 
 card-image-alternative=Position on map
 card-category-population=Population
