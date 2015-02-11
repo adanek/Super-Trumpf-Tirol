@@ -4,8 +4,6 @@ index.header=Willkommen auf Super Trumpf Tirol
 index.link-newGame=Spielen
 index.link-manual=Anleitung
 
-manual.header=Spielanleitung
-manual.text=Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 manual.backbutton=Zurück
 
 game-index-header=Gegen wen möchtest du spielen?
@@ -41,7 +39,13 @@ game-info-commit=Weiter
 game-abort-message=Wenn Sie die Seite verlassen, wird das Spiel abgebrochen und Ihr Gegenspieler gewinnt.
 game-end-button=Beenden
 
-user-story.header=User stories
-user-story.text=Aufgrund der kurzen Entwicklungszeit lag der Fokus auf der Spiele-Funktionalität. Die "Fancy Features" fehlen in dieser Version noch, sollen aber noch folgen. Die Anleitung ist hier durch User stories niedergeschrieben und entspricht zugleich der Aufgabe 9 des Übungsblattes.
-user-story.user1=Ted möchte beim ersten Einstieg bevor er spielt Informationen zum Spiel erhalten. Unter dem Punkt 'Anleitung' kann er nachlesen worum es in 'Super Trumpf Tirol' geht, wie man es spielt und wie die Spielregeln lauten. Danach soll es ans Spielen gehen! Zum Aufwärmen spielt Ted eine Runde gegen den Computer. Er beginnt und wählt eine Kategorie aus, von der er glaubt, dass sein Ort die Karte des Computers schlägt. Nach der Auswahl zeigt sich die gegnerische Karte und wer die Runde gewinnt. Ist der Computer am Zug kann Ted den Spielablauf über den 'Weiter' Button steuern.
-user-story.user2=(Offene Implementierungen) Alex überbrückt Bus-Wartezeiten oder Pausen in der Schule am liebsten mit seinem Smartphone. Daher mag er keine Spiele, bei denen man nur mit großer Geduld schlussendlich zum Spiel gelangt. Bei Super Trumpf Tirol möchte er entweder ohne Anmeldung gegen den Computer bzw. gegen beliebige Gegner, die gerade online sind spielen, oder Super Trumpf Tirol merkt sich seine Login-Daten. Da er öfters weniger Zeit hat kann er auch das Spiel unterbrechen und bei der nächsten Pause fortsetzen.
+manual.header=Spielanleitung
+manual.introduction=Das Spiel Super Trumpf Tirol ist eine Version vom klassischem Kartenspiel Quartett, das eines der bekanntesten und beliebtesten Kartenspiele für Kinder ist. Bei unserem Spiel gibt es 52 Karten, die jeweils eine Gemeinde aus Tirol repräsentieren. Auf der Karte befinden sich 5 Kategorien: Einwohnerzahl, Fläche, Verschuldungsgrad, Anzahl Übernachtungen und Anzahl der Sportanlagen. Diese App funktioniert auf Smartphones (Tablets) wie auch auf normalen Computern. Es wurde darauf geachtet, dass auf jedem Gerät das Spiel eine schöne Darstellungsform besitzt.
+manual.header_goal=Ziel des Spiels
+manual.goal=Jeder Spieler versucht durch geeignete Wahl der Kategorie die Karte des Gegners zu gewinnen. Wer am Ende alle Spielkarten besitzt hat das Spiel gewonnen.
+manual.header_start=Beginn und Verlauf des Spiels
+manual.start=Zuerst werden die Karten gemischt und gleichmäßig auf beide Spieler aufgeteilt. Anschließend beginnt die erste Runde und ein Spieler wird zufällig ausgewählt, um in der ersten Runde die Kategorie zu bestimmen. Wurde eine Kategorie ausgewählt, wird die Karte nun mit dem Gegner verglichen. Jener Spieler mit dem besserem Wert in der ausgewählten Kategorie gewinnt die Karte des Gegners. Nun beginnt eine neue Runde und der Spieler der die letzte Runde gewonnen hat darf die Kategorie dieser Runde auswählen.
+manual.header_end=Ende des Spiels
+manual.end=Sobald ein Spieler alle 52 Karten besitzt ist das Spiel zu Ende und der Besitzer der 52 Karten hat das Spiel gewonnen. Im Anschluss kann sofort ein neues Spiel begonnen werden.
+manual.header_tactic=Taktik während des Spiels
+manual.tactic=Um das Spiel zu gewinnen, sind viele Überlegungen bei der Wahl der Kategorie anzustellen. Man sollte immer zuerst abwägen, was für Schwächen und Stärken die aktuelle Karte besitzt und daraufhin die beste Kategorie wählen. Wenn der Gegner nur mehr wenige Karten besitzt, kann man sich die Karten merken, somit ist es möglich gezielt die Schwäche der gegnerischen Karte auszuwählen. Hat man das Spiel schon mehrmals gespielt bekommt man ein Gefühl welche Kategorien bei manchen Karten besonders stark sind und kann diese dann optimal einsetzen.

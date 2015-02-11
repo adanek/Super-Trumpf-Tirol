@@ -4,8 +4,6 @@ index.header=Welcome to Top Trump Tyrol
 index.link-newGame=Play
 index.link-manual=Instructions
 
-manual.header=Instructions
-manual.text=Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 manual.backbutton=Back
 
 game-index-header=Against who do you want to play?
@@ -41,7 +39,13 @@ game-info-commit=Next
 game-abort-message=If you leave now, the game will end and your competitor wins.
 game-end-button=Finished
 
-user-story.header=User stories
-user-story.text=Due to the short time of code development, our main goal was to finish the game-play functionalities. “Fancy features” are missing but will be implemented in the future. The following user stories act as a manual and represent Exercise 9 of the assignment.
-user-story.user1=Ted is, like any other player who enters Top Trump Tyrol for the first time, not familiar with the game so he reads the manual where he can find information about what Top Trump Tyrol actually is, how to play etc. For a first try he wants to play against the computer. Ted starts by choosing a category, which he believes, will win the computer’s card. After Ted’s decision the computer shows his card and the winner is determined. Suppose it’s the computer’s turn, then Ted controls the game with the ‘Next’ button.
-user-story.user2=(to be implemented) Alex likes to spend his leisure time playing with his smartphone. Often he has some minutes to play Top Trump Tyrol. In order not to waste a lot of time by annoying authentication etc. he likes games where he can play right away. Top Trump Tyrol lets him play without the necessity to log in against random online players or the computer. Alex may like to play against friends in the future so he creates an account once and Top Trump Tyrol saves his login-data in order to guarantee a fast game access.
+manual.header=Instructions
+manual.introduction=Das Spiel Super Trumpf Tirol ist eine Version vom klassischem Kartenspiel Quartett, das eines der bekanntesten und beliebtesten Kartenspiele für Kinder ist. Bei unserem Spiel gibt es 52 Karten, die jeweils eine Gemeinde aus Tirol repräsentieren. Auf der Karte befinden sich 5 Kategorien: Einwohnerzahl, Fläche, Verschuldungsgrad, Anzahl Übernachtungen und Anzahl der Sportanlagen. Diese App funktioniert auf Smartphones (Tablets) wie auch auf normalen Computern, dabei wurde beachtet, dass auf jedem Gerät das Spiele eine schöne Darstellungsform besitzt.
+manual.header_goal=Ziel des Spiels
+manual.goal=Jeder Spieler versucht durch geeignete Wahl der Kategorie die Karte des Gegners zu gewinnen. Wer am Ende alle Spielkarten besitzt hat das Spiel gewonnen und kann einen neue Runde beginnen.
+manual.header_start=Beginn und Verlauf des Spiels
+manual.start=Zuerst werden die Karten gemischt und gleichmäßig auf die beiden Spieler aufgeteilt. Anschließend beginnt die erste Runde und ein Spieler wird zufällig ausgewählt, um in der ersten Runde die Kategorie zu bestimmen. Wurde eine Kategorie ausgewählt, wird die Karte nun mit dem Gegner verglichen. Jener Spieler mit dem besserem Wert in der ausgewählten Kategorie gewinnt die Karte des Gegners. Nun beginnt eine neue Runde und der Spieler der die letzte Runde gewonnen hat darf wieder die Kategorie auswählen.
+manual.header_end=Ende des Spiels
+manual.end=Sobald ein Spieler alle 52 Karten besitzt ist das Spiel zu Ende und der Besitzer der 52 Karten hat das Spiel gewonnen. Im Anschluss kann sofort ein neues Spiel begonnen werden.
+manual.header_tactic=Taktik während des Spiels
+manual.tactic=Um das Spiel zu gewinnen, sind viele Überlegungen bei der Wahl der Kategorie anzustellen. Man sollte immer zuerst abwägen, was für Schwächen und Stärken die aktuelle Karte besitzt und daraufhin die beste Kategorie wählen. Wenn der Gegner nur mehr wenige Karten besitzt, kann man sich die Karten merken. Somit kann man die Kategorie gezielt nach der Schwäche der Karte des Gegners wählen. Hat man das Spiel schon mehrmals gespielt bekommt man ein Gefühl welche Kategorien bei manchen Karten besonders stark sind und kann diese dann optimal einsetzen.
