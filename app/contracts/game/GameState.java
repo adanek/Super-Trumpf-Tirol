@@ -6,6 +6,7 @@ public enum GameState {
     WaitForOtherPlayer,
     WaitForCommitCard,
     WaitForCommitRound,
+    Aborted,
     Won,
     Lost
 }

@@ -131,6 +131,22 @@ public class GameHandler implements IGameHandler {
 
     @Override
     public void abortGame(String gameId, String playerId) {
+        
+        try{
+            IGame game = getGame(gameId);
+            
+            Logger.info(String.format("Player %s has aborted game %s.", playerId, gameId));
+            game.setAborted(playerId);
+            
+            // Delete the game if both players have aborted.
+            if(game.isFinished()){
+                games.remove(game.getGameID());
+                Logger.info(String.format("Game %s has been removed.", gameId));
+            }
+            
+        }catch(UnknownPlayerException ex) {
+            Logger.error(ex.toString());
+        }
 
     }
 
@@ -151,13 +167,14 @@ public class GameHandler implements IGameHandler {
         }
         Collections.shuffle(shuffleArray);
 
+        int split = shuffleArray.size()/2;
         Queue<Integer> player1Cards = new LinkedList<>();
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < split; i++) {
             player1Cards.add(shuffleArray.get(i));
         }
 
         Queue<Integer> player2Cards = new LinkedList<>();
-        for (int i = 26; i < 52; i++) {
+        for (int i = split; i < shuffleArray.size(); i++) {
             player2Cards.add(shuffleArray.get(i));
         }
         Game game = new Game(gid, p1Id, p2Id, player1Cards, player2Cards);

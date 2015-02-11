@@ -43,7 +43,6 @@ function commitCard() {
 }
 
 function commitRound() {
-
     var url = "/game/commitround";
     $.post(url);
     setTimeout(update, 500);
@@ -52,7 +51,6 @@ function commitRound() {
 function abortGame() {
     var url = "/game/abort";
     $.post(url);
-    setTimeout(update, 500);
 }
 
 /* Section Logic */
@@ -87,6 +85,7 @@ function setState(state){
         case "WaitForCommitRound":
             setStateCommit();
             break;
+        case "Aborted":
         case "Won":
         case "Lost":
             setStateEndGame();

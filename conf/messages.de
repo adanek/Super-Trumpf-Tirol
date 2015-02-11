@@ -29,7 +29,7 @@ game-state-commit-won=Sie haben diese Runde gewonnen.
 game-state-commit-lost=Sie habe diese Runde verloren.
 game-state-commit-drawn=Unentschieden!
 game-state-Won=Gratulation! Sie haben das Spiel gewonnen!
-game-state-Lose=Sie haben das Spiel leider verloren. Viel Glück beim nächsten mal.
+game-state-Lost=Sie haben das Spiel leider verloren. Viel Glück beim nächsten mal.
 
 game-info-player-before=Sie haben
 game-info-player-after=Karten.

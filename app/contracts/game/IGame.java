@@ -22,4 +22,8 @@ public interface IGame {
     Boolean canEvaluateRound();
 
     void setWinner(String winnerId);
+    
+    void setAborted(String playerId);
+
+    Boolean isFinished();
 }

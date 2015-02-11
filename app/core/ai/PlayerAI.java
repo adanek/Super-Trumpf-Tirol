@@ -40,9 +40,16 @@ public abstract class PlayerAI implements Observer {
             case WaitForCommitRound:
                 commitRound(game);
                 break;
+            case Aborted:
+                unregister(game);
             default:
                 break;
         }
+    }
+
+    private void unregister(Game game) {
+        game.deleteObserver(this);
+        gh.abortGame(game.getGameID(), pid);
     }
 
     private void commitRound(IGame game) {

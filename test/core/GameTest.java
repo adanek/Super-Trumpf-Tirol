@@ -223,6 +223,84 @@ public class GameTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @Test
+    public void commitRound_lastRound_player1Wins() {
+
+        IGame sut = createGameLastRound();
+        String p1 = sut.getActivePlayer();
+        String p2 = sut.getPassivePlayer();
+        
+        sut.chooseCategory(p1, 0);
+        sut.commitCard(p2);
+        sut.setWinner(p1);
+        sut.commitRound(p1);
+        sut.commitRound(p2);
+
+        String expected = GameState.Won.toString();
+        String actual = sut.getGameStatus(p1).getGameState();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void commitRound_lastRound_player2Lose() {
+
+        IGame sut = createGameLastRound();
+        String p1 = sut.getActivePlayer();
+        String p2 = sut.getPassivePlayer();
+
+        sut.chooseCategory(p1, 0);
+        sut.commitCard(p2);
+        sut.setWinner(p1);
+        sut.commitRound(p1);
+        sut.commitRound(p2);
+
+        String expected = GameState.Lost.toString();
+        String actual = sut.getGameStatus(p2).getGameState();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+    
+    @Test 
+    public void abortGame_Player1Aborts_Player2ChangesState(){
+
+        IGame sut = createGame();
+        String p1 = sut.getActivePlayer();
+        String p2 = sut.getPassivePlayer();
+
+        sut.chooseCategory(p1, 0);
+        sut.commitCard(p2);
+        sut.setWinner(p1);
+        sut.commitRound(p1);
+        sut.commitRound(p2);
+        sut.setAborted(p1);
+
+        String expected = GameState.Aborted.toString();
+        String actual = sut.getGameStatus(p2).getGameState();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void abortGame_Player1Aborts_Player1ChangesState(){
+
+        IGame sut = createGame();
+        String p1 = sut.getActivePlayer();
+        String p2 = sut.getPassivePlayer();
+
+        sut.chooseCategory(p1, 0);
+        sut.commitCard(p2);
+        sut.setWinner(p1);
+        sut.commitRound(p1);
+        sut.commitRound(p2);
+        sut.setAborted(p1);
+
+        String expected = GameState.Aborted.toString();
+        String actual = sut.getGameStatus(p2).getGameState();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
     // Helpers
 
     private Game createGameWithId(String id) {
@@ -264,5 +342,25 @@ public class GameTest {
         }
 
         return new Game(gid, p1Id, p2Id, cardsP1, cardsP2);
+    }
+
+    private Game createGameLastRound() {
+
+        String gid = UUID.randomUUID().toString();
+        String p1Id = UUID.randomUUID().toString();
+        String p2Id = UUID.randomUUID().toString();
+        Queue<Integer> cardsP1 = new LinkedList<>();
+        Queue<Integer> cardsP2 = new LinkedList<>();
+
+        for (int i = 0; i < 51; i++) {
+            cardsP1.add(i);
+        }
+
+        cardsP2.add(51);
+
+        Game game = new Game(gid, p1Id, p2Id, cardsP1, cardsP2);
+        game.setActivePlayer(p1Id);
+        
+        return game;
     }
 }

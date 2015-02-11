@@ -174,13 +174,14 @@ public class GameController extends Controller {
         try {
             String pid = session().get("pid");
             String gid = session().get("gid");
-
+          
             ServiceLocator.getGameHandler().abortGame(gid, pid);
+            session().remove("gid");
 
         } catch (Exception ex) {
             return badRequest();
         }
-
+        
         return ok();
     }
 }
