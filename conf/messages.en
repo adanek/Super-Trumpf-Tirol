@@ -1,6 +1,6 @@
 app.name=Top Trump Tyrol
 
-index.header=Welcome to Top Trump Tyrol
+index.header=Welcome to
 index.link-newGame=Play
 index.link-manual=Instructions
 
@@ -22,13 +22,13 @@ card-category-sportfacilities=Sport facilities
 card-back-message=Isn''t this the perfect place for your add?
 
 game-state-WaitForYourChoice=Choose a category
-game-state-WaitForCommitCard=It's your competitors turn
+game-state-WaitForCommitCard=It''s your competitors turn
 game-state-WaitForOtherPlayer=Wait until your competitor has finished his move
 game-state-commit-won=You won this round.
 game-state-commit-lost=You lost this round.
 game-state-commit-drawn=Drawn!
 game-state-Won=Congratulation! You won the game.
-game-state-Lost=I'm sorry. You lost the game. Better luck next time.
+game-state-Lost=I''m sorry. You lost the game. Better luck next time.
 game-state-Aborted=Your competitor has quited the game, so you won.
 
 game-info-player-before=You own

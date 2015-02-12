@@ -160,22 +160,15 @@ public class GameHandler implements IGameHandler {
     @Override
     public void registerForMultiPlayerGame(String playerId) {
 
+        Logger.info(String.format("Player %s has registered for multi player game.", playerId));
         waitingPlayers.add(playerId);
         tryCreateMultiPlayerGame();
     }
 
-    private void tryCreateMultiPlayerGame() {
-        if (waitingPlayers.size() >= 2) {
-            String p1 = waitingPlayers.poll();
-            String p2 = waitingPlayers.poll();
-
-            IGame game = createGame(p1, p2);
-            String gid = game.getGameID();
-            
-            games.put(gid, game);
-            mpGames.put(p1, gid);
-            mpGames.put(p2, gid);
-        }
+    @Override
+    public void unregisterForMultiPlayerGame(String playerId) {
+        Logger.info(String.format("Player %s has unregistered for multi player game.", playerId));
+        waitingPlayers.remove(playerId);
     }
 
     @Override
@@ -183,6 +176,7 @@ public class GameHandler implements IGameHandler {
         String gameId = mpGames.get(playerId);
 
         if (gameId != null)
+            Logger.info(String.format("Player %s has joined game %s.", playerId, gameId));
             mpGames.remove(playerId);
 
         return gameId;
@@ -257,6 +251,30 @@ public class GameHandler implements IGameHandler {
             } else {
                 game.setWinner(game.getPassivePlayer());
             }
+        }
+    }
+
+    /**
+     * Tries to create a multi player game if at least two players are waiting
+     */
+    private void tryCreateMultiPlayerGame() {
+        if (waitingPlayers.size() >= 2) {
+            String p1 = waitingPlayers.poll();
+            String p2 = waitingPlayers.poll();
+
+            if(p1.equals(p2)){
+                waitingPlayers.add(p1);
+                return;
+            }
+            
+            IGame game = createGame(p1, p2);
+            String gid = game.getGameID();
+
+            games.put(gid, game);
+            mpGames.put(p1, gid);
+            mpGames.put(p2, gid);
+
+            Logger.info(String.format("Multi player game %s created.", gid));
         }
     }
 }

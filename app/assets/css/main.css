@@ -21,7 +21,6 @@ body {
 /* Wrapper for page content to push down footer */
 #wrap {
     min-height: 100%;
-    height: auto !important;
     height: 100%;
     /* Negative indent footer by it's height */
     margin: 0 auto -40px;
@@ -30,7 +29,7 @@ body {
 /* Set the fixed height of the footer here */
 #push,
 #footer {
-    height: 40px;
+    min-height: 40px;
 
 }
 
@@ -40,4 +39,15 @@ body {
 
 .container .credit {
     margin: 10px 0;
+}
+
+#img-loading {
+    margin: 40px;
+    
+}
+
+.row-first{
+    
+    margin-top: 40px;
+    
 }

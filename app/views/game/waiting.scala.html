@@ -6,6 +6,14 @@
 
 @views.html.shared.main(signedIn, scripts) {
 
-    <p>Waiting for another player to join the game...</p>
-    <button id="cancel" class="btn btn-default">Cancel</button>
+    <div class="text-center panel panel-default col-sm-6 col-sm-offset-3">
+        <div class="panel-body">
+            <h2>Game created</h2>
+            <img id="img-loading" src='@routes.Assets.at("images/loading.gif")' alt="loading" />
+            <p>Waiting for another player to join the game...</p>
+
+            <button id="btn-cancel" class="btn btn-warning">Cancel</button>
+        </div>
+    </div>
+   
 }

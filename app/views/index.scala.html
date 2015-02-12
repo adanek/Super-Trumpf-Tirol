@@ -1,7 +1,11 @@
 @(signedin: Boolean)
 @shared.main(signedin) {
 
-	<h2 class="text-center">@play.i18n.Messages.get("index.header")</h2>
+	<div class="text-center">
+		<h1><small>@play.i18n.Messages.get("index.header")</small><br/>
+		@play.i18n.Messages.get("app.name")</h1>
+	</div>
+	
 
 	<div class="row row-first">
 		<div class="col-xs-12 col-sm-6 col-sm-offset-3 btn-group-vertical">

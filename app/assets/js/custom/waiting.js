@@ -13,10 +13,27 @@ function tryStart(){
             setTimeout(tryStart, 1000);
         }
         else {
+            $(window).off('unload', abortGame);
             window.location = "/game";
         }
     });    
 }
 
-$(document).ready(tryStart);
+function setup() {
+    $('#btn-cancel').click(function() {
+        window.location.replace('/game/selectMode');
+    });
+    
+    tryStart();
+}
+
+function abortGame() {
+
+    var url = "/game/multi/abort";
+    $.post(url);
+}
+
+
+$(document).ready(setup);
+$(window).on('unload', abortGame);
 

@@ -11,6 +11,7 @@ import controllers.helpers.GameStateAjax;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Results;
 import play.mvc.Security;
 
 public class GameController extends Controller {
@@ -32,7 +33,7 @@ public class GameController extends Controller {
         return ok(views.html.game.mode.render());
     }
 
-    // POST /game/create/single
+    // POST /game/single/create
     @Security.Authenticated(MyAuthenticator.class)
     public static Result createSinglePlayerGame() {
 
@@ -50,7 +51,8 @@ public class GameController extends Controller {
         return redirect(controllers.routes.GameController.index());
     }
 
-
+    // POST /game/multi/create
+    @Security.Authenticated(MyAuthenticator.class)
     public static Result registerForMultiPlayerGame() {
 
         IGameHandler gh = ServiceLocator.getGameHandler();
@@ -60,13 +62,20 @@ public class GameController extends Controller {
         return ok(views.html.game.waiting.render(pid != null));
     }
     
+    // POST /game/multi/abort
+    @Security.Authenticated(MyAuthenticator.class)
     public static Result unregisterForMultiPlayerGame(){
+
+        IGameHandler gh = ServiceLocator.getGameHandler();
+        String pid = session().get("pid");
         
+        gh.unregisterForMultiPlayerGame(pid);
         
-        return redirect(controllers.routes.GameController.selectMode());
-        
+        return Results.noContent();        
     }
 
+    // POST /game/multi/ready
+    @Security.Authenticated(MyAuthenticator.class)
     public static Result tryStartMultiPlayerGame() {
 
         Result res;
