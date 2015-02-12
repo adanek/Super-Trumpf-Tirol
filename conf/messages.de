@@ -19,6 +19,7 @@ card-category-area=Fläche
 card-category-indebtedness=Verschuldung
 card-category-overnightstays=Übernachtungen
 card-category-sportfacilities=Sportanlagen
+card-back-message=Hier sollte Ihre Werbung stehen
 
 game-state-WaitForYourChoice=Wählen Sie eine Kategorie
 game-state-WaitForCommitCard=Ihr Gegenspieler ist an der Reihe
@@ -28,6 +29,7 @@ game-state-commit-lost=Sie habe diese Runde verloren.
 game-state-commit-drawn=Unentschieden!
 game-state-Won=Gratulation! Sie haben das Spiel gewonnen!
 game-state-Lost=Sie haben das Spiel leider verloren. Viel Glück beim nächsten mal.
+game-state-Aborted=Ihr Gegenspieler hat aufgegeben. Somit haben Sie gewonnen.
 
 game-info-player-before=Sie haben
 game-info-player-after=Karten.

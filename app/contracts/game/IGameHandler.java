@@ -107,4 +107,8 @@ public interface IGameHandler {
      * @param playerId
      */
     public void abortGame(String gameId, String playerId);
+    
+    public void registerForMultiPlayerGame(String playerId);
+    public String getMultiPlayerGameId(String playerId);
+    
 }

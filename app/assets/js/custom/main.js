@@ -8,17 +8,17 @@ function startGame(mode) {
 
 function startSinglePlayerGame() {
 
-    var url = "/game/create/single";
+    var url = "/game/single/create";
     doPost(url);
 }
 
 function startMultiPlayerGame() {
 
-    var url = "/game/create/multi";
+    var url = "/game/multi/create";
     doPost(url);
 }
 
 function doPost(url){
 
-    $('<form action="#" method="post"></form>').attr('action', url).submit();
+    $('<form action=' + url + ' method="post"></form>').appendTo('.body-content').submit();
 }

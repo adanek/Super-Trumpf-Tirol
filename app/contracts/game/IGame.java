@@ -1,5 +1,7 @@
 package contracts.game;
 
+import java.util.Observer;
+
 public interface IGame {
     String getGameID();
 
@@ -28,4 +30,5 @@ public interface IGame {
     Boolean isFinished();
     
     void notifyObservers();
+    void addObserver(Observer o);
 }

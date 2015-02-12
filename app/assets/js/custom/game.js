@@ -116,6 +116,8 @@ function setStateCommitCard() {
 
 function setStateWait() {
 
+    setCommitCardButtonVisibilityTo(false);
+    setCommitRoundButtonVisibilityTo(false);
     setTimeout(update, 1000);
 }
 
