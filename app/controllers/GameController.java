@@ -1,18 +1,17 @@
 package controllers;
 
+import authentication.MyAuthenticator;
 import com.fasterxml.jackson.databind.JsonNode;
+import config.ServiceLocator;
+import contracts.game.GameStatus;
 import contracts.game.ICard;
 import contracts.game.IGameHandler;
 import controllers.helpers.CardAjax;
 import controllers.helpers.GameStateAjax;
-import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import authentication.MyAuthenticator;
-import config.ServiceLocator;
-import contracts.game.GameStatus;
 
 public class GameController extends Controller {
 
@@ -33,9 +32,9 @@ public class GameController extends Controller {
        return ok(views.html.game.mode.render());
     }
 
-    // POST /game/create
+    // POST /game/create/single
     @Security.Authenticated(MyAuthenticator.class)
-    public static Result createGame() {
+    public static Result createSinglePlayerGame() {
 
         IGameHandler gh = ServiceLocator.getGameHandler();
         String pid = session().get("pid");
@@ -49,6 +48,17 @@ public class GameController extends Controller {
         }
 
         return redirect(controllers.routes.GameController.index());
+    }
+
+
+    // POST /game/create/multi
+    @Security.Authenticated(MyAuthenticator.class)
+    public static Result createMultiPlayerGame() {
+
+        IGameHandler gh = ServiceLocator.getGameHandler();
+
+        
+        return ok();
     }
 
     // POST /game/play
