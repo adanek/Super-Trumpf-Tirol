@@ -159,10 +159,16 @@ public class GameHandler implements IGameHandler {
 
     @Override
     public void registerForMultiPlayerGame(String playerId) {
-
-        Logger.info(String.format("Player %s has registered for multi player game.", playerId));
-        waitingPlayers.add(playerId);
-        tryCreateMultiPlayerGame();
+        
+        // A player can only exists once in the queue
+        if(waitingPlayers.contains(playerId)){
+            Logger.info(String.format("Player %s has registered for multi player game.", playerId));
+            waitingPlayers.add(playerId);
+            tryCreateMultiPlayerGame();
+        }
+        else {
+            Logger.info(String.format("Player %s wants to register for multi player game but is already in queue.", playerId));;
+        }
     }
 
     @Override
@@ -258,15 +264,12 @@ public class GameHandler implements IGameHandler {
      * Tries to create a multi player game if at least two players are waiting
      */
     private void tryCreateMultiPlayerGame() {
+        
+        Logger.info(String.format("Try to create a new multi player game. Queue length: %d", waitingPlayers.size()));
         if (waitingPlayers.size() >= 2) {
             String p1 = waitingPlayers.poll();
             String p2 = waitingPlayers.poll();
 
-            if(p1.equals(p2)){
-                waitingPlayers.add(p1);
-                return;
-            }
-            
             IGame game = createGame(p1, p2);
             String gid = game.getGameID();
 
