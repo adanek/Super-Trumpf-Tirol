@@ -1,23 +1,16 @@
 package Login;
 
-import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
-
-import javafx.util.Callback;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import play.mvc.Result;
 import authentication.MyLoginHandler;
 import config.ServiceLocator;
 import contracts.data.DataProvider;
 import contracts.login.LoginHandler;
 import contracts.model.IUser;
+import org.junit.Before;
+import org.junit.Test;
+import play.test.WithApplication;
 
-import play.test.*;
-import play.test.Helpers.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class LoginTest extends WithApplication {
 
@@ -78,5 +71,4 @@ public class LoginTest extends WithApplication {
 		assertEquals(user.getName(), "admin");
 
 	}
-
 }
