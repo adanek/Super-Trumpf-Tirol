@@ -1,17 +1,16 @@
 package data;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-import play.db.ebean.Model;
 import config.ServiceLocator;
 import contracts.data.DataProvider;
 import contracts.game.ICard;
 import contracts.game.ICardCategory;
+import play.db.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Class to save the data about the communes (cards) in a database. H2 is a
@@ -141,7 +140,8 @@ public class Card extends Model implements ICard {
 	    return false;
 	if (population != other.population)
 	    return false;
-	if (sportFields != other.sportFields)
+		//noinspection RedundantIfStatement
+		if (sportFields != other.sportFields)
 	    return false;
 	return true;
     }

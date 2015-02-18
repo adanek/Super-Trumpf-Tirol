@@ -10,6 +10,10 @@ game-index-header=Gegen wen möchtest du spielen?
 game-index-singleplayer=Computer
 game-index-multiplayer=anderen Spieler
 
+game-multiplayer-waiting-header=Spiel erzeugt
+game-multiplayer-waiting-message=Warten Sie bis ein zweiter Spieler dem Spiel beitritt...
+game-multiplayer-waiting-button-cancel=Abbrechen
+
 login-button=login
 register-button=Registrieren
 

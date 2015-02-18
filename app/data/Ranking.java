@@ -1,11 +1,10 @@
 package data;
 
-import java.util.UUID;
+import play.db.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import play.db.ebean.Model;
+import java.util.UUID;
 
 /**
  * This class contains the information about a village and the position of the
@@ -96,7 +95,7 @@ public class Ranking extends Model {
 	return rankSportFields;
     }
 
-    protected static final Finder<UUID, Ranking> getFind() {
+    protected static Finder<UUID, Ranking> getFind() {
 	return find;
     }
 

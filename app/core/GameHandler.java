@@ -83,8 +83,11 @@ public class GameHandler implements IGameHandler {
         IGame game = getGame(gameId);
 
         String currentState = game.getGameStatus(playerId).getGameState();
-        String expectedState = GameState.WaitForCommitRound.toString();
-        if (!currentState.equals(expectedState))
+        List<String> expectedStates = new LinkedList<>();
+        expectedStates.add(GameState.WaitForCommitRound.toString());
+        expectedStates.add(GameState.Aborted.toString());
+                
+        if (!expectedStates.contains(currentState))
             throw new IllegalStateException("The competitors card is only accessible in state WaitForCommit.");
 
         int cardId = game.getCompetitorCardId(playerId);
@@ -161,13 +164,13 @@ public class GameHandler implements IGameHandler {
     public void registerForMultiPlayerGame(String playerId) {
         
         // A player can only exists once in the queue
-        if(waitingPlayers.contains(playerId)){
+        if(!waitingPlayers.contains(playerId)){
             Logger.info(String.format("Player %s has registered for multi player game.", playerId));
             waitingPlayers.add(playerId);
             tryCreateMultiPlayerGame();
         }
         else {
-            Logger.info(String.format("Player %s wants to register for multi player game but is already in queue.", playerId));;
+            Logger.info(String.format("Player %s wants to register for multi player game but is already in queue.", playerId));
         }
     }
 
@@ -181,10 +184,12 @@ public class GameHandler implements IGameHandler {
     public String getMultiPlayerGameId(String playerId) {
         String gameId = mpGames.get(playerId);
 
-        if (gameId != null)
+        if (gameId != null) {
             Logger.info(String.format("Player %s has joined game %s.", playerId, gameId));
             mpGames.remove(playerId);
-
+        } else if(!waitingPlayers.contains(playerId)){
+            throw new IllegalArgumentException("The player isn't register for a multi player game.");
+        }
         return gameId;
     }
 
@@ -245,17 +250,18 @@ public class GameHandler implements IGameHandler {
     private void tryEvaluateRound(IGame game) {
         if (game.canEvaluateRound()) {
 
-            String pid = game.getActivePlayer();
-            int category = game.getGameStatus(pid).getChoosenCategoryId();
-            ICard c1 = cards[game.getCardId(pid)];
-            ICard c2 = cards[game.getCompetitorCardId(pid)];
+            String p1 = game.getActivePlayer();
+            String p2 = game.getPassivePlayer();
+            int category = game.getGameStatus(p1).getChoosenCategoryId();
+            ICard c1 = cards[game.getCardId(p1)];
+            ICard c2 = cards[game.getCardId(p2)];
             Integer rank1 = c1.getRankingArray()[category];
             Integer rank2 = c2.getRankingArray()[category];
 
             if (rank1 < rank2) {
-                game.setWinner(pid);
+                game.setWinner(p1);
             } else {
-                game.setWinner(game.getPassivePlayer());
+                game.setWinner(p2);
             }
         }
     }

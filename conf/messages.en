@@ -10,6 +10,10 @@ game-index-header=Against who do you want to play?
 game-index-singleplayer=Computer
 game-index-multiplayer=Real Person
 
+game-multiplayer-waiting-header=Game created
+game-multiplayer-waiting-message=Waiting for another player to join the game...
+game-multiplayer-waiting-button-cancel=Cancel
+
 login-button=login
 register-button=register
 
@@ -51,3 +55,4 @@ manual.header_end=End of the game
 manual.end=Once a player has all 52 cards the game is over and the owner of 52 cards wins the game. Following you can immediately begin a new game.
 manual.header_tactic=Tactic during the game
 manual.tactic=To win the game, many considerations when choosing the category are to be made. One should always consider first what has the current card for strengths and weaknesses and then choose the best category. If the opponent only has a few more cards, the cards can remember, so it is possible to select specific weakness of the opponents card. If you have the game already played several times you get a feeling which categories on some cards are especially strong and can make the best use of them.
+

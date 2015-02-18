@@ -1,28 +1,37 @@
 @(signedIn: Boolean)
 @shared.main(signedIn) {
 
-    <div>
-        <article>
-            <header class="h3">@play.i18n.Messages.get("manual.header")</header>
-            <p>@play.i18n.Messages.get("manual.introduction")</p>
-            <p>
-                <h4>@play.i18n.Messages.get("manual.header_goal")</h4>
-                @play.i18n.Messages.get("manual.goal")
-            </p>
-            <p>
-                <h4>@play.i18n.Messages.get("manual.header_start")</h4>
-                @play.i18n.Messages.get("manual.start")
-            </p>
-            <p>
-                <h4>@play.i18n.Messages.get("manual.header_end")</h4>
-                @play.i18n.Messages.get("manual.end")
-            </p>
-            <p>
-                <h4>@play.i18n.Messages.get("manual.header_tactic")</h4>
-                @play.i18n.Messages.get("manual.tactic")
-            </p>
-        </article>
-
-        <a class="btn btn-primary" href="@routes.Application.index()">@play.i18n.Messages.get("manual.backbutton")</a>
+    <div class="info-box">
+        <div class="text-center">
+            <span>@play.i18n.Messages.get("app.name")</span>
+        </div>
     </div>
+
+    <div class="box col-sm-8 col-sm-offset-2">
+        <div>
+            <article>
+                <header class="h3">@play.i18n.Messages.get("manual.header")</header>
+                <p>@play.i18n.Messages.get("manual.introduction")</p>
+                <p>
+            <h4>@play.i18n.Messages.get("manual.header_goal")</h4>
+                @play.i18n.Messages.get("manual.goal")
+                </p>
+                <p>
+            <h4>@play.i18n.Messages.get("manual.header_start")</h4>
+                @play.i18n.Messages.get("manual.start")
+                </p>
+                <p>
+            <h4>@play.i18n.Messages.get("manual.header_end")</h4>
+                @play.i18n.Messages.get("manual.end")
+                </p>
+                <p>
+            <h4>@play.i18n.Messages.get("manual.header_tactic")</h4>
+                @play.i18n.Messages.get("manual.tactic")
+                </p>
+            </article>
+
+            <a class="btn btn-primary" href="@routes.Application.index()">@play.i18n.Messages.get("manual.backbutton")</a>
+        </div>
+    </div>
+
 }

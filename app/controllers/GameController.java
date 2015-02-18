@@ -81,14 +81,20 @@ public class GameController extends Controller {
         Result res;
         IGameHandler gh = ServiceLocator.getGameHandler();
         String pid = session().get("pid");
-        String gid = gh.getMultiPlayerGameId(pid);
+        String gid;
+        
+        try{
+            gid = gh.getMultiPlayerGameId(pid);        
+            
+            if (gid == null) {
+                res = noContent();
+            } else {
 
-        if (gid == null)
-            res = noContent();
-        else {
-
-            session("gid", gid);
-            res = redirect(controllers.routes.GameController.index());
+                session("gid", gid);
+                res = ok();
+            }
+        }catch (IllegalArgumentException ex){
+            res = badRequest();
         }
         
         return res;

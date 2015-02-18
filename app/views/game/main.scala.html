@@ -5,27 +5,28 @@
     }
 
     @views.html.shared.main(signedIn, scripts) {
-        <!-- InfoBox -->
-        <div class="row">
-            <div id="info-box" class="text-center col-sm-6 col-sm-offset-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        @play.i18n.Messages.get("game-info-round") <span class="round"></span>:
-                    </div>
 
-                    <div class="panel-body">
-                        <span class="message"></span>
-                        <button id="info-button-commit-card" type="button" class="btn btn-success">@play.i18n.Messages.get("game-info-commit")</button>
-                        <button id="info-button-commit-round" type="button" class="btn btn-info">@play.i18n.Messages.get("game-info-commit")</button>
-                    </div>
-                </div>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/card.css")">
+        <!-- InfoBox -->
+
+        <div class="info-box">
+            <div class="col-xs-9 col-sm-8 col-sm-offset-2">
+                <strong>@play.i18n.Messages.get("game-info-round") <span class="round"></span>:</strong><br>
+                <span class="message"></span>
             </div>
+
+            <div class="col-xs-3 col-sm-2" id="info-box-buttons">
+                <button id="info-button-commit-card" type="button" class="btn btn-success">@play.i18n.Messages.get("game-info-commit")</button>
+                <button id="info-button-commit-round" type="button" class="btn btn-info">@play.i18n.Messages.get("game-info-commit")</button>
+            </div>
+            
         </div>
+
         <!-- Cards -->
         <div id="cards" class="row">
 
                 <!-- player -->
-            <div class="col-sm-4 col-sm-offset-1">
+            <div class="player-area col-xs-12 col-sm-6 col-md-4 col-md-offset-2 col-lg-3 col-lg-offset-3">
                 <div id="card-player" class="card">
                     <div class="card-title">Name</div>
                     <div class="panel panel-default card-img">
@@ -51,13 +52,13 @@
                 </div>
 
 
-                <div class="player-info panel panel-default">
-                    <div class="panel-body">@play.i18n.Messages.get("game-info-player-before") <strong><span class="game-info-cards-player"></span></strong> @play.i18n.Messages.get("game-info-player-after")</div>
+                <div class="player-info box">
+                    @play.i18n.Messages.get("game-info-player-before") <strong><span class="game-info-cards-player"></span></strong> @play.i18n.Messages.get("game-info-player-after")
                 </div>
             </div>
 
                 <!-- competitor -->
-            <div class="col-sm-4 col-sm-offset-2 " >
+            <div class="player-area col-xs-12 col-sm-6 col-md-4 col-lg-3" >
                 <div id="card-competitor" class="card">
                     <div class="card-front">
                         <div class="card-title">Name</div>
@@ -90,10 +91,9 @@
 
                 </div>
                     <!-- Infobox competitor-->
-                <div class="player-info panel panel-default">
-                    <div class="panel-body">@play.i18n.Messages.get("game-info-competitor-before") 
-                        <strong><span class="game-info-cards-competitor"></span></strong> @play.i18n.Messages.get("game-info-competitor-after")
-                    </div>
+                <div class="player-info box">
+                    @play.i18n.Messages.get("game-info-competitor-before")
+                    <strong><span class="game-info-cards-competitor"></span></strong> @play.i18n.Messages.get("game-info-competitor-after")
                 </div>
             </div>
         </div>

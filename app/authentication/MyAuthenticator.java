@@ -1,13 +1,21 @@
 package authentication;
 
-import play.mvc.*;
-import play.mvc.Http.*;
+import play.mvc.Http.Context;
+import play.mvc.Result;
+import play.mvc.Security;
+
+import java.util.UUID;
 
 public class MyAuthenticator extends Security.Authenticator {
     
     @Override
     public String getUsername(Context ctx) {
-        return ctx.session().get("pid");
+        String pid = ctx.session().get("pid");
+        if(pid == null){
+            pid = UUID.randomUUID().toString();
+            ctx.session().put("pid", pid);
+        }
+        return pid;
     }
 
     @Override

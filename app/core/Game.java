@@ -107,6 +107,13 @@ public class Game extends Observable implements contracts.game.IGame {
     public int getCompetitorCardId(String playerId) {
 
         validatePlayerId(playerId);
+
+        GameState currentState = getGameState(playerId);
+
+        if (currentState != GameState.WaitForCommitRound && currentState != GameState.Aborted) {
+            throw new IllegalStateException(String.format("Accessing the competitors card is only possible in state WaitForCommitRound but was called in %s", currentState));
+        }
+        
         int cardId;
 
         if (playerId.equals(p1Id)) {
@@ -156,12 +163,10 @@ public class Game extends Observable implements contracts.game.IGame {
         validatePlayerId(playerId);
         validateCategory(category);
 
-        if (!round.getActivePlayer().equals(playerId)) {
-            throw new IllegalStateException("Only the active player can choose a category");
-        }
+        GameState currentState = getGameState(playerId);
 
-        if (!getGameState(playerId).equals(GameState.WaitForYourChoice)) {
-            throw new IllegalStateException("The category can only be choosen in state WaitForYourChoice");
+        if (currentState != GameState.WaitForYourChoice && currentState != GameState.Aborted) {
+            throw new IllegalStateException(String.format("The category can only be choosen in state WaitForYourChoice but was called in %s", currentState));
         }
 
         this.round.setChoosenCategory(category);
@@ -181,13 +186,10 @@ public class Game extends Observable implements contracts.game.IGame {
     public void commitCard(String playerId) {
 
         validatePlayerId(playerId);
+        GameState currentState = getGameState(playerId);
 
-        if (round.getActivePlayer().equals(playerId)) {
-            throw new IllegalStateException("Only the passive player can commit his card.");
-        }
-
-        if (!getGameState(playerId).equals(GameState.WaitForCommitCard)) {
-            throw new IllegalStateException("The card of the passive player can only be committed in state WaitForCommitCard");
+        if (currentState != GameState.WaitForCommitCard && currentState != GameState.Aborted) {
+            throw new IllegalStateException(String.format("The card of the passive player can only be committed in state WaitForCommitCard but was called in %s", currentState));
         }
 
         round.setPassivPlayerCommitedCard();
@@ -217,9 +219,10 @@ public class Game extends Observable implements contracts.game.IGame {
     public void commitRound(String playerId) {
 
         validatePlayerId(playerId);
+        GameState currentState = getGameState(playerId);
 
-        if (getGameState(playerId) != GameState.WaitForCommitRound) {
-            throw new IllegalStateException("Committing a round is only possible in state WaitForCommitRound");
+        if (currentState != GameState.WaitForCommitRound && currentState != GameState.Aborted) {
+            throw new IllegalStateException(String.format("Committing a round is only possible in state WaitForCommitRound but was called in %s", currentState));
         }
 
         if (playerId.equals(getActivePlayer())) {

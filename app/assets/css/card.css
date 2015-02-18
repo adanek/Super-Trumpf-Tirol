@@ -1,15 +1,18 @@
 
-#info-box .panel-body {
-    min-height: 64px;
+
+@media(min-width: 768px){
+    
+    .info-box {
+        text-align: center;
+    }    
 }
 
-#info-box .panel-body span {
-    line-height: 34px;
-    vertical-align: middle;
+.player-area {
+    margin-bottom: 20px;
 }
 
 .card {
-    max-width: 300px;
+    max-width: 280px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
@@ -64,7 +67,7 @@
 
 .player-info{
 
-    max-width: 300px;
+    max-width: 280px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1em;
@@ -83,3 +86,4 @@
     
     display: none;
 }
+

@@ -11,54 +11,27 @@
 
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.css")" />
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/main.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/card.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     </head>
     <body>
-
-        <div id="wrap">
-            <div id="nav">
-                <nav class="navbar navbar-fixed-top">
-                    <div class="container">
-                        <div class="navbar-header">
-
-                            <button @if(!signedin) {
-                                hidden="hidden"
-                            } type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-
-                            <span class="navbar-brand">@play.i18n.Messages.get("app.name")</span>
-                        </div>
-                        <div class="navbar-collapse collapse">
-                            <div class="navbar-text  navbar-right">
-                                <a class="navbar-link" href="@if(signedin) {
-                                    @routes.LoginController.logout()
-                                }">@if(signedin) {logout}</a>
-
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div class="container body-content center-block" >
+        
+        <main class="container-fluid body-content" >
             @content
-            </div>
-            <div id="push"></div>
-        </div>
-        <div id="footer">
-            <div class="container center-block">
-                <p class="credit text-center">&copy; 2015 - Team A Software Development - <a href='@routes.Application.impressum()'>Impressum</a></p>
-            </div>
-        </div>
+        </main>
 
-            <!-- Scripts -->
-        <script type="text/javascript" src="@routes.Assets.at("js/jquery-1.11.2.min.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.min.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("js/custom/main.js")"></script>
-        @scripts
+        <footer class="container-fluid">
+            <p class="credit text-center">
+                    &copy; 2015 - Team A Software Development -
+                <a href='@routes.Application.impressum()'>Impressum</a>
+            </p>
+        </footer>
+        
+        <section id="scripts">
+            <script type="text/javascript" src="@routes.Assets.at("js/jquery-1.11.2.min.js")"></script>
+            <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+            <script type="text/javascript" src="@routes.Assets.at("js/custom/main.js")"></script>
+            @scripts
+        </section>
+    
     </body>
 </html>

@@ -5,20 +5,27 @@ function tryStart(){
         url: url, 
         type: 'post',
         cache: false
-    }).done(function(data, statustext, xhr) {
-        var status = xhr.status;
-        
-        if(status == 204){
-            
-            setTimeout(tryStart, 1000);
-        }
-        else {
-            $(window).off('unload', abortGame);
-            window.location = "/game";
-        }
-    });    
+    }).done(response).fail(response);
 }
 
+function response (data, statustext, xhr) {
+    var status = xhr.status;
+
+    if(status == 204){
+
+        setTimeout(tryStart, 1000);
+    } else {
+
+        var loc = "/";
+
+        if (status == 200) {
+            loc = "/game";
+        }
+
+        $(window).off('unload', abortGame);
+        window.location = loc;
+    }
+}
 function setup() {
     $('#btn-cancel').click(function() {
         window.location.replace('/game/selectMode');
@@ -36,4 +43,5 @@ function abortGame() {
 
 $(document).ready(setup);
 $(window).on('unload', abortGame);
+
 

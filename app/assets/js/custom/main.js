@@ -22,3 +22,4 @@ function doPost(url){
 
     $('<form action=' + url + ' method="post"></form>').appendTo('.body-content').submit();
 }
+

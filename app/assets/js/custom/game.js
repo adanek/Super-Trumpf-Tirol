@@ -63,9 +63,9 @@ function setState(state){
     $('.game-info-cards-player').text(state.CardCountPlayer);
     $('.game-info-cards-competitor').text(state.CardCountCompetitor);
     //noinspection JSJQueryEfficiency
-    $('#info-box').find('.round').text(state.Round);
+    $('.info-box').find('.round').text(state.Round);
     //noinspection JSJQueryEfficiency
-    $('#info-box').find('.message').text(state.Message);
+    $('.info-box').find('.message').text(state.Message);
     
     if(state.RoundState != "OUTSTANDING"){
         clearCategoryHighlight();
@@ -276,5 +276,6 @@ $(document).ready(function () {
 });
 
 // Prevent Navigation while inGame
-$(window).on('beforeunload', preventNavigation).on('unload', abortGame);
+$(window).on('unload', abortGame);
+$(window).on('beforeunload', preventNavigation);
 

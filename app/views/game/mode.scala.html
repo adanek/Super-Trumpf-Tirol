@@ -1,9 +1,17 @@
 @shared.main(true) {
 
-    <h2 class="text-center">@play.i18n.Messages.get("game-index-header")</h2>
+    <div class="info-box">
+        <div class="text-center">
+            <span>@play.i18n.Messages.get("app.name")</span>
+        </div>
+    </div>
+    
+    <div class="col-sm-6 col-sm-offset-3 text-center box">
+        <h2 class="text-center">@play.i18n.Messages.get("game-index-header")</h2>
+    </div>
 
-    <div class="row row-first">
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3 btn-group-vertical">
+    <div class="text-center">
+        <div class="btn-group-vertical">
             <a class='btn btn-default btn-lg btn-block' href='javascript:startGame("S")'>@play.i18n.Messages.get("game-index-singleplayer")</a>
             <a class="btn btn-default btn-lg btn-block" href='javascript:startGame("M")'>@play.i18n.Messages.get("game-index-multiplayer")</a>
         </div>
