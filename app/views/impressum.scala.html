@@ -6,12 +6,33 @@
             <span>@play.i18n.Messages.get("app.name")</span>
         </div>
     </div>
-    
-    <div class="box col-sm-8 col-sm-offset-2">
+
+    <div class="box col-sm-4 col-sm-offset-4">
         <h1>Impressum</h1>
         
-        <p>Hier sollte unser Impressum Text stehen.</p>
+        <article>
+            <header class="h3">@play.i18n.Messages.get("impressum.developer")</header>
+            <ul class="list-unstyled">
+                <li>Danek Andreas</li>
+                <li>Deutsch Patrick</li>
+                <li>Nocker Martin</li>
+                <li>Schiborr Mark</li>
+                <li>Witsch Daniel</li>
+            </ul>
+        </article>
+        
+        <article>
+            <header class="h3">@play.i18n.Messages.get("impressum.contact")</header>
+            <a href="mailto:Andreas.Danek-Bulius&#64;student.uibk.ac.at">Andreas.Danek-Bulius&#64;student.uibk.ac.at</a>
+        </article>
+        
+        <article>
+            <header class="h3">@play.i18n.Messages.get("impressum.picture-credits")</header>
+            <p>Tirol Karte - <a href="http://www.zamg.ac.at/zamgWeb/common/img/tirol.jpg">tirol.jpg</a> - &copy;ZAMG - Zentralanstalt für Meteorologie und Geodynamik</p>
+        </article>
+        
+        <nav>
+            <a class="btn btn-primary" href="@routes.Application.index()">Home</a>
+        </nav>
     </div>
-    
-    
 }

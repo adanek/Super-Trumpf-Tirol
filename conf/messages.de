@@ -56,3 +56,7 @@ manual.header_end=Ende des Spiels
 manual.end=Sobald ein Spieler alle 52 Karten besitzt ist das Spiel zu Ende und der Besitzer der 52 Karten hat das Spiel gewonnen. Im Anschluss kann sofort ein neues Spiel begonnen werden.
 manual.header_tactic=Taktik während des Spiels
 manual.tactic=Um das Spiel zu gewinnen, sind viele Überlegungen bei der Wahl der Kategorie anzustellen. Man sollte immer zuerst abwägen, was für Schwächen und Stärken die aktuelle Karte besitzt und daraufhin die beste Kategorie wählen. Wenn der Gegner nur mehr wenige Karten besitzt, kann man sich die Karten merken, somit ist es möglich gezielt die Schwäche der gegnerischen Karte auszuwählen. Hat man das Spiel schon mehrmals gespielt bekommt man ein Gefühl welche Kategorien bei manchen Karten besonders stark sind und kann diese dann optimal einsetzen.
+
+impressum.developer=Entwickler
+impressum.contact=Kontakt
+impressum.picture-credits=Bildnachweis
