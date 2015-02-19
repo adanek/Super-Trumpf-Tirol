@@ -4,15 +4,25 @@ html {
 }
 
 body {
-    background-color: lightgray;
+    background-color: gray;
     margin-top: 20px;
     margin-bottom: 80px;
+    font-family: cursive;
 }
 
 @media(min-width: 768px){
 
+    html {
+        background: url('/assets/images/background.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover; /* For WebKit*/
+        -moz-background-size: cover;    /* Mozilla*/
+        -o-background-size: cover;      /* Opera*/
+        background-size: cover;         /* Generic*/
+    }
+    
     body {
         margin-bottom: 60px;
+        background-color: transparent;
     }
 }
 
@@ -66,7 +76,7 @@ footer a {
 }
 
 .body-content {
-    
+
     height: 100%;
 }
 
@@ -82,5 +92,10 @@ footer a {
 
 #img-loading {
     margin: 40px;
+    
+}
+
+#logo {
+    width: 200px;
     
 }

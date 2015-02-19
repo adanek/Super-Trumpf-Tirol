@@ -1,6 +1,7 @@
 app.name=Top Trump Tyrol
 
 index.header=Welcome to
+index.name=Top Trump
 index.link-newGame=Play
 index.link-manual=Instructions
 

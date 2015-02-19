@@ -1,6 +1,7 @@
 app.name=Super Trumpf Tirol
 
 index.header=Willkommen auf
+index.name=Super Trumpf
 index.link-newGame=Spielen
 index.link-manual=Anleitung
 
