@@ -57,6 +57,10 @@ footer a {
     overflow: auto;
 }
 
+.box h1 {
+    margin-top: 0px;
+    
+}
 .btn-group-vertical {
     margin-top: 50px;    
     margin-left: auto;
