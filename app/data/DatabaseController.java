@@ -50,7 +50,7 @@ public class DatabaseController implements DataProvider {
         if (flagLoaded)
             return;
 
-        File myfile = Play.application().getFile("/app/data/Daten.csv");
+        File myfile = Play.application().getFile("conf/resources/communeData.csv");
 
         /**
          * Scanner split the file into the different communes and save them
