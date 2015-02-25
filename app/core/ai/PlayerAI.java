@@ -41,6 +41,8 @@ public abstract class PlayerAI implements Observer {
                 commitRound(game);
                 break;
             case Aborted:
+            case Won:
+            case Lost:
                 unregister(game);
             default:
                 break;
