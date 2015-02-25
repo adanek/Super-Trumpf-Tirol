@@ -1,7 +1,8 @@
-app.name=Top Trump Tyrol
+app.name=Top Trumps Tyrol
 
 index.header=Welcome to
-index.name=Top Trump
+index.name.line1=Top Trumps Tyrol
+index.name.line2=online card game
 index.link-newGame=Play
 index.link-manual=Instructions
 

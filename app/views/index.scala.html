@@ -5,10 +5,13 @@
         <span>@play.i18n.Messages.get("app.name")</span>
     </div>
 
-    <div class="col-sm-6 col-sm-offset-3 text-center box">
-        <h1><small>@play.i18n.Messages.get("index.header")</small><br/>
-            @play.i18n.Messages.get("index.name")</h1>
-        <img id="logo" src="/assets/images/logo.png" alt="Tirol Logo"/>
+    <div id="salutatory" class="col-sm-6 col-sm-offset-3 text-center">
+        <h1><small>@play.i18n.Messages.get("index.header")</small><br/><br/>
+            @play.i18n.Messages.get("index.name.line1")<br/>
+            <div id="logo">
+                <small>@play.i18n.Messages.get("index.name.line2")</small>
+            </div>
+        </h1>
     </div>
 
     <div class="col-xs-12 text-center">

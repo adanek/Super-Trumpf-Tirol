@@ -4,7 +4,12 @@ html {
 }
 
 body {
-    background: url('/assets/images/background.jpg') no-repeat center center fixed;
+    
+    background-color: #747474;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('/assets/images/background.jpg');
+    background-attachment: fixed;
     -webkit-background-size: cover; /* For WebKit*/
     -moz-background-size: cover;    /* Mozilla*/
     -o-background-size: cover;      /* Opera*/
@@ -18,7 +23,6 @@ body {
 
     body {
         margin-bottom: 60px;
-        background-color: transparent;
     }
 }
 
@@ -42,7 +46,6 @@ footer a {
     overflow: auto;
     background-color: #5e5e5e;
     color: white;
-
     border-bottom: medium solid #13a5ff;
 }
 
@@ -90,11 +93,26 @@ footer a {
     padding: 15px;
 }
 
+
+
 #img-loading {
     margin: 40px;
     
 }
 
+#salutatory {
+    background-color: transparent;
+    color: #ffffff !important;
+    font-width: bold;
+}
+
+#salutatory small {
+    color: #ffffff;
+    ;
+    
+}
+
 #logo {
-    width: 200px;
+    font-weight: bold;
+    
 }
