@@ -2,7 +2,7 @@ app.name=Super Trumpf Tirol
 
 index.header=Willkommen auf
 index.name.line1=Super Trumpf Tirol
-index.name.line2=Online Kartenspiel
+index.name.line2=Beta
 index.link-newGame=Spielen
 index.link-manual=Anleitung
 
@@ -61,3 +61,4 @@ manual.tactic=Um das Spiel zu gewinnen, sind viele Überlegungen bei der Wahl de
 impressum.developer=Entwickler
 impressum.contact=Kontakt
 impressum.picture-credits=Bildnachweis
+impressum.references=Quellenverweis

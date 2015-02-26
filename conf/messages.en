@@ -2,7 +2,7 @@ app.name=Top Trumps Tyrol
 
 index.header=Welcome to
 index.name.line1=Top Trumps Tyrol
-index.name.line2=online card game
+index.name.line2=Beta
 index.link-newGame=Play
 index.link-manual=Instructions
 
@@ -61,3 +61,4 @@ manual.tactic=To win the game, many considerations when choosing the category ar
 impressum.developer=Developers
 impressum.contact=Contact
 impressum.picture-credits=Picture Credits
+impressum.references=References

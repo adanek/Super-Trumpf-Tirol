@@ -39,6 +39,11 @@ footer a {
     color: #ffffff;
 }
 
+article {
+    margin-bottom: 30px;
+    
+}
+
 .info-box {
 
     margin: -20px -15px 20px;
