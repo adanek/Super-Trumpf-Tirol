@@ -16,7 +16,7 @@ body {
     background-size: cover;         /* Generic*/
     margin-top: 20px;
     margin-bottom: 80px;
-    font-family: cursive;
+    font-family: 'Pontano Sans', sans-serif;
 }
 
 @media(min-width: 768px){
