@@ -13,7 +13,7 @@ public interface IGameHandler {
      * 
      * @return the id of the new game
      */
-    public String createNewGame(String playerId);
+    String createNewGame(String playerId);
 
     /**
      * Creates a new multiplayer game* 
@@ -21,7 +21,7 @@ public interface IGameHandler {
      * @param player2Id the id of player2
      * @return the id of the new game
      */
-    public String createNewGame(String player1Id, String player2Id);
+    String createNewGame(String player1Id, String player2Id);
     /**
      * Returns the current state of the game from the sight of the player
      * 
@@ -32,7 +32,7 @@ public interface IGameHandler {
      * 
      * @return an object representing the current game state
      */
-    public GameStatus getGameStatus(String gameId, String playerId);
+    GameStatus getGameStatus(String gameId, String playerId);
 
     /**
      * Returns the current card of the player 
@@ -43,7 +43,7 @@ public interface IGameHandler {
      *            The ID of the player
      * @return an object representing the current ard of the player
      */
-    public ICard getCard(String gameId, String playerId);
+    ICard getCard(String gameId, String playerId);
 
     /**
      * Returns the current card of the competitor to compare it with your own
@@ -58,7 +58,7 @@ public interface IGameHandler {
      *            If state is not WaitForCommit
      * @return the current card of the competitor
      */
-    public ICard getCardFromCompetitor(String gameId, String playerId) throws IllegalStateException;
+    ICard getCardFromCompetitor(String gameId, String playerId) throws IllegalStateException;
 
     /**
      * Submit the chosen category 
@@ -72,7 +72,7 @@ public interface IGameHandler {
      * @param categoryID
      *            The Id of the choosen category
      */
-    public void makeMove(String gameId, String playerId, int categoryID);
+    void makeMove(String gameId, String playerId, int categoryID);
 
     /**
      * Finishes a round.
@@ -87,7 +87,7 @@ public interface IGameHandler {
      * @param playerId
      *            The ID of the passive player
      */
-    public void commitRound(String gameId, String playerId);
+    void commitRound(String gameId, String playerId);
 
     /**
      * The passiv player has to commit his card before the evaluation of the
@@ -99,17 +99,17 @@ public interface IGameHandler {
      * @param playerId
      *            The ID of the passive player
      */
-    public void commitCard(String gameId, String playerId);
+    void commitCard(String gameId, String playerId);
 
     /**
      * Aborts the game.
      * @param gameId
      * @param playerId
      */
-    public void abortGame(String gameId, String playerId);
+    void abortGame(String gameId, String playerId);
     
-    public void registerForMultiPlayerGame(String playerId);
-    public void unregisterForMultiPlayerGame(String playerId);
-    public String getMultiPlayerGameId(String playerId);
+    void registerForMultiPlayerGame(String playerId);
+    void unregisterForMultiPlayerGame(String playerId);
+    String getMultiPlayerGameId(String playerId);
     
 }

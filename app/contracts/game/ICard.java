@@ -28,18 +28,18 @@ public interface ICard {
      * 
      * @return get the URL to the image of the card
      */
-    public String getImageUrl();
+    String getImageUrl();
 
     /**
      * 
      * @return a list of category for each card
      */
-    public List<ICardCategory> getCategories();
+    List<ICardCategory> getCategories();
 
     /**
      * 
      * @return a array with the ranking of all 5 categories
      */
-    public Integer[] getRankingArray();
+    Integer[] getRankingArray();
 
 }
