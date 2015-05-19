@@ -6,6 +6,7 @@ import contracts.game.IGameHandler;
 import contracts.login.LoginHandler;
 import core.GameHandler;
 import data.DatabaseController;
+import data.StaticDataController;
 import play.Logger;
 
 
@@ -27,7 +28,7 @@ public class ServiceLocator {
 	if (db == null) {
 
         Logger.info("Dataprovider initialized");
-        db = DatabaseController.getInstance();
+        db = new StaticDataController();
 	}
 
 	return db;
